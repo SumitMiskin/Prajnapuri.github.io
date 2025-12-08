@@ -80,7 +80,418 @@
       </div>
 
       <div class="container">
-              <div class="idea-box">Garbage collection </div>
+              <div class="idea-box">Garbage collection
+                Here’s a rewritten **research-style report**, now focused **only on garbage collection and recycling** in a smart city, using **more than 10 DSA concepts and algorithms** from your list. I’ll also give **algorithms + sample code** for the main parts.
+
+---
+
+# Optimizing Garbage Collection and Recycling using Data Structures and Algorithms
+
+## Abstract
+
+Efficient garbage collection and recycling are critical functions of a sustainable smart city. This paper presents a data-driven framework for planning, monitoring, and optimizing municipal solid waste (MSW) operations using classical Data Structures and Algorithms (DSA). The proposed system models city bins, recycling centers, and vehicle routes using arrays, structures, lists, queues, heaps, hash tables, tries, segment trees, union-find, and graph algorithms. Core procedures such as route planning, zone clustering, capacity monitoring, and request handling are implemented using BFS, Dijkstra, and Kruskal algorithms. The result is a modular architecture that can scale to large cities and adapt to dynamic conditions such as varying waste volumes and traffic.
+
+---
+
+## 1. Introduction
+
+Urban garbage collection is usually constrained by vehicle capacity, traffic, bin overflow, and limited recycling capacity. Traditional fixed-route collection often leads to inefficient fuel use and overflowing bins. A smart city can instrument bins with fill-level sensors and track vehicles in real time.
+
+To exploit this information, we design the waste system as a **computational problem**. Using DSA, we can:
+
+* Represent city infrastructure efficiently
+* Answer queries like “which bins are almost full in this zone?”
+* Compute near-optimal collection routes
+* Dynamically prioritize urgent pickups
+* Group regions for recycling centers
+
+---
+
+## 2. System Model
+
+We model:
+
+* **Bins**: each has an ID, location, waste type (dry, wet, e-waste), and current fill level.
+* **Road network**: nodes are intersections or important places; edges are roads with travel time.
+* **Vehicles**: garbage trucks with capacity and assigned depot.
+* **Recycling centers**: target nodes where waste is delivered and processed.
+
+All of this is encoded using the data structures below.
+
+---
+
+## 3. Data Structures Used (≥10 from your list)
+
+### 3.1 Arrays
+
+We use arrays to store fixed-size daily data:
+
+```c
+float binFillLevel[MAX_BINS];      // percentage 0–100
+int   binRouteOrder[MAX_BINS];     // route sequence for a truck
+```
+
+Arrays give **O(1)** index access and are good for sensor snapshots at each hour.
+
+---
+
+### 3.2 Structures (`struct`)
+
+Structures combine multiple attributes of a bin or truck.
+
+```c
+typedef struct {
+    int id;
+    float x, y;       // coordinates
+    float fill;       // current fill %
+    char type;        // 'D' dry, 'W' wet, 'E' e-waste
+} Bin;
+
+typedef struct {
+    int id;
+    float capacity;
+    float currentLoad;
+} Truck;
+```
+
+---
+
+### 3.3 Lists (linked lists / dynamic arrays)
+
+Dynamic routes and event logs are stored in lists:
+
+* `List<BinID>` – bins assigned to a truck today
+* `List<Event>` – overflow events, citizen complaints
+
+Lists allow **insertion/deletion** as routes change.
+
+---
+
+### 3.4 Queue
+
+Queues manage **collection requests** and are used in BFS.
+
+* Request queue: bins that citizens manually flag as urgent.
+* BFS frontier: nodes being explored in road graph.
+
+```c
+Queue urgentRequests; // FIFO processing
+```
+
+---
+
+### 3.5 Heap (Priority Queue)
+
+A **min-heap** prioritizes bins by overflow risk:
+
+Key = `time_to_overflow` or `fill%` (higher fill → higher priority using negative key).
+
+```c
+// Each entry: (priority, binID)
+Heap pickupHeap;
+```
+
+The truck always chooses the next highest-priority bin, giving adaptive routing.
+
+---
+
+### 3.6 Hashing (Hash Table / Lookup Table)
+
+Hash tables map **address or RFID tags → bin index**:
+
+```c
+// Pseudocode
+int idx = hash(address) % TABLE_SIZE;
+binTable[idx] = &binArray[realIndex];
+```
+
+This provides **O(1)** access to a bin from its label or QR code.
+
+---
+
+### 3.7 Trie
+
+A **Trie** stores codes for:
+
+* Waste **categories** (e.g., "PLASTIC", "PAPER", "METAL")
+* Or **street names / area codes** to autocomplete when an operator types.
+
+Each node corresponds to a character; this allows O(length) prefix search for quick lookups and suggestions in control software.
+
+---
+
+### 3.8 Segment Tree (or Fenwick Tree)
+
+We divide the city into linearly indexed **sectors** `0..N-1`.
+A **Segment Tree** maintains total waste in any range of sectors:
+
+* Node value = total fill level or total number of “almost full” bins in that sector range.
+
+Queries:
+
+* “How much waste is there in sectors [L, R]?” → O(log N)
+* “Update sector i because a bin was emptied.” → O(log N)
+
+This helps decide **where to send extra trucks**.
+
+---
+
+### 3.9 Union-Find (Disjoint Set Union – DSU)
+
+We model **connectivity of zones and roads**:
+
+* Each node = sector or local road component.
+* Union when there is a direct road between them.
+* If two sectors are disconnected, we know trucks cannot move directly and must route via other zones.
+
+DSU is also used to build **Minimum Spanning Tree (MST)** of the road network (Kruskal).
+
+---
+
+### 3.10 Graph + BFS, Dijkstra, Kruskal
+
+We represent the road network as an **adjacency list**, which itself uses arrays + lists + structures.
+
+```c
+typedef struct {
+    int to;
+    float time;     // travel time or distance
+} Edge;
+
+List<Edge> graph[MAX_NODES];  // adjacency list
+```
+
+1. **BFS** – explore reachable nodes from a depot; used to compute **coverage** and **checks for disconnected bins**.
+2. **Dijkstra** – find **shortest path** between depot and bins, or between bins, based on distance or time.
+3. **Kruskal** – construct a **minimum spanning tree** of roads so that we get a low-cost backbone network for planned collection routes.
+
+These algorithms are classic graph algorithms from your list.
+
+---
+
+## 4. Algorithms for Garbage Collection & Recycling
+
+### 4.1 Garbage Bin Prioritization with Heap + Hashing
+
+**Idea:** Build a heap of candidate bins for pickup, keyed by overflow risk.
+
+**Algorithm (High Level)**
+
+1. For each bin `b`
+   1.1 Estimate `time_to_overflow` from current fill and average fill rate.
+   1.2 Insert `(time_to_overflow, b.id)` into a min-heap.
+2. Repeatedly pop the smallest `time_to_overflow` to select bins for immediate routing.
+3. Each time a bin is emptied, recompute its risk and update heap.
+
+**C-style Pseudocode**
+
+```c
+typedef struct {
+    float t_overflow;
+    int binID;
+} HeapNode;
+
+void buildHeap() {
+    for (int i = 0; i < nBins; ++i) {
+        HeapNode node;
+        node.binID = bins[i].id;
+        node.t_overflow = estimateTimeToOverflow(bins[i]);
+        heapPush(nodeHeap, node);   // min-heap by t_overflow
+    }
+}
+```
+
+---
+
+### 4.2 Shortest Route between Depot and Bins using Dijkstra
+
+**Use:** compute minimal travel time for a truck to reach all selected bins (or each individually).
+
+**Pseudocode (Dijkstra)**
+
+```c
+void dijkstra(int source) {
+    for (int v = 0; v < N; ++v) {
+        dist[v] = INF;
+        parent[v] = -1;
+    }
+    dist[source] = 0;
+    Heap pq;  // min-heap of (dist, node)
+    heapPush(pq, (0, source));
+
+    while (!heapEmpty(pq)) {
+        auto [d, u] = heapPop(pq);
+        if (d > dist[u]) continue;
+        for (Edge e : graph[u]) {
+            int v = e.to;
+            float nd = dist[u] + e.time;
+            if (nd < dist[v]) {
+                dist[v] = nd;
+                parent[v] = u;
+                heapPush(pq, (nd, v));
+            }
+        }
+    }
+}
+```
+
+---
+
+### 4.3 Zone Clustering using Kruskal + Union-Find
+
+We want a **low-cost backbone** connecting depots, recycling centers, and major intersections.
+
+**Algorithm (Kruskal MST)**
+
+1. Sort all roads (edges) by cost (distance).
+2. Initialize DSU with each node in its own set.
+3. For each edge `(u, v)` in sorted order:
+
+   * If `find(u) != find(v)`, add edge to MST and union their sets.
+
+This MST is used as the base network from which detailed routes are derived.
+
+**Pseudocode Skeleton**
+
+```c
+struct Edge2 { int u, v; float w; };
+
+void kruskalMST(Edge2 edges[], int M) {
+    sort(edges, edges+M, byWeight);   // can use Merge Sort / Quick Sort
+    makeSet();                        // DSU init
+    for (int i = 0; i < M; ++i) {
+        int u = edges[i].u, v = edges[i].v;
+        if (find(u) != find(v)) {
+            addToMST(edges[i]);
+            unite(u, v);
+        }
+    }
+}
+```
+
+This uses the **Kruskal** algorithm + **Union-Find**, and the sorting step may use **Merge Sort or Quick Sort** from your list.
+
+---
+
+### 4.4 Coverage Analysis using BFS
+
+We check which bins are reachable from each depot under road constraints (e.g., one-way streets, blocked roads).
+
+```c
+void bfs(int start) {
+    bool visited[MAX_NODES] = {false};
+    Queue q;
+    enqueue(q, start);
+    visited[start] = true;
+
+    while (!empty(q)) {
+        int u = dequeue(q);
+        for (Edge e : graph[u]) {
+            int v = e.to;
+            if (!visited[v]) {
+                visited[v] = true;
+                enqueue(q, v);
+            }
+        }
+    }
+}
+```
+
+If any bin’s node is **not visited**, it means the bin is disconnected and needs infrastructure change or different depot.
+
+---
+
+### 4.5 Sector Statistics with Segment Tree
+
+Let `w[i]` = total waste in sector `i`.
+
+We build a **segment tree** to answer range queries.
+
+```c
+int segtree[4*MAX_SECTORS];
+
+void build(int idx, int l, int r) {
+    if (l == r) {
+        segtree[idx] = w[l];
+        return;
+    }
+    int mid = (l + r) / 2;
+    build(2*idx, l, mid);
+    build(2*idx+1, mid+1, r);
+    segtree[idx] = segtree[2*idx] + segtree[2*idx+1];
+}
+
+int query(int idx, int l, int r, int ql, int qr) {
+    if (qr < l || r < ql) return 0;             // disjoint
+    if (ql <= l && r <= qr) return segtree[idx]; // fully inside
+    int mid = (l + r) / 2;
+    return query(2*idx,l,mid,ql,qr) + query(2*idx+1,mid+1,r,ql,qr);
+}
+```
+
+This enables fast decisions like:
+
+* “Send an extra truck to any sector range where total waste > capacity.”
+
+---
+
+## 5. Example Workflow: Daily Garbage Collection in Prajnapuri
+
+1. **Sensor Data Ingestion (Arrays + Structures)**
+
+   * Fill levels from bin sensors are stored in arrays of `Bin` structures.
+
+2. **Bin Classification (Trie + Hashing)**
+
+   * Waste type codes (“PLASTIC”, “METAL”) stored in a trie for quick validation and auto-completion.
+   * Bin labels hashed to indices for quick updates.
+
+3. **Risk Computation & Prioritization (Heap)**
+
+   * For each bin, risk score is computed and pushed into a min-heap.
+   * The control system repeatedly pops top-risk bins to form candidate routes.
+
+4. **Route Backbone (Kruskal + Union-Find)**
+
+   * At network-planning time, an MST of main roads is computed so major routes are efficient.
+
+5. **Per-Truck Routing (Dijkstra)**
+
+   * For the candidate bins of a specific truck, run Dijkstra from its depot to compute shortest paths.
+
+6. **Coverage & Connectivity Check (BFS)**
+
+   * BFS ensures there are no unreachable bins.
+
+7. **Sector Load Balancing (Segment Tree)**
+
+   * Segment tree queries decide which sectors require additional trucks, especially near recycling centers.
+
+8. **Execution & Live Updates (Queue + Lists)**
+
+   * Trucks maintain lists of remaining bins. Real-time updates (overflow alerts) are queued and may cause dynamic route changes.
+
+---
+
+## 6. Conclusion
+
+By framing garbage collection and recycling as a DSA problem, we obtain a modular and optimizable system. Arrays, structures, lists, queues, heaps, tries, hash tables, segment trees, union-find, and graph algorithms (BFS, Dijkstra, Kruskal) collectively enable intelligent decisions about bin prioritization, routing, sector balancing, and infrastructure planning.
+
+This approach is directly applicable to a smart-city project like **Prajnapuri** and can be implemented in C/C++/Java/Python as part of a municipal management platform.
+
+---
+
+If you want, I can next:
+
+* Turn this into a **proper IEEE/ACM formatted paper** (with sections numbered 1–8, references, etc.)
+* Or write **complete C or Python programs** that simulate:
+
+  * bin prioritization with heap,
+  * route planning with Dijkstra,
+  * MST creation with Kruskal,
+  * and segment tree queries for sector loads.
+
+              </div>
         <div class="idea-box">Resource station</div>
         <div class="idea-box">Resource Distribution</div>
         <div class="idea-box">Traveling and routing</div>
