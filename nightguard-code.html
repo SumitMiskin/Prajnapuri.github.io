@@ -45,49 +45,274 @@
       <div class="content-card">
         <h2 style="font-family: 'Montserrat', sans-serif;">NightGuard — Technical Spec &amp; Example Code</h2>
 
-        <h3 style="font-family: 'Times New Roman', serif;">1) Data model (example JSON)</h3>
-        <pre><code>{
-  "trip": {
-    "id": "trip_12345",
-    "user_id": "user_987",
-    "driver": { "id": "drv_42", "name": "Asha", "photo": "url" },
-    "vehicle": { "plate": "KA01XX1234", "type": "RSV" },
-    "route": { "start": {"lat": 12.9, "lng": 77.6}, "end": {"lat": 12.95, "lng": 77.62} },
-    "eta_safe_arrival": "2025-12-13T01:23:00Z",
-    "status": "en_route"
-  }
-}</code></pre>
+        <h3 style="font-family: 'Times New Roman', serif;">Algorithms &amp; Data Structures (Examples)</h3>
 
-        <h3 style="font-family: 'Times New Roman', serif;">2) Silent S.O.S. (example client JS snippet)</h3>
-        <pre><code>// POST current GPS to city security endpoint
-async function sendSilentSos(tripId, userId, gps) {
-  const payload = { tripId, userId, gps, timestamp: new Date().toISOString() };
-  await fetch('/api/nightguard/silent-sos', {
-    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload)
-  });
-}
+        <p>The following code samples illustrate algorithms used in NightGuard routing, safety analysis and prioritization. These are illustrative C++ snippets and pseudocode used for teaching and prototyping — they should be adapted and hardened before production.</p>
 
-// Example usage:
-// sendSilentSos('trip_12345','user_987',{lat:12.92,lng:77.61});
-</code></pre>
+        <h4>1. Dijkstra's Algorithm (Safest Route)</h4>
+        <pre><code>#include <bits/stdc++.h>
+    using namespace std;
 
-        <h3 style="font-family: 'Times New Roman', serif;">3) ETSA calculation (pseudocode)</h3>
-        <pre><code>// ETSA = Estimated Time of Safe Arrival
-function calculateETSA(currentLocation, routePoints, safetyFactor) {
-  // sum segment times (considering speed and safetyFactor for detours)
-  let timeMs = 0;
-  for (let i=0;i<routePoints.length-1;i++){
-    timeMs += segmentTime(routePoints[i],routePoints[i+1]) * safetyFactor;
-  }
-  return new Date(Date.now() + timeMs).toISOString();
-}
-</code></pre>
+    // Dijkstra's Algorithm to find safest route
+    // Nodes -> locations
+    // Edges -> roads
+    // Weights -> risk level (crime, poor lighting, isolation)
 
-        <h3 style="font-family: 'Times New Roman', serif;">4) Deployment notes</h3>
+    vector<int> dijkstra(int source, vector<vector<pair<int,int>>> &graph) {
+      int V = graph.size();
+      vector<int> distance(V, INT_MAX);
+
+      // Min-heap priority queue (risk, node)
+      priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>> pq;
+
+      distance[source] = 0;
+      pq.push({0, source});
+
+      while (!pq.empty()) {
+        int currentRisk = pq.top().first;
+        int u = pq.top().second;
+        pq.pop();
+
+        if (currentRisk > distance[u])
+          continue;
+
+        for (auto edge : graph[u]) {
+          int v = edge.first;
+          int risk = edge.second;
+
+          if (distance[u] + risk < distance[v]) {
+            distance[v] = distance[u] + risk;
+            pq.push({distance[v], v});
+          }
+        }
+      }
+      return distance;
+    }
+
+    int main() {
+      int V = 5; // number of locations
+      vector<vector<pair<int,int>>> graph(V);
+
+      // Adding roads (u, v, risk)
+      graph[0].push_back({1, 2});
+      graph[0].push_back({2, 4});
+      graph[1].push_back({2, 1});
+      graph[1].push_back({3, 7});
+      graph[2].push_back({4, 3});
+      graph[3].push_back({4, 1});
+
+      int source = 0;
+      vector<int> safestRoute = dijkstra(source, graph);
+
+      cout << "Safest risk level from source location:\n";
+      for (int i = 0; i < V; i++) {
+        cout << "To location " << i << " = " << safestRoute[i] << endl;
+      }
+
+      return 0;
+    }
+    </code></pre>
+
+        <h4>2. Floyd–Warshall (All-Pairs Safest Routes)</h4>
+        <pre><code>#include <bits/stdc++.h>
+    using namespace std;
+    #define INF 1e9
+
+    void floydWarshall(vector<vector<int>> &dist, int V) {
+      for (int k = 0; k < V; k++) {
+        for (int i = 0; i < V; i++) {
+          for (int j = 0; j < V; j++) {
+            if (dist[i][k] < INF && dist[k][j] < INF &&
+              dist[i][k] + dist[k][j] < dist[i][j]) {
+              dist[i][j] = dist[i][k] + dist[k][j];
+            }
+          }
+        }
+      }
+    }
+
+    int main() {
+      int V = 4;
+      vector<vector<int>> dist = {
+        {0,   3,   INF, 7},
+        {8,   0,   2,   INF},
+        {5,   INF, 0,   1},
+        {2,   INF, INF, 0}
+      };
+
+      floydWarshall(dist, V);
+
+      cout << "Safest risk levels between all pairs of locations:\n";
+      for (int i = 0; i < V; i++) {
+        for (int j = 0; j < V; j++) {
+          if (dist[i][j] == INF)
+            cout << "INF ";
+          else
+            cout << dist[i][j] << " ";
+        }
+        cout << endl;
+      }
+
+      return 0;
+    }
+    </code></pre>
+
+        <h4>3. Union–Find (Disjoint Set Union) — Connected Safe Zones</h4>
+        <pre><code>#include <bits/stdc++.h>
+    using namespace std;
+
+    class UnionFind {
+      vector<int> parent, rank;
+
+    public:
+      UnionFind(int n) {
+        parent.resize(n);
+        rank.resize(n, 0);
+        for (int i = 0; i < n; i++) parent[i] = i;
+      }
+      int findSet(int x) {
+        if (parent[x] != x)
+          parent[x] = findSet(parent[x]);
+        return parent[x];
+      }
+      void unionSet(int a, int b) {
+        int rootA = findSet(a);
+        int rootB = findSet(b);
+        if (rootA != rootB) {
+          if (rank[rootA] < rank[rootB]) parent[rootA] = rootB;
+          else if (rank[rootA] > rank[rootB]) parent[rootB] = rootA;
+          else { parent[rootB] = rootA; rank[rootA]++; }
+        }
+      }
+    };
+
+    int main() {
+      int locations = 6;
+      UnionFind uf(locations);
+      uf.unionSet(0,1); uf.unionSet(1,2); uf.unionSet(3,4);
+      if (uf.findSet(0) == uf.findSet(2)) cout << "Location 0 and 2 are in the same safe zone\n";
+      if (uf.findSet(2) == uf.findSet(4)) cout << "Location 2 and 4 are in the same safe zone\n";
+      return 0;
+    }
+    </code></pre>
+
+        <h4>4. Quick Sort (Prioritization)</h4>
+        <pre><code>#include <bits/stdc++.h>
+    using namespace std;
+
+    int partition(vector<int>& priority, int low, int high) {
+      int pivot = priority[high];
+      int i = low - 1;
+      for (int j = low; j < high; j++) {
+        if (priority[j] <= pivot) { i++; swap(priority[i], priority[j]); }
+      }
+      swap(priority[i + 1], priority[high]);
+      return i + 1;
+    }
+    void quickSort(vector<int>& priority, int low, int high) {
+      if (low < high) {
+        int pi = partition(priority, low, high);
+        quickSort(priority, low, pi - 1);
+        quickSort(priority, pi + 1, high);
+      }
+    }
+    int main() {
+      vector<int> rideRequests = {15, 3, 10, 7, 1, 12};
+      quickSort(rideRequests, 0, rideRequests.size() - 1);
+      for (int p : rideRequests) cout << p << " ";
+      return 0;
+    }
+    </code></pre>
+
+        <h4>5. Priority Queue / Heap (Emergency Requests)</h4>
+        <pre><code>#include <bits/stdc++.h>
+    using namespace std;
+    int main() {
+      priority_queue<int> emergencyRequests;
+      emergencyRequests.push(5); emergencyRequests.push(20); emergencyRequests.push(10); emergencyRequests.push(30);
+      while (!emergencyRequests.empty()) {
+        cout << "Serving request with priority: " << emergencyRequests.top() << endl;
+        emergencyRequests.pop();
+      }
+      return 0;
+    }
+    </code></pre>
+
+        <h4>6. Segment Tree (Range Crime Density)</h4>
+        <pre><code>#include <bits/stdc++.h>
+    using namespace std;
+
+    class SegmentTree {
+      vector<int> tree; int n;
+    public:
+      SegmentTree(vector<int>& safetyData) { n = safetyData.size(); tree.resize(4*n); build(safetyData,0,0,n-1); }
+      void build(vector<int>& arr, int node, int start, int end) {
+        if (start == end) tree[node] = arr[start];
+        else {
+          int mid = (start+end)/2; build(arr,2*node+1,start,mid); build(arr,2*node+2,mid+1,end);
+          tree[node] = tree[2*node+1] + tree[2*node+2];
+        }
+      }
+      int query(int node,int start,int end,int l,int r) {
+        if (r < start || l > end) return 0;
+        if (l <= start && end <= r) return tree[node];
+        int mid=(start+end)/2;
+        return query(2*node+1,start,mid,l,r)+query(2*node+2,mid+1,end,l,r);
+      }
+      int rangeQuery(int l,int r){ return query(0,0,n-1,l,r); }
+    };
+
+    int main(){ vector<int> crimeRisk = {3,5,2,6,4,1}; SegmentTree st(crimeRisk);
+      cout<<"Crime risk between location 1 and 4: "<<st.rangeQuery(1,4)<<endl;
+      cout<<"Crime risk between location 2 and 5: "<<st.rangeQuery(2,5)<<endl; return 0; }
+    </code></pre>
+
+        <h4>7. Fenwick Tree (Real-Time Incident Tracking)</h4>
+        <pre><code>#include <bits/stdc++.h>
+    using namespace std;
+
+    class FenwickTree { vector<int> BIT; int n; public: FenwickTree(int size){ n=size; BIT.assign(n+1,0);} 
+      void update(int i,int value){ while(i<=n){ BIT[i]+=value; i+=i&(-i);} }
+      int query(int i){ int sum=0; while(i>0){ sum+=BIT[i]; i-=i&(-i);} return sum; }
+      int rangeQuery(int l,int r){ return query(r)-query(l-1); }
+    };
+
+    int main(){ int locations=6; FenwickTree ft(locations); ft.update(1,2); ft.update(3,1); ft.update(5,3);
+      cout<<"Incidents between location 1 and 4: "<<ft.rangeQuery(1,4)<<endl;
+      cout<<"Incidents between location 2 and 6: "<<ft.rangeQuery(2,6)<<endl; return 0; }
+    </code></pre>
+
+        <h4>8. Trie &amp; KMP (Text search and pattern detection)</h4>
+        <pre><code>// Trie: used for autocomplete (not fully expanded here)
+    // KMP: used for pattern detection in reports
+
+    #include <bits/stdc++.h>
+    using namespace std;
+
+    vector<int> computeLPS(string pattern) {
+      int m = pattern.length(); vector<int> lps(m,0);
+      for (int i =1,len=0;i<m;i++){
+        while(len>0 && pattern[i]!=pattern[len]) len = lps[len-1];
+        if (pattern[i]==pattern[len]) len++; lps[i]=len;
+      }
+      return lps;
+    }
+
+    void KMPSearch(string text,string pattern){ int n=text.length(), m=pattern.length(); vector<int> lps=computeLPS(pattern); int i=0,j=0;
+      while(i<n){ if(text[i]==pattern[j]){ i++; j++; } if(j==m){ cout<<"Pattern found at index "<<i-j<<endl; j=lps[j-1]; }
+        else if(i<n && text[i]!=pattern[j]){ if(j!=0) j=lps[j-1]; else i++; }
+      }
+    }
+
+    int main(){ string feedback = "poor lighting reported near station. poor lighting and no cctv observed."; string pattern = "poor lighting"; KMPSearch(feedback, pattern); return 0; }
+    </code></pre>
+
+        <h3 style="font-family: 'Times New Roman', serif;">Deployment notes</h3>
         <ul class="spec-list">
           <li>Secure endpoints (mutual TLS / OAuth2) for city security integration.</li>
-          <li>Store minimal location history and respect local privacy rules.</li>
-          <li>Run pilot with manual monitoring and iterate detection thresholds.</li>
+          <li>Minimize stored location history; apply privacy-preserving defaults.</li>
+          <li>Use pilots to tune risk weights and thresholding for alerts.</li>
+          <li>Production systems should be implemented in robust server languages (Go/Java/Node) with monitored queues and retries.</li>
         </ul>
 
         <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap">
