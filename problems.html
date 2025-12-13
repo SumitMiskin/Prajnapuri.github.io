@@ -139,8 +139,9 @@
                   <h6 class="text-success">Problem Statement</h6>
                   <p>Providing tap water supply for each corner of the city with minimal pipe-line connection to reduce the cost for the project is bit difficult. We need to implement the pipe-line with cost and can optimize the cost and budget. We need to find the shortest path and implement these pipes in efficient manner.</p>
                   <h6 class="text-success">Solution Approach</h6>
-                  <p>To solve the pipe-line problem we are using minimum spanning tree: Prim’s algorithm. Adding vertices in each corner to cover all the area of our city and the edges are connecting each node for proper implementation.</p>
-                </div>
+                  <p>To solve the pipe-line problem we are using minimum spanning tree: Prim’s algorithm. Adding vertices in each corner to cover all the area of our city and the edges are connecting each node for proper implementation.</p>                  <div style="margin-top: 20px; text-align: center;">
+                    <img src="assets/img/portfolio/Prim's Problem1.png" alt="Prim's Algorithm Diagram" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
+                  </div>                </div>
                 <div class="col-md-6">
                   <h6 class="text-success">C++ Implementation</h6>
                   <pre class="code-block"><code>#include &lt;bits/stdc++.h&gt;
@@ -300,6 +301,9 @@ public:
                 <p>Problems that are faced by our city, lack of control over the statistical data which tells the common aspects of the city. This survey is conducted to solve this problem and maintain a proper set of statistical data which defines the city. In this survey we collecting the basic information of each person of the city Prajnapuri, and categorizing them in different forms.</p>
                 <h6 class="text-success">Solution Approach</h6>
                 <p>After collecting the data, we are using sorting algorithms for storing the data in a specific form. Using Quick Sort: for names-based sort, age-based sort(To know how many people are 0-20,21-40,40-50,50+), etc. Using Hash function to store the sensitive data safe, like Aadhar number and mobile number.</p>
+                <div style="margin-top: 20px;">
+                  <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#csvModal3" style="cursor: pointer;">📊 View Population Data</button>
+                </div>
               </div>
               <div class="col-md-6">
                 <h6 class="text-success">Implementation</h6>
@@ -458,6 +462,20 @@ int main() {
       </div>
     </div>
 
+    <!-- CSV Data Modal -->
+    <div class="modal fade" id="csvModal3" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header border-0"><h5 class="modal-title">Population Data - Prajnapuri</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+          <div class="modal-body" style="max-height: 600px; overflow-y: auto;">
+            <div id="csvTableContainer" style="font-family: 'Times New Roman', Times, serif;">
+              <p style="text-align: center; color: #666;">Loading data...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Footer -->
     <footer class="footer text-center py-4">
       <div class="container"><p class="mb-0">Prajnapuri City Design — Key Problems</p></div>
@@ -465,5 +483,39 @@ int main() {
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/scripts.js"></script>
+    <script>
+      // Load and display CSV data
+      function loadCSVData() {
+        fetch('assets/img/portfolio/Prajnapuri_population.csv')
+          .then(response => response.text())
+          .then(data => {
+            const lines = data.trim().split('\n');
+            let tableHTML = '<table style="width: 100%; border-collapse: collapse; margin-top: 10px;">';
+            
+            lines.forEach((line, index) => {
+              const cells = line.split(',');
+              const isHeader = index === 0;
+              const rowStyle = isHeader ? 'background-color: #28a745; color: white; font-weight: bold;' : (index % 2 === 0 ? 'background-color: #f9f9f9;' : '');
+              
+              tableHTML += `<tr style="${rowStyle}">`;
+              cells.forEach(cell => {
+                const tag = isHeader ? 'th' : 'td';
+                tableHTML += `<${tag} style="padding: 10px; border: 1px solid #ddd; text-align: left;">${cell.trim()}</${tag}>`;
+              });
+              tableHTML += '</tr>';
+            });
+            
+            tableHTML += '</table>';
+            document.getElementById('csvTableContainer').innerHTML = tableHTML;
+          })
+          .catch(error => {
+            document.getElementById('csvTableContainer').innerHTML = '<p style="color: red; text-align: center;">Error loading CSV data</p>';
+            console.error('Error:', error);
+          });
+      }
+
+      // Load CSV when modal is shown
+      document.getElementById('csvModal3').addEventListener('show.bs.modal', loadCSVData);
+    </script>
   </body>
 </html>
