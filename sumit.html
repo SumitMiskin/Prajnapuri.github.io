@@ -92,95 +92,7 @@
         <h1> - </h1>
         <h2 class="page-section-heading text-uppercase">Course Outcomes</h2>
       </div>
-      <!-- Course Reflection Section -->
-        <section class="page-section" id="course-reflection">
-            <div class="container">
-                <div class="course-card rounded-3 p-4" style="font-family: 'Times New Roman', Times, serif; font-size: 18px; line-height: 1.7;">
-                    <h2 class="text-center mb-4" style="font-family: 'Times New Roman', Times, serif; font-size: 28px;">Course Reflection</h2>
-
-                    <h3 style="font-family: 'Times New Roman', Times, serif; font-size: 22px; margin-top: 1.5rem;">Kinds of Problems in Nature</h3>
-                    <p>We can see many examples in nature that are similar to concepts like iteration, recursion, and backtracking. The change in seasons happens in a cycle again and again, which is like iteration. The growth of cabbage leaves in layers is like recursion, where the same pattern repeats itself. Ants exploring their area and returning home is like backtracking, as they explore paths and then come back. There are many other examples in nature that match these ideas.</p>
-
-                    <h3 style="font-family: 'Times New Roman', Times, serif; font-size: 22px; margin-top: 1.5rem;">Space and Time Efficiency</h3>
-                    <p>Space complexity is the extra memory an algorithm needs to run. Time complexity is the time an algorithm takes to complete its task. Both are important to check how well an algorithm works and if it fits a certain problem. The order of growth shows how the time or space needed grows with the input size:</p>
-                    <ul style="margin-left: 1.5rem;">
-                        <li>O (1) → constant growth</li>
-                        <li>O (n) → linear growth</li>
-                        <li>O (log n) → logarithmic growth</li>
-                    </ul>
-                    <p style="margin-top: 1rem;"><strong>Takeaway from Design Principles:</strong> After learning different algorithms, the main ideas became clear. AVL trees and Red-Black trees taught how balance is important for fast operations. The comparison between DFS (Depth First Search) and BFS (Breadth First Search) showed how different methods can be used to solve problems. Learning how different sorting algorithms work—like dividing and merging or swapping elements—helped in understanding their working logic. Altogether, these ideas gave a good base for understanding the principles of algorithms.</p>
-
-                    <h3 style="font-family: 'Times New Roman', Times, serif; font-size: 22px; margin-top: 1.5rem;">Hierarchical Data and Tree Data Structures</h3>
-                    <p>Tree data structures help in organizing data in a hierarchy and solve many problems efficiently. Binary Search Trees (BSTs) help in searching faster but are not always balanced. A 2-3 tree keeps all leaf nodes at the same level, making it more balanced but still not perfect. An AVL tree is balanced using a balancing factor and rotations. The Red-Black tree improves this by reducing the number of rotations. A heap is a complete binary tree used to maintain a heap property, good for priority queues. A trie is used to store strings, useful in autocomplete and prefix search systems.</p>
-
-                    <h3 style="font-family: 'Times New Roman', Times, serif; font-size: 22px; margin-top: 1.5rem;">Need for Array Query</h3>
-                    <p>Algorithms array queries are useful for quickly handling large data with frequent changes. Lookup tables store precomputed results for faster queries. Segment trees help perform fast range queries and updates. Binary Indexed Trees (BIT) offer simpler code for range queries and work using the last bit concept.</p>
-
-                    <h3 style="font-family: 'Times New Roman', Times, serif; font-size: 22px; margin-top: 1.5rem;">Difference Between Tree and Graphs</h3>
-                    <p>Trees and graphs both store data, but they are different. A tree has one root node and no cycles. A graph has nodes connected by edges and can have cycles.</p>
-                    <p><strong>Tree traversals:</strong></p>
-                    <ul style="margin-left: 1.5rem;">
-                        <li>Pre-order</li>
-                        <li>In-order</li>
-                        <li>Post-order</li>
-                    </ul>
-                    <p style="margin-top: 0.8rem;"><strong>Graph traversals:</strong></p>
-                    <ul style="margin-left: 1.5rem;">
-                        <li>DFS (Depth First Search) → Brave traversal</li>
-                        <li>BFS (Breadth First Search) → Cautious traversal</li>
-                    </ul>
-                    <p style="margin-top: 0.8rem;">Trees are used for hierarchical data, sorting, and searching. Graphs are used in problems like finding the shortest path.</p>
-
-                    <h3 style="font-family: 'Times New Roman', Times, serif; font-size: 22px; margin-top: 1.5rem;">Sorting and Searching Algorithms</h3>
-                    <p>Sorting and searching make it easy to manage and find information. Sorting, like quick sort and merge sort, arranges data in order. For example, arranging products on shopping websites. Searching, like binary search, helps find specific data quickly, such as search suggestions or product searches online.</p>
-
-                    <h3 style="font-family: 'Times New Roman', Times, serif; font-size: 22px; margin-top: 1.5rem;">Importance of Graph Algorithms</h3>
-                    <p>Graph algorithms are important for finding minimum spanning trees (MST) and shortest paths. The MST connects all nodes with the least total cost, useful for laying roads or pipelines. Shortest path algorithms like Dijkstra's help find the fastest route, useful in GPS navigation systems.</p>
-
-                    <h3 style="font-family: 'Times New Roman', Times, serif; font-size: 22px; margin-top: 1.5rem;">Algorithm Design Techniques</h3>
-                    <p>Different design methods of algorithms include:</p>
-                    <ol style="margin-left: 1.5rem;">
-                        <li><strong>Backtracking</strong> – Trying all options and removing wrong ones (like the N-Queens problem).</li>
-                        <li><strong>Sorting algorithms:</strong>
-                            <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
-                                <li>Divide and conquer: Quick sort and Merge sort</li>
-                                <li>Comparison-based: Selection, Insertion, and Bubble sort</li>
-                            </ul>
-                        </li>
-                        <li><strong>Brute force</strong> – Trying every possible solution one by one.</li>
-                        <li><strong>String search algorithms:</strong>
-                            <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
-                                <li>Boyer-Moore</li>
-                                <li>Knuth-Morris-Pratt</li>
-                                <li>Rabin-Karp</li>
-                            </ul>
-                        </li>
-                        <li><strong>Shortest path algorithms:</strong>
-                            <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
-                                <li>Dijkstra's</li>
-                                <li>Floyd-Warshall</li>
-                                <li>Prim's</li>
-                            </ul>
-                        </li>
-                    </ol>
-                </div>
-            </div>
-        </section>
-
-      <div class="container text-center mb-4">
-        <h1> - </h1>
-        <h2 class="page-section-heading text-uppercase">Identified Business Ideas</h2>
-      </div>
-
-      <div class="container">
-        <a class="idea-box" href="garbage-collection.html" role="button" aria-label="Garbage collection and Recycling">Garbage collection and Recycling</a>
-        <a class="idea-box" href="traveling-routing.html" role="button" aria-label="Traveling and routing">Traveling and routing</a>
-        <a class="idea-box" href="city-survey.html" role="button" aria-label="City survey">City survey</a>
-        <a class="idea-box" href="smart-agriculture.html" role="button" aria-label="Smart Agriculture Management">Smart Agriculture Management</a>
-      </div>
-    </section>
-
-    <!-- Course Reflection Section -->
+       <!-- Course Reflection Section -->
     <section id="reflection" class="page-section py-5" style="background-color:#d6e9f5;">
       <div class="container">
         <div style="background: #ffffff; max-width: 980px; margin: 36px auto; padding: 28px 32px; border-radius: 12px; box-shadow: 0 12px 36px rgba(0,0,0,0.12); font-family: 'Times New Roman', Times, serif; font-size: 20px; line-height: 1.6; color: #222;">
@@ -255,6 +167,19 @@
       </div>
     </section>
 
+
+      <div class="container text-center mb-4">
+        <h1> - </h1>
+        <h2 class="page-section-heading text-uppercase">Identified Business Ideas</h2>
+      </div>
+
+      <div class="container">
+        <a class="idea-box" href="garbage-collection.html" role="button" aria-label="Garbage collection and Recycling">Garbage collection and Recycling</a>
+        <a class="idea-box" href="traveling-routing.html" role="button" aria-label="Traveling and routing">Traveling and routing</a>
+        <a class="idea-box" href="city-survey.html" role="button" aria-label="City survey">City survey</a>
+        <a class="idea-box" href="smart-agriculture.html" role="button" aria-label="Smart Agriculture Management">Smart Agriculture Management</a>
+      </div>
+    </section>
 
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
