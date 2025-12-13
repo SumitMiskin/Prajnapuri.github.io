@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Rabin-Karp — Pattern Matching for ANPR — Prajnapuri</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
+    <style>
+      body { background: #f3f6f9; color: #333; font-family: 'Lato', sans-serif; padding: 60px 20px; }
+      .container-modal { max-width: 1000px; margin: 0 auto; background: white; border-radius: 8px; box-shadow: 0 12px 40px rgba(0,0,0,0.08); overflow: hidden; }
+      .modal-header { padding: 20px 24px; border-bottom: 1px solid #e1e8ed; display: flex; justify-content: space-between; align-items: center; }
+      .modal-title { font-weight: 700; font-size: 18px; color: #222; }
+      .modal-subtitle { color: #777; font-size: 13px; }
+      .top-actions { display: flex; gap: 8px; }
+      .btn-action { background: #1f6feb; color: white; border: none; padding: 8px 14px; border-radius: 6px; cursor: pointer; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-size: 14px; }
+      .btn-action:hover { background: #0d47a1; }
+      .btn-action.btn-close-modal { background: #2b87c9; }
+      .modal-body { padding: 24px; }
+      .row-content { display: grid; grid-template-columns: 40% 60%; gap: 24px; }
+      @media (max-width: 768px) { .row-content { grid-template-columns: 1fr; } }
+      .col-left h6 { color: #2a6a9e; font-weight: 700; font-size: 14px; margin-top: 16px; margin-bottom: 8px; }
+      .col-left p { color: #555; font-size: 14px; line-height: 1.6; margin-bottom: 12px; }
+      pre.code-block { background: #0b1220; color: #cfe5ff; padding: 16px; border-radius: 6px; overflow: auto; max-height: 600px; font-size: 12px; line-height: 1.5; }
+      .code-line { display: flex; }
+      .ln { width: 35px; text-align: right; padding-right: 12px; color: #6b7a89; user-select: none; flex-shrink: 0; }
+      .code { white-space: pre; font-family: Consolas, 'Courier New', monospace; }
+    </style>
+  </head>
+  <body>
+    <div class="container-modal">
+      <div class="modal-header">
+        <div>
+          <div class="modal-title">Vehicle Plate Detection — Rabin-Karp Pattern Matching</div>
+          <div class="modal-subtitle">Case9.cpp — C++ (read-only)</div>
+        </div>
+        <div class="top-actions">
+          <button class="btn-action" id="copyBtn"><i class="fas fa-copy"></i> Copy</button>
+          <a href="transportation.html" class="btn-action btn-close-modal"><i class="fas fa-times"></i> Close</a>
+        </div>
+      </div>
+
+      <div class="modal-body">
+        <div class="row-content">
+          <div class="col-left">
+            <h6>Problem Statement</h6>
+            <p>Efficiently search for flagged vehicle license plates in ANPR (Automatic Number Plate Recognition) logs to identify violators, stolen vehicles, or vehicles of interest in real-time traffic monitoring systems.</p>
+
+            <h6>Solution Approach</h6>
+            <p><strong>Rabin-Karp Algorithm:</strong> Uses rolling hash to find pattern matches with average-case O(n+m) time complexity. Computes hash values for the target plate and sliding windows of the log stream, enabling fast detection of vehicle plates without scanning character-by-character.</p>
+          </div>
+
+          <div class="col-right">
+            <h6>C++ Implementation</h6>
+            <pre class="code-block" id="codeBlock"><code>
+<div class="code-line"><span class="ln">1</span><span class="code">#include &lt;iostream&gt;</span></div>
+<div class="code-line"><span class="ln">2</span><span class="code">#include &lt;string&gt;</span></div>
+<div class="code-line"><span class="ln">3</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">4</span><span class="code">using namespace std;</span></div>
+<div class="code-line"><span class="ln">5</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">6</span><span class="code">// Rabin-Karp pattern matching adapted for ANPR</span></div>
+<div class="code-line"><span class="ln">7</span><span class="code">void searchPlate(const string&amp; logStream, const string&amp; targetPlate, int base, int primeMod)</span></div>
+<div class="code-line"><span class="ln">8</span><span class="code">{</span></div>
+<div class="code-line"><span class="ln">9</span><span class="code">    int logLen = logStream.size();</span></div>
+<div class="code-line"><span class="ln">10</span><span class="code">    int plateLen = targetPlate.size();</span></div>
+<div class="code-line"><span class="ln">11</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">12</span><span class="code">    int hashMultiplier = 1;</span></div>
+<div class="code-line"><span class="ln">13</span><span class="code">    for (int i = 0; i &lt; plateLen - 1; i++)</span></div>
+<div class="code-line"><span class="ln">14</span><span class="code">        hashMultiplier = (hashMultiplier * base) % primeMod;</span></div>
+<div class="code-line"><span class="ln">15</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">16</span><span class="code">    int patternHash = 0, textHash = 0;</span></div>
+<div class="code-line"><span class="ln">17</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">18</span><span class="code">    // Initial hash values for pattern and first window of text</span></div>
+<div class="code-line"><span class="ln">19</span><span class="code">    for (int i = 0; i &lt; plateLen; i++) {</span></div>
+<div class="code-line"><span class="ln">20</span><span class="code">        patternHash = (base * patternHash + targetPlate[i]) % primeMod;</span></div>
+<div class="code-line"><span class="ln">21</span><span class="code">        textHash = (base * textHash + logStream[i]) % primeMod;</span></div>
+<div class="code-line"><span class="ln">22</span><span class="code">    }</span></div>
+<div class="code-line"><span class="ln">23</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">24</span><span class="code">    // Slide over the log stream</span></div>
+<div class="code-line"><span class="ln">25</span><span class="code">    for (int s = 0; s &lt;= logLen - plateLen; s++) {</span></div>
+<div class="code-line"><span class="ln">26</span><span class="code">        // Check hash match first</span></div>
+<div class="code-line"><span class="ln">27</span><span class="code">        if (patternHash == textHash) {</span></div>
+<div class="code-line"><span class="ln">28</span><span class="code">            bool matched = true;</span></div>
+<div class="code-line"><span class="ln">29</span><span class="code">            for (int i = 0; i &lt; plateLen; i++) {</span></div>
+<div class="code-line"><span class="ln">30</span><span class="code">                if (logStream[s + i] != targetPlate[i]) {</span></div>
+<div class="code-line"><span class="ln">31</span><span class="code">                    matched = false;</span></div>
+<div class="code-line"><span class="ln">32</span><span class="code">                    break;</span></div>
+<div class="code-line"><span class="ln">33</span><span class="code">                }</span></div>
+<div class="code-line"><span class="ln">34</span><span class="code">            }</span></div>
+<div class="code-line"><span class="ln">35</span><span class="code">            if (matched)</span></div>
+<div class="code-line"><span class="ln">36</span><span class="code">                cout &lt;&lt; "Vehicle plate '" &lt;&lt; targetPlate &lt;&lt; "' found at position " &lt;&lt; s &lt;&lt; " in the stream.\n";</span></div>
+<div class="code-line"><span class="ln">37</span><span class="code">        }</span></div>
+<div class="code-line"><span class="ln">38</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">39</span><span class="code">        // Update hash for next window</span></div>
+<div class="code-line"><span class="ln">40</span><span class="code">        if (s &lt; logLen - plateLen) {</span></div>
+<div class="code-line"><span class="ln">41</span><span class="code">            textHash = (base * (textHash - logStream[s] * hashMultiplier) + logStream[s + plateLen]) % primeMod;</span></div>
+<div class="code-line"><span class="ln">42</span><span class="code">            if (textHash &lt; 0)</span></div>
+<div class="code-line"><span class="ln">43</span><span class="code">                textHash += primeMod;</span></div>
+<div class="code-line"><span class="ln">44</span><span class="code">        }</span></div>
+<div class="code-line"><span class="ln">45</span><span class="code">    }</span></div>
+<div class="code-line"><span class="ln">46</span><span class="code">}</span></div>
+<div class="code-line"><span class="ln">47</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">48</span><span class="code">int main() {</span></div>
+<div class="code-line"><span class="ln">49</span><span class="code">    // Simulated stream of vehicle number plates (e.g., from ANPR logs)</span></div>
+<div class="code-line"><span class="ln">50</span><span class="code">    string plateLogStream = "KA01AA1234DL04CN6753MH12DE1432KA01AA1234";</span></div>
+<div class="code-line"><span class="ln">51</span><span class="code">    string plateToFind = "KA01AA1234"; // Target vehicle to flag</span></div>
+<div class="code-line"><span class="ln">52</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">53</span><span class="code">    int base = 256;     // Base for ASCII hashing</span></div>
+<div class="code-line"><span class="ln">54</span><span class="code">    int mod = 101;      // Prime modulus to reduce collisions</span></div>
+<div class="code-line"><span class="ln">55</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">56</span><span class="code">    cout &lt;&lt; "Searching for vehicle plate '" &lt;&lt; plateToFind &lt;&lt; "' in ANPR log...\n\n";</span></div>
+<div class="code-line"><span class="ln">57</span><span class="code">    searchPlate(plateLogStream, plateToFind, base, mod);</span></div>
+<div class="code-line"><span class="ln">58</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">59</span><span class="code">    return 0;</span></div>
+<div class="code-line"><span class="ln">60</span><span class="code">}</span></div>
+            </code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      document.getElementById('copyBtn').addEventListener('click', function(){
+        const text = Array.from(document.querySelectorAll('#codeBlock .code')).map(n=>n.textContent).join('\n');
+        navigator.clipboard.writeText(text).then(()=>{
+          this.textContent = 'Copied!';
+          setTimeout(()=> this.innerHTML = '<i class="fas fa-copy"></i> Copy', 1500);
+        });
+      });
+    </script>
+  </body>
+</html>
