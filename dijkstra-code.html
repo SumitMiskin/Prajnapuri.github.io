@@ -20,7 +20,6 @@
       .btn-action:hover { background: #0d47a1; }
       .btn-action.btn-close-modal { background: #2b87c9; }
       .modal-body { padding: 24px; }
-      /* Left column (text) 60%, right column (code) 40% on wide screens */
       .row-content { display: grid; grid-template-columns: 40% 60%; gap: 24px; }
       @media (max-width: 768px) { .row-content { grid-template-columns: 1fr; } }
       .col-left h6 { color: #2a6a9e; font-weight: 700; font-size: 14px; margin-top: 16px; margin-bottom: 8px; }
@@ -41,7 +40,7 @@
           <div class="modal-subtitle">Case1.cpp — C++ (read-only)</div>
         </div>
         <div class="top-actions">
-          
+          <button class="btn-action" id="copyBtn"><i class="fas fa-copy"></i> Copy</button>
           <a href="transportation.html" class="btn-action btn-close-modal"><i class="fas fa-times"></i> Close</a>
         </div>
       </div>
@@ -59,104 +58,104 @@
 
           <div class="col-right">
             <h6>C++ Implementation</h6>
-            <pre class="code-block" id="codeBlock"><code><div class="code-line">
-#include;
-
-class SmartTransportation {
-public:
-    int previous[4];
-    int travelTime[4];
-    int visited[4];
-
-    void initialize(int timeMatrix[4][4], int start);
-    int findMinimum();
-    void update(int timeMatrix[4][4]);
-    void computeShortestPaths(int timeMatrix[4][4], int start);
-    void displayPaths(int start, string locationNames[4]);
-};
-
-void SmartTransportation::initialize(int timeMatrix[4][4], int start) {
-    for (int i = 0; i < 4; i++) {
-        previous[i] = start;
-        travelTime[i] = (timeMatrix[start][i] == 0) ? 10000000 : timeMatrix[start][i];
-        visited[i] = 0;
-    }
-    visited[start] = 1;
-    travelTime[start] = 0;
-}
-
-int SmartTransportation::findMinimum() {
-    int minimum = 10000000;
-    int minIndex = -1;
-    for (int i = 0; i < 4; i++) {
-        if (!visited[i] && travelTime[i] < minimum) {
-            minimum = travelTime[i];
-            minIndex = i;
-        }
-    }
-    return minIndex;
-}
-
-void SmartTransportation::update(int timeMatrix[4][4]) {
-    int u = findMinimum();
-    if (u == -1)
-        return;
-    visited[u] = 1;
-    for (int i = 0; i < 4; i++) {
-        if (!visited[i]) {
-            if (travelTime[u] + timeMatrix[u][i] < travelTime[i]) {
-                travelTime[i] = travelTime[u] + timeMatrix[u][i];
-                previous[i] = u;
-            }
-        }
-    }
-}
-
-void SmartTransportation::computeShortestPaths(int timeMatrix[4][4], int start) {
-    initialize(timeMatrix, start);
-    for (int i = 0; i < 3; i++)
-        update(timeMatrix);
-}
-
-void SmartTransportation::displayPaths(int start, string locationNames[4]) {
-    for (int i = 0; i < 4; i++) {
-        if (i != start) {
-            cout << "Fastest route from " << locationNames[start] << " to " << locationNames[i]
-                 << " takes " << travelTime[i] << " minutes via: ";
-            int j = i;
-            cout << locationNames[j];
-            while (previous[j] != start) {
-                j = previous[j];
-                cout << " <- " << locationNames[j];
-            }
-            cout << " <- " << locationNames[start] << endl;
-        }
-    }
-}
-
-int main() {
-    int start;
-    int timeMatrix[4][4];
-    string locationNames[4] = {"Central Junction", "Hospital", "City Market", "Tech Park"};
-
-    cout << "Enter the starting location (0 - Central Junction, 1 - Hospital, 2 - City Market, 3 - Tech Park): ";
-    cin >> start;
-
-    cout << "Enter the travel time matrix (in minutes) between intersections:\n";
-    for (int i = 0; i < 4; i++) {
-        for (int j = 0; j < 4; j++) {
-            cin >> timeMatrix[i][j];
-        }
-    }
-
-    SmartTransportation trafficSystem;
-    trafficSystem.computeShortestPaths(timeMatrix, start);
-    trafficSystem.displayPaths(start, locationNames);
-
-    return 0;
-}
-
-            </pre>
+            <pre class="code-block" id="codeBlock"><code><div class="code-line"><span class="ln">1</span><span class="code">#include &lt;iostream&gt;</span></div>
+<div class="code-line"><span class="ln">2</span><span class="code">#include &lt;algorithm&gt;</span></div>
+<div class="code-line"><span class="ln">3</span><span class="code">#include &lt;string&gt;</span></div>
+<div class="code-line"><span class="ln">4</span><span class="code">using namespace std;</span></div>
+<div class="code-line"><span class="ln">5</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">6</span><span class="code">class SmartTransportation {</span></div>
+<div class="code-line"><span class="ln">7</span><span class="code">public:</span></div>
+<div class="code-line"><span class="ln">8</span><span class="code">    int previous[4];</span></div>
+<div class="code-line"><span class="ln">9</span><span class="code">    int travelTime[4];</span></div>
+<div class="code-line"><span class="ln">10</span><span class="code">    int visited[4];</span></div>
+<div class="code-line"><span class="ln">11</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">12</span><span class="code">    void initialize(int timeMatrix[4][4], int start);</span></div>
+<div class="code-line"><span class="ln">13</span><span class="code">    int findMinimum();</span></div>
+<div class="code-line"><span class="ln">14</span><span class="code">    void update(int timeMatrix[4][4]);</span></div>
+<div class="code-line"><span class="ln">15</span><span class="code">    void computeShortestPaths(int timeMatrix[4][4], int start);</span></div>
+<div class="code-line"><span class="ln">16</span><span class="code">    void displayPaths(int start, string locationNames[4]);</span></div>
+<div class="code-line"><span class="ln">17</span><span class="code">};</span></div>
+<div class="code-line"><span class="ln">18</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">19</span><span class="code">void SmartTransportation::initialize(int timeMatrix[4][4], int start) {</span></div>
+<div class="code-line"><span class="ln">20</span><span class="code">    for (int i = 0; i &lt; 4; i++) {</span></div>
+<div class="code-line"><span class="ln">21</span><span class="code">        previous[i] = start;</span></div>
+<div class="code-line"><span class="ln">22</span><span class="code">        travelTime[i] = (timeMatrix[start][i] == 0) ? 10000000 : timeMatrix[start][i];</span></div>
+<div class="code-line"><span class="ln">23</span><span class="code">        visited[i] = 0;</span></div>
+<div class="code-line"><span class="ln">24</span><span class="code">    }</span></div>
+<div class="code-line"><span class="ln">25</span><span class="code">    visited[start] = 1;</span></div>
+<div class="code-line"><span class="ln">26</span><span class="code">    travelTime[start] = 0;</span></div>
+<div class="code-line"><span class="ln">27</span><span class="code">}</span></div>
+<div class="code-line"><span class="ln">28</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">29</span><span class="code">int SmartTransportation::findMinimum() {</span></div>
+<div class="code-line"><span class="ln">30</span><span class="code">    int minimum = 10000000;</span></div>
+<div class="code-line"><span class="ln">31</span><span class="code">    int minIndex = -1;</span></div>
+<div class="code-line"><span class="ln">32</span><span class="code">    for (int i = 0; i &lt; 4; i++) {</span></div>
+<div class="code-line"><span class="ln">33</span><span class="code">        if (!visited[i] &amp;&amp; travelTime[i] &lt; minimum) {</span></div>
+<div class="code-line"><span class="ln">34</span><span class="code">            minimum = travelTime[i];</span></div>
+<div class="code-line"><span class="ln">35</span><span class="code">            minIndex = i;</span></div>
+<div class="code-line"><span class="ln">36</span><span class="code">        }</span></div>
+<div class="code-line"><span class="ln">37</span><span class="code">    }</span></div>
+<div class="code-line"><span class="ln">38</span><span class="code">    return minIndex;</span></div>
+<div class="code-line"><span class="ln">39</span><span class="code">}</span></div>
+<div class="code-line"><span class="ln">40</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">41</span><span class="code">void SmartTransportation::update(int timeMatrix[4][4]) {</span></div>
+<div class="code-line"><span class="ln">42</span><span class="code">    int u = findMinimum();</span></div>
+<div class="code-line"><span class="ln">43</span><span class="code">    if (u == -1)</span></div>
+<div class="code-line"><span class="ln">44</span><span class="code">        return;</span></div>
+<div class="code-line"><span class="ln">45</span><span class="code">    visited[u] = 1;</span></div>
+<div class="code-line"><span class="ln">46</span><span class="code">    for (int i = 0; i &lt; 4; i++) {</span></div>
+<div class="code-line"><span class="ln">47</span><span class="code">        if (!visited[i]) {</span></div>
+<div class="code-line"><span class="ln">48</span><span class="code">            if (travelTime[u] + timeMatrix[u][i] &lt; travelTime[i]) {</span></div>
+<div class="code-line"><span class="ln">49</span><span class="code">                travelTime[i] = travelTime[u] + timeMatrix[u][i];</span></div>
+<div class="code-line"><span class="ln">50</span><span class="code">                previous[i] = u;</span></div>
+<div class="code-line"><span class="ln">51</span><span class="code">            }</span></div>
+<div class="code-line"><span class="ln">52</span><span class="code">        }</span></div>
+<div class="code-line"><span class="ln">53</span><span class="code">    }</span></div>
+<div class="code-line"><span class="ln">54</span><span class="code">}</span></div>
+<div class="code-line"><span class="ln">55</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">56</span><span class="code">void SmartTransportation::computeShortestPaths(int timeMatrix[4][4], int start) {</span></div>
+<div class="code-line"><span class="ln">57</span><span class="code">    initialize(timeMatrix, start);</span></div>
+<div class="code-line"><span class="ln">58</span><span class="code">    for (int i = 0; i &lt; 3; i++)</span></div>
+<div class="code-line"><span class="ln">59</span><span class="code">        update(timeMatrix);</span></div>
+<div class="code-line"><span class="ln">60</span><span class="code">}</span></div>
+<div class="code-line"><span class="ln">61</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">62</span><span class="code">void SmartTransportation::displayPaths(int start, string locationNames[4]) {</span></div>
+<div class="code-line"><span class="ln">63</span><span class="code">    for (int i = 0; i &lt; 4; i++) {</span></div>
+<div class="code-line"><span class="ln">64</span><span class="code">        if (i != start) {</span></div>
+<div class="code-line"><span class="ln">65</span><span class="code">            cout &lt;&lt; "Fastest route from " &lt;&lt; locationNames[start] &lt;&lt; " to " &lt;&lt; locationNames[i]</span></div>
+<div class="code-line"><span class="ln">66</span><span class="code">                 &lt;&lt; " takes " &lt;&lt; travelTime[i] &lt;&lt; " minutes via: ";</span></div>
+<div class="code-line"><span class="ln">67</span><span class="code">            int j = i;</span></div>
+<div class="code-line"><span class="ln">68</span><span class="code">            cout &lt;&lt; locationNames[j];</span></div>
+<div class="code-line"><span class="ln">69</span><span class="code">            while (previous[j] != start) {</span></div>
+<div class="code-line"><span class="ln">70</span><span class="code">                j = previous[j];</span></div>
+<div class="code-line"><span class="ln">71</span><span class="code">                cout &lt;&lt; " &lt;- " &lt;&lt; locationNames[j];</span></div>
+<div class="code-line"><span class="ln">72</span><span class="code">            }</span></div>
+<div class="code-line"><span class="ln">73</span><span class="code">            cout &lt;&lt; " &lt;- " &lt;&lt; locationNames[start] &lt;&lt; endl;</span></div>
+<div class="code-line"><span class="ln">74</span><span class="code">        }</span></div>
+<div class="code-line"><span class="ln">75</span><span class="code">    }</span></div>
+<div class="code-line"><span class="ln">76</span><span class="code">}</span></div>
+<div class="code-line"><span class="ln">77</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">78</span><span class="code">int main() {</span></div>
+<div class="code-line"><span class="ln">79</span><span class="code">    int start;</span></div>
+<div class="code-line"><span class="ln">80</span><span class="code">    int timeMatrix[4][4];</span></div>
+<div class="code-line"><span class="ln">81</span><span class="code">    string locationNames[4] = {"Central Junction", "Hospital", "City Market", "Tech Park"};</span></div>
+<div class="code-line"><span class="ln">82</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">83</span><span class="code">    cout &lt;&lt; "Enter the starting location (0 - Central Junction, 1 - Hospital, 2 - City Market, 3 - Tech Park): ";</span></div>
+<div class="code-line"><span class="ln">84</span><span class="code">    cin &gt;&gt; start;</span></div>
+<div class="code-line"><span class="ln">85</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">86</span><span class="code">    cout &lt;&lt; "Enter the travel time matrix (in minutes) between intersections:\n";</span></div>
+<div class="code-line"><span class="ln">87</span><span class="code">    for (int i = 0; i &lt; 4; i++) {</span></div>
+<div class="code-line"><span class="ln">88</span><span class="code">        for (int j = 0; j &lt; 4; j++) {</span></div>
+<div class="code-line"><span class="ln">89</span><span class="code">            cin &gt;&gt; timeMatrix[i][j];</span></div>
+<div class="code-line"><span class="ln">90</span><span class="code">        }</span></div>
+<div class="code-line"><span class="ln">91</span><span class="code">    }</span></div>
+<div class="code-line"><span class="ln">92</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">93</span><span class="code">    SmartTransportation trafficSystem;</span></div>
+<div class="code-line"><span class="ln">94</span><span class="code">    trafficSystem.computeShortestPaths(timeMatrix, start);</span></div>
+<div class="code-line"><span class="ln">95</span><span class="code">    trafficSystem.displayPaths(start, locationNames);</span></div>
+<div class="code-line"><span class="ln">96</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">97</span><span class="code">    return 0;</span></div>
+<div class="code-line"><span class="ln">98</span><span class="code">}</span></div></code></pre>
           </div>
         </div>
       </div>
