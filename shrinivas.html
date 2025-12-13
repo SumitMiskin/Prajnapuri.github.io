@@ -15,6 +15,30 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" type="text/css" />
     <!-- Core theme CSS (includes Bootstrap)--> 
     <link href="css/styles.css" rel="stylesheet" />
+    <style>
+      /* Match manjunath page button/card styles */
+      .idea-box {
+        background: #2b87c9;
+        color: #ffffff;
+        width: 70%;
+        margin: 15px auto;
+        padding: 18px;
+        font-size: 24px;
+        font-weight: bold;
+        border-radius: 12px;
+        text-align: center;
+        box-shadow: 0px 4px 10px rgba(0,0,0,0.15);
+        transition: 0.18s ease-in-out;
+        font-family: "Times New Roman", Times, serif;
+        display: block;
+        text-decoration: none;
+      }
+      .idea-box:hover{ transform: translateY(-4px); background:#2573a8; color:#fff; text-decoration:none }
+      .content-card{ background:#ffffff; max-width:980px; margin:0 auto; padding:28px; border-radius:12px; box-shadow:0 12px 36px rgba(0,0,0,0.12); font-family: "Times New Roman", Times, serif; font-size:18px; line-height:1.6; color:#222 }
+      .content-card h2{ font-size:28px; margin-bottom:.5rem }
+      .start-next-page{ min-height:100vh; display:flex; align-items:flex-start; justify-content:center; padding-top:80px; background-color:#d6e9f5 }
+      .start-next-page .idea-box{ width:70%; margin:14px auto }
+    </style>
   </head>
 
   <body id="page-top">
@@ -57,16 +81,24 @@
       </div>
 
       <div class="container d-flex justify-content-center">
-        <div class="ideas-card w-100 mw-800">
-         
-          </div>
-          <div class="container">
-        <a class="idea-box" href="Night-Time Safe Travel Services.html" role="button" aria-label="Night-Time Safe Travel Services">Night-Time Safe Travel Services</a>
-        <a class="idea-box" href="Drone-Based Fast Delivery Network.html" role="button" aria-label="Drone-Based Fast Delivery Network">Drone-Based Fast Delivery Network</a>
-        <a class="idea-box" href="Smart Farming Zone with Hydroponics + iot.html" role="button" aria-label="Smart Farming Zone with Hydroponics + iot">Smart Farming Zone with Hydroponics + iot</a>
-        <a class="idea-box" href=".html" role="button" aria-label="HealthTech: Smart Emergency Response Systems">HealthTech: Smart Emergency Response Systems</a>
-        <a class="idea-box" href="city-survey.html" role="button" aria-label="City survey">City survey</a>
+        <div class="ideas-card w-100 mw-800"></div>
       </div>
+    </section>
+
+    <!-- Large buttons panel (matches other person pages) -->
+    <section class="start-next-page">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8 text-center">
+            <h4 class="text-dark mb-4">Explore Each Idea in Detail:</h4>
+            <div class="content-card">
+              <a href="night-time-safe-travel-services.html" class="idea-box" role="button">Night-Time Safe Travel Services</a>
+              <a href="drone-based-fast-delivery-network.html" class="idea-box" role="button">Drone-Based Fast Delivery Network</a>
+              <a href="smart-farming-hydroponics-iot.html" class="idea-box" role="button">Smart Farming Zone with Hydroponics + IoT</a>
+              <a href="healthtech-smart-emergency-response-systems.html" class="idea-box" role="button">HealthTech: Smart Emergency Response Systems</a>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
