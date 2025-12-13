@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Dijkstra Code Preview — Prajnapuri</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
+    <style>
+      body { background: #071226; color: #e6eef8; font-family: 'Lato', sans-serif; }
+      .code-modal { max-width: 900px; margin: 60px auto; background: #0e1721; border-radius: 8px; box-shadow: 0 12px 40px rgba(0,0,0,0.6); padding: 18px; }
+      .modal-header { display:flex; justify-content:space-between; align-items:center; }
+      .modal-title { font-weight:700; font-size:18px; }
+      .btn-copy { background:#1f6feb; color:white; border:none; padding:8px 12px; border-radius:6px; }
+      pre.code-block { background:#0b1220; color:#cfe5ff; padding:18px; border-radius:6px; overflow:auto; max-height:70vh; }
+      /* line numbers */
+      .code-line { display:flex; }
+      .ln { width:40px; text-align:right; padding-right:12px; color:#6b7a89; user-select:none; }
+      .ln + .code { white-space:pre; font-family: Consolas, 'Courier New', monospace; }
+      .top-actions { display:flex; gap:8px; }
+    </style>
+  </head>
+  <body>
+    <div class="code-modal">
+      <div class="modal-header">
+        <div>
+          <div class="modal-title">Ride-Sharing & Dynamic Dispatch — Dijkstra Preview</div>
+          <div style="color:#9fb6d8; font-size:13px;">Case1.cpp — C++ (read-only)</div>
+        </div>
+        <div class="top-actions">
+          <button class="btn-copy" id="copyBtn"><i class="fas fa-copy"></i> Copy</button>
+          <a href="transportation.html" class="btn-copy" style="background:#2b87c9; text-decoration:none; display:inline-flex; align-items:center;
+              font-weight:600;">Close</a>
+        </div>
+      </div>
+
+      <hr style="border-color:rgba(255,255,255,0.04); margin:12px 0 18px;" />
+
+      <pre class="code-block" id="codeBlock"><code>
+<span class="code-line"><span class="ln">1</span><span class="code">// Ride-Sharing Dispatch Demo</span></span>
+<span class="code-line"><span class="ln">2</span><span class="code">// Algorithms: BFS, DFS, Dijkstra, Bellman-Ford</span></span>
+<span class="code-line"><span class="ln">3</span><span class="code">// Data structures: queue (request buffer), priority_queue (min-heap for closest driver),</span></span>
+<span class="code-line"><span class="ln">4</span><span class="code">// unordered_map (hashing for fast driver lookup)</span></span>
+<span class="code-line"><span class="ln">5</span><span class="code"></span></span>
+<span class="code-line"><span class="ln">6</span><span class="code">#include &lt;bits/stdc++.h&gt;</span></span>
+<span class="code-line"><span class="ln">7</span><span class="code">using namespace std;</span></span>
+<span class="code-line"><span class="ln">8</span><span class="code"></span></span>
+<span class="code-line"><span class="ln">9</span><span class="code">// ---------------------- Shared Graph Structure --------------------</span></span>
+<span class="code-line"><span class="ln">10</span><span class="code">// Nodes can represent map intersections or zones.</span></span>
+<span class="code-line"><span class="ln">11</span><span class="code">// Edges represent roads between them.</span></span>
+<span class="code-line"><span class="ln">12</span><span class="code">struct Edge {</span></span>
+<span class="code-line"><span class="ln">13</span><span class="code">    int u, v;</span></span>
+<span class="code-line"><span class="ln">14</span><span class="code">    int w; // travel time or distance</span></span>
+<span class="code-line"><span class="ln">15</span><span class="code">};</span></span>
+<span class="code-line"><span class="ln">16</span><span class="code"></span></span>
+<span class="code-line"><span class="ln">17</span><span class="code">class Graph {</span></span>
+<span class="code-line"><span class="ln">18</span><span class="code">public:</span></span>
+<span class="code-line"><span class="ln">19</span><span class="code">    int V;</span></span>
+<span class="code-line"><span class="ln">20</span><span class="code">    vector&lt;vector&lt;int&gt;&gt; adjList;               // for BFS/DFS</span></span>
+<span class="code-line"><span class="ln">21</span><span class="code">    vector&lt;vector&lt;pair&lt;int,int&gt;&gt;&gt; adjWeighted;   // for Dijkstra</span></span>
+<span class="code-line"><span class="ln">22</span><span class="code">    vector&lt;Edge&gt; edges;                           // for Bellman-Ford</span></span>
+<span class="code-line"><span class="ln">23</span><span class="code"></span></span>
+<span class="code-line"><span class="ln">24</span><span class="code">    Graph(int n = 0) {</span></span>
+<span class="code-line"><span class="ln">25</span><span class="code">        V = n;</span></span>
+<span class="code-line"><span class="ln">26</span><span class="code">        adjList.assign(V, {});</span></span>
+<span class="code-line"><span class="ln">27</span><span class="code">        adjWeighted.assign(V, {});</span></span>
+<span class="code-line"><span class="ln">28</span><span class="code">    }</span></span>
+<span class="code-line"><span class="ln">29</span><span class="code">    void resize(int n) {</span></span>
+<span class="code-line"><span class="ln">30</span><span class="code">        V = n;</span></span>
+<span class="code-line"><span class="ln">31</span><span class="code">        adjList.assign(V, {});</span></span>
+<span class="code-line"><span class="ln">32</span><span class="code">        adjWeighted.assign(V, {});</span></span>
+<span class="code-line"><span class="ln">33</span><span class="code">        edges.clear();</span></span>
+<span class="code-line"><span class="ln">34</span><span class="code">    }</span></span>
+<span class="code-line"><span class="ln">35</span><span class="code">};</span></span>
+</code></pre>
+    </div>
+
+    <script>
+      document.getElementById('copyBtn').addEventListener('click', function(){
+        const text = Array.from(document.querySelectorAll('#codeBlock .code')).map(n=>n.textContent).join('\n');
+        navigator.clipboard.writeText(text).then(()=>{
+          this.textContent = 'Copied';
+          setTimeout(()=> this.innerHTML = '<i class="fas fa-copy"></i> Copy', 1500);
+        });
+      });
+    </script>
+  </body>
+</html>
