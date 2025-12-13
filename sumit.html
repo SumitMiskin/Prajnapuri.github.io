@@ -23,7 +23,9 @@
 
     <style>
       /* Custom Styling for Boxes (render as buttons) */
-      .idea-box {
+      .idea-box,
+      .idea-box:link,
+      .idea-box:visited {
         display: block;
         background: #ffffff;
         width: 70%;
@@ -38,6 +40,8 @@
         border: none;
         color: #222;
         cursor: pointer;
+        text-decoration: none;
+        font-family: "Times New Roman", Times, serif;
       }
 
       .idea-box:focus {
@@ -48,6 +52,7 @@
       .idea-box:hover {
         transform: translateY(-4px);
         background: #fbfbfb;
+        text-decoration: none;
       }
     </style>
   </head>
