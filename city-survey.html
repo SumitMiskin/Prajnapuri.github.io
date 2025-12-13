@@ -8,6 +8,25 @@
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
+    <style>
+      /* Page-specific: Times New Roman + centered white card on light-blue band */
+      body, .content-card { font-family: "Times New Roman", Times, serif; }
+      .content-card{
+        background: #ffffff;
+        max-width: 980px;
+        margin: 36px auto;
+        padding: 28px 32px;
+        border-radius: 12px;
+        box-shadow: 0 12px 36px rgba(0,0,0,0.12);
+        font-size: 18px;
+        line-height: 1.6;
+        color: #222;
+      }
+      .content-card h2{ font-size: 28px; margin-bottom: 0.5rem }
+      .content-card h3{ font-size: 20px; margin-top:1rem }
+      .content-card ul{ padding-left:1.1rem; }
+      .content-card ul li{ font-size: 16px; margin-bottom: 0.35rem }
+    </style>
   </head>
   <body id="page-top">
     <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
@@ -26,17 +45,35 @@
 
     <header class="masthead masthead-small text-white text-center"></header>
 
-    <section class="page-section py-5">
+    <section class="page-section py-5" style="background-color:#d6e9f5;">
       <div class="container">
-        <div class="content-card" style="max-width:900px; margin:48px auto;">
+        <div class="content-card">
           <h2>City Survey</h2>
-          <p class="lead">City surveys gather citizen feedback and data to guide planning and services.</p>
+          <p>The population of Prajnapuri is approximately 200,000. To manage and query this large dataset efficiently we apply DAA concepts (arrays, hash tables, trees, tries, sorting, graphs).</p>
+
+          <h3>Typical operations</h3>
           <ul>
-            <li>Community questionnaires and location-based feedback.</li>
-            <li>Mobile data collection for infrastructure assessments.</li>
-            <li>Integration with mapping and visualization tools.</li>
+            <li>Search by Aadhar, mobile, email, or name.</li>
+            <li>Insert/update/delete a record when details change.</li>
+            <li>Detect duplicates or inconsistent entries (e.g., same person with different mobiles).</li>
           </ul>
-          <p><a href="sumit.html" class="btn btn-secondary mt-3">Back to ideas</a></p>
+
+          <h3>Core data structures</h3>
+          <ul>
+            <li><strong>Array</strong>: store records for sequential scans, sorting, and batch processing.</li>
+            <li><strong>Hash tables (maps)</strong>: O(1) exact lookup — hash(Aadhar) with a large prime modulus; separate maps for mobile and email for fast uniqueness checks.</li>
+            <li><strong>Structured trees</strong> (BST / AVL / Red‑Black): ordered indexes for name/email enabling range queries and ordered traversals.</li>
+            <li><strong>Tries / prefix trees</strong>: fast prefix search for emails or mobile prefixes (useful for autocomplete and fuzzy checks).</li>
+          </ul>
+
+          <h3>Algorithms on top</h3>
+          <ul>
+            <li><strong>Searching</strong>: hash-based O(1) lookup for exact Aadhar/mobile/email; binary search on sorted arrays or tree indexes for names; trie-based prefix search for autocomplete.</li>
+            <li><strong>Sorting</strong>: quicksort/mergesort to build sorted arrays or indexes (useful for deduplication and display).</li>
+            <li>Use sorting + grouping as a pre-step for deduplication (group similar records together for comparison).</li>
+          </ul>
+
+          <p class="mt-3"><a href="sumit.html" class="btn btn-secondary">Back to ideas</a></p>
         </div>
       </div>
     </section>
