@@ -8,6 +8,25 @@
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
+    <style>
+      /* Page-specific: Times New Roman + centered white card on light-blue band + increased text size */
+      body, .content-card { font-family: "Times New Roman", Times, serif; }
+      .content-card{
+        background: #ffffff;
+        max-width: 980px;
+        margin: 36px auto;
+        padding: 28px 32px;
+        border-radius: 12px;
+        box-shadow: 0 12px 36px rgba(0,0,0,0.12);
+        font-size: 20px;
+        line-height: 1.6;
+        color: #222;
+      }
+      .content-card h2{ font-size: 28px; margin-bottom: 0.5rem }
+      .content-card h3{ font-size: 22px; margin-top:1rem }
+      .content-card ul{ padding-left:1.1rem; }
+      .content-card ul li{ font-size: 18px; margin-bottom: 0.35rem }
+    </style>
   </head>
   <body id="page-top">
     <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
@@ -26,17 +45,53 @@
 
     <header class="masthead masthead-small text-white text-center"></header>
 
-    <section class="page-section py-5">
+    <section class="page-section py-5" style="background-color:#d6e9f5;">
       <div class="container">
-        <div class="content-card" style="max-width:900px; margin:48px auto;">
-          <h2>Traveling and Routing</h2>
-          <p class="lead">Smart routing and travel systems reduce congestion and improve mobility.</p>
+        <div class="content-card">
+          <h2>Smart Traveling and Resource Station Management</h2>
+
+          <p>In today's world, traveling has become faster and more frequent, but travelers often face difficulties such as finding the shortest route, locating petrol pumps, ATMs, EV charging stations, or other essential services during the journey. Lack of proper planning can lead to fuel shortages, delays, or inconvenience.</p>
+
+          <p>The Smart Traveling and Resource Station Management System is designed to solve these problems using Data Structures and Algorithms (DSA). This system helps travelers find the shortest path between locations and also provides information about available resource stations along the route.</p>
+
+          <h3>Objectives of the Project</h3>
           <ul>
-            <li>Real-time traffic-aware routing for public and emergency vehicles.</li>
-            <li>Multi-modal trip planning to encourage public transit use.</li>
-            <li>Data-driven signals and priority lanes.</li>
+            <li>Calculate the shortest travel distance between two locations.</li>
+            <li>Help users find nearby resource stations such as petrol pumps, ATMs, EV charging stations, hospitals, etc.</li>
+            <li>Demonstrate real-world application of DSA concepts.</li>
+            <li>Improve travel planning and reduce travel inconvenience.</li>
           </ul>
-          <p><a href="sumit.html" class="btn btn-secondary mt-3">Back to ideas</a></p>
+
+          <h3>System Overview</h3>
+          <p>The system represents the traveling environment as a network of locations connected by roads:</p>
+          <ul>
+            <li>Locations are represented as nodes.</li>
+            <li>Roads are represented as edges with distance (weight).</li>
+            <li>Resource stations are mapped to locations.</li>
+            <li>The system finds the shortest route and displays available resources.</li>
+          </ul>
+
+          <h3>Advantages of the System</h3>
+          <ul>
+            <li>Saves time and fuel.</li>
+            <li>Helps avoid emergency situations.</li>
+            <li>User-friendly and efficient.</li>
+            <li>Scalable for smart cities.</li>
+          </ul>
+
+          <h3>Future Enhancements</h3>
+          <ul>
+            <li>Real-time traffic updates.</li>
+            <li>GPS-based navigation.</li>
+            <li>Nearest resource station finder.</li>
+            <li>EV battery range prediction.</li>
+            <li>Mobile or web application interface.</li>
+          </ul>
+
+          <h3>Conclusion</h3>
+          <p>The Smart Traveling and Resource Station Management System successfully demonstrates how Data Structures and Algorithms can be used to solve real-life travel problems. By using graphs, priority queues, and shortest path algorithms, the system improves travel efficiency and provides essential information to travelers. This project highlights the importance of DSA in modern transportation and smart city solutions.</p>
+
+          <p class="mt-3"><a href="sumit.html" class="btn btn-secondary">Back to ideas</a></p>
         </div>
       </div>
     </section>
