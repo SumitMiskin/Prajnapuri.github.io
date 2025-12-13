@@ -87,11 +87,66 @@
           <ul class="text-dark mt-3">
             <li><p>In cases of traffic violation logs or vehicle identification through ANPR (Automatic Number Plate Recognition), string search algorithms like Knuth–Morris–Pratt (KMP), Boyer–Moore, or Rabin–Karp can help detect specific license patterns or flagged vehicle IDs efficiently.</p></li>
           </ul>
-          <h2>algorithms and datastructure used</h2>
+          <h2>Algorithms and Datastructure used</h2>
+          <h3>Dijkstra's Algorithm</h3>
           <ul class="text-dark mt-3">
             <li><p>Dijkstra’s Algorithm plays a crucial role in smart transportation systems by helping calculate the shortest travel time between intersections, landmarks, or urban zones in a road network.</p></li>
           </ul>
-        </div>
+                    <button class="btn btn-primary mt-4" data-bs-toggle="collapse" data-bs-target="#dijkstraCode">
+            <i class="fas fa-code"></i> View Code
+          </button>
+          
+          <div class="collapse mt-4" id="dijkstraCode">
+            <pre style="background-color: #1e1e1e; color: #d4d4d4; padding: 20px; border-radius: 8px; overflow-x: auto;"><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+const int INF = 1e9;
+
+int main() {
+    int n, m;
+    cin &gt;&gt; n &gt;&gt; m;
+    
+    // Adjacency list: vector of pairs {weight, destination}
+    vector&lt;vector&lt;pair&lt;int, int&gt;&gt;&gt; adj(n + 1);
+    
+    for (int i = 0; i &lt; m; i++) {
+        int u, v, w;
+        cin &gt;&gt; u &gt;&gt; v &gt;&gt; w;
+        adj[u].push_back({w, v});
+        adj[v].push_back({w, u}); // For undirected graph
+    }
+    
+    // Dijkstra's Algorithm
+    vector&lt;int&gt; dist(n + 1, INF);
+    priority_queue&lt;pair&lt;int, int&gt;, vector&lt;pair&lt;int, int&gt;&gt;, greater&lt;pair&lt;int, int&gt;&gt;&gt; pq;
+    
+    int source = 1; // Starting node
+    dist[source] = 0;
+    pq.push({0, source});
+    
+    while (!pq.empty()) {
+        auto [d, u] = pq.top();
+        pq.pop();
+        
+        if (d &gt; dist[u]) continue;
+        
+        for (auto [w, v] : adj[u]) {
+            if (dist[u] + w &lt; dist[v]) {
+                dist[v] = dist[u] + w;
+                pq.push({dist[v], v});
+            }
+        }
+    }
+    
+    // Print shortest distances
+    for (int i = 1; i &lt;= n; i++) {
+        cout &lt;&lt; "Node " &lt;&lt; i &lt;&lt; ": " &lt;&lt; dist[i] &lt;&lt; "\n";
+    }
+    
+    return 0;
+}</code></pre>
+          </div>
+                  </div>
       </div>
     </section>
 
