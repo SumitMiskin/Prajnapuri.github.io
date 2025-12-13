@@ -18,11 +18,10 @@
       .ideas-card ul li { margin-bottom: 8px; font-size: 18px; }
       .back-ideas { position: fixed; top: 100px; left: 20px; z-index: 1000; padding: 12px 20px; font-size: 16px; font-weight: 600; background-color: #2b87c9; color: #fff; border: none; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); transition: 0.2s ease; text-decoration: none; display: inline-block; }
       /* Algorithm card grid styles */
-      .algo-card { background: #fff; border-radius: 10px; padding: 22px; box-shadow: 0 12px 30px rgba(0,0,0,0.08); height: 100%; }
-      .algo-tag { display: inline-block; background: #f3f6f9; color: #2a6a9e; padding: 6px 10px; border-radius: 6px; font-size: 12px; font-weight: 700; }
-      .algo-title { color: #1673a7; font-weight: 700; margin-bottom: 8px; }
-      .watch-link { color: #2b87c9; font-weight: 700; text-decoration: none; }
-      .watch-link:hover { text-decoration: underline; }
+      .algo-card { background: #fff; border-radius: 10px; padding: 18px; box-shadow: 0 10px 30px rgba(0,0,0,0.06); }
+      .algo-title { font-weight: 700; color: #2a6a9e; }
+      .algo-link { background: transparent; border: none; color: #2a6a9e; font-weight: 700; padding: 0; cursor: pointer; text-decoration: none; font-size: 14px; }
+      .algo-link:hover { text-decoration: underline; }
     </style>
   </head>
   <body id="page-top">
@@ -48,7 +47,7 @@
       <div class="container">
         <h2 class="text-center text-uppercase mb-4">Transportation (Traffic & Mobility)</h2>
         <div class="ideas-card">
-          <img src="assets/img/portfolio/image.png" class="d-block mx-auto mb-4" style="max-width: 50%;eight: auto;" alt="Transportation concept image" />
+          <img src="assets/img/portfolio/image.png" class="d-block mx-auto mb-4" style="max-width: 50%; height: auto;" alt="Transportation concept image" />
           
           <ul class="text-dark">
             <li><p class="mb-2">Building a Smart Transportation system is essential for a developing city, as it ensures smooth traffic flow, reduces congestion and pollution, and enhances commuter safety. Efficient mobility also supports economic activity, improves emergency response times, and contributes to better urban planning.</p></li>
@@ -93,44 +92,74 @@
           <ul class="text-dark mt-3">
             <li><p>In cases of traffic violation logs or vehicle identification through ANPR (Automatic Number Plate Recognition), string search algorithms like Knuth–Morris–Pratt (KMP), Boyer–Moore, or Rabin–Karp can help detect specific license patterns or flagged vehicle IDs efficiently.</p></li>
           </ul>
-          </div>
-          <h1 class="text-center">                                 -  </h1>
-          <h2 class="text-center text-uppercase mb-4">Algorithms and Datastructure used</h2>
-          <div class="ideas-card">
-          
-          <h3>Dijkstra's Algorithm</h3>
-          <ul class="text-dark mt-3">
-            <li><p>Dijkstra’s Algorithm plays a crucial role in smart transportation systems by helping calculate the shortest travel time between intersections, landmarks, or urban zones in a road network.</p></li>
-          </ul>
-          <a href="dijkstra-code.html" class="btn btn-primary mt-4">
-            <i class="fas fa-code"></i> View Code
-          </a>
-          
-          <h3>Floyd–Warshall's Algorithm</h3>
-          <ul class="text-dark mt-3">
-            <li><p>Floyd-Warshall's algorithm is essential for computing shortest paths between all pairs of locations in a city network. Unlike Dijkstra which finds paths from a single source, Floyd-Warshall pre-computes optimal routes between every pair of intersections, making it ideal for offline route planning, congestion analysis, and traffic optimization across the entire city network.</p></li>
-          </ul>
-          
-          <a href="floyd-warshall-code.html" class="btn btn-primary mt-4">
-            <i class="fas fa-code"></i> View Code
-          </a>
-          
-          <h3>Prim's Algorithm</h3>
-          <ul class="text-dark mt-3">
-            <li><p>Prim’s Algorithm is a greedy algorithm used to design a Minimum Spanning Tree (MST) — the most cost-efficient way to connect all key locations (e.g., intersections, stations, or zones) in a city with roads or transit lines, ensuring there are no redundant routes or loops.</p></li>
-          </ul>
-          <a href="prim-code.html" class="btn btn-primary mt-4">
-            <i class="fas fa-code"></i> View Code
-          </a>
+        </div>
 
-          <h3>Kruskal's Algorithm</h3>
-          <ul class="text-dark mt-3">
-            <li><p>Kruskal’s Algorithm is a greedy algorithm used to design a Minimum Spanning Tree (MST) — the most cost-effective way to connect key locations in a city with roads or transit routes while avoiding redundancy and ensuring full connectivity.</p></li>
-          </ul>
-                    <a href="kruskal-code.html" class="btn btn-primary mt-4">
-            <i class="fas fa-code"></i> View Code
-          </a>          
-                  </div>
+        <h2 class="text-center text-uppercase mb-4">Algorithms and Datastructure used</h2>
+        <div class="row g-4">
+          <!-- Dijkstra -->
+          <div class="col-md-6">
+            <div class="algo-card">
+              <div class="d-flex justify-content-between align-items-start">
+                <div>
+                  <div class="badge bg-light text-dark mb-2">Dijkstra's Algorithm</div>
+                  <h4 class="algo-title">Shortest-path routing</h4>
+                  <p class="mb-0">Dijkstra's Algorithm plays a crucial role in smart transportation systems by helping calculate the shortest travel time between intersections, landmarks, or urban zones in a road network.</p>
+                </div>
+                <div>
+                  <a href="dijkstra-code.html" class="algo-link">Watch out →</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Floyd-Warshall -->
+          <div class="col-md-6">
+            <div class="algo-card">
+              <div class="d-flex justify-content-between align-items-start">
+                <div>
+                  <div class="badge bg-light text-dark mb-2">Floyd–Warshall</div>
+                  <h4 class="algo-title">All-pairs shortest routes</h4>
+                  <p class="mb-0">Floyd-Warshall's algorithm is essential for computing shortest paths between all pairs of locations in a city network. Unlike Dijkstra which finds paths from a single source, Floyd-Warshall pre-computes optimal routes between every pair of intersections, making it ideal for offline route planning, congestion analysis, and traffic optimization across the entire city network.</p>
+                </div>
+                <div>
+                  <a href="floyd-warshall-code.html" class="algo-link">Watch out →</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Prim -->
+          <div class="col-md-6">
+            <div class="algo-card">
+              <div class="d-flex justify-content-between align-items-start">
+                <div>
+                  <div class="badge bg-light text-dark mb-2">Prim's Algorithm</div>
+                  <h4 class="algo-title">Minimum spanning backbone</h4>
+                  <p class="mb-0">Prim's Algorithm is a greedy algorithm used to design a Minimum Spanning Tree (MST) — the most cost-efficient way to connect all key locations (e.g., intersections, stations, or zones) in a city with roads or transit lines, ensuring there are no redundant routes or loops.</p>
+                </div>
+                <div>
+                  <a href="prim-code.html" class="algo-link">Watch out →</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Kruskal -->
+          <div class="col-md-6">
+            <div class="algo-card">
+              <div class="d-flex justify-content-between align-items-start">
+                <div>
+                  <div class="badge bg-light text-dark mb-2">Kruskal's Algorithm</div>
+                  <h4 class="algo-title">Sparse-network MST</h4>
+                  <p class="mb-0">Kruskal's Algorithm is a greedy algorithm used to design a Minimum Spanning Tree (MST) — the most cost-effective way to connect key locations in a city with roads or transit routes while avoiding redundancy and ensuring full connectivity.</p>
+                </div>
+                <div>
+                  <a href="kruskal-code.html" class="algo-link">Watch out →</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
 
