@@ -42,7 +42,34 @@
       <div class="container">
         <div class="ideas-card">
           <h2 class="text-center text-uppercase mb-4">Energy Grid (Electricity Distribution)</h2>
-          </div>
+        A city’s power grid is managed as a smart network of generators, substations, and consumers. The grid forms a weighted graph (nodes=power stations, edges=transmission lines). Data structures: Meter readings and consumption curves are stored in arrays or time-indexed structures; each meter or substation is a struct with fields (ID, location, capacity, load). Dynamic data (like real-time load) may use a Segment Tree or Fenwick (BIT) Tree to answer range-sum queries. Fenwick trees handle prefix-sum queries of power usage in O(log n)
+beyondit.blog
+, and segment trees answer arbitrary range queries (min, max, sum) in O(log n)
+geeksforgeeks.org
+. A sparse table may be precomputed on historical consumption data for O(1) static range queries (e.g. “what was the maximum load between day 10 and day 20?”).
+
+Graph algorithms: To design or reconfigure the grid, minimum spanning tree algorithms (Prim’s, Kruskal’s) are used. For example, a power utility uses an MST to connect all substations with minimal total wiring cost
+memgraph.com
+. Dijkstra’s or Bellman-Ford compute optimal power flow paths (minimizing transmission loss or cost) between generators and consumers. Bellman-Ford is useful if some edges represent “negative” load (e.g. net generation)
+memgraph.com
+. Floyd–Warshall could pre-calculate all-pairs shortest paths for contingency planning. BFS/DFS detect connectivity or isolate outages. Union-Find quickly merges or queries connected zones when adding new lines
+geeksforgeeks.org
+.
+
+Balanced trees: A large smart-meter database may use AVL or Red-Black trees for indexing by meter ID or timestamp, keeping operations O(log n). If meter records are static post-installation, a 2-3 tree (a form of B-tree) or skip list could similarly store sorted IDs with fast search/insert. Tries can store customer address prefixes or device codes. Hash tables map meter IDs to records for O(1) lookups (critical for real-time queries).
+
+Range queries and updates: To track rolling totals (e.g. cumulative citywide consumption), a Fenwick tree or segment tree allows quick updates and queries. For example, when each meter reports hourly usage, a Fenwick tree can maintain the prefix sum of usage so far (O(log n) updates/queries)
+beyondit.blog
+. A segment tree can compute total usage in any interval (e.g. sum of district loads) in O(log n)
+geeksforgeeks.org
+. Both are far more efficient than recomputing sums from raw data.
+
+Scheduling & sorting: Energy utilities schedule maintenance or generation dispatch. They sort machines by priority or efficiency: Heap Sort or a binary heap (priority queue) selects the next unit to activate. For example, sorting a list of transformers by load uses Quick Sort or Merge Sort; small crews might use simpler sorts like Insertion Sort.
+
+Pattern/search: Smart grid logs (event logs, alerts) are scanned for keywords. For example, detecting a fault signature in logs uses string search: Brute-force or Rabin–Karp (rolling hashes) for quick substring checks, or KMP/Boyer–Moore for efficient pattern matching. Boyer–Moore’s skip-ahead heuristics are ideal for finding repeated patterns in large log files
+memgraph.com
+.  
+        </div>
       </div>
     </section>
 
