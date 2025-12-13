@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Main Key Problems — Prajnapuri</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
+    <style>
+      .problem-card{ background:#fff; border-radius:10px; padding:18px; box-shadow:0 10px 30px rgba(0,0,0,0.06); }
+      .problem-title{ font-weight:700; color:var(--accent); }
+      .view-btn{ background:transparent; border:none; color:var(--accent); font-weight:700; }
+      pre.code-block{ background:#0f1720; color:#dfeffb; padding:16px; border-radius:8px; overflow:auto; }
+      body, .problem-card{ font-family: "Times New Roman", Times, serif; }
+    </style>
+  </head>
+  <body id="page-top">
+    <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+      <div class="container">
+        <a class="navbar-brand" href="index.html">Prajnapuri Design</a>
+        <button class="navbar-toggler text-uppercase font-weight-bold bg-primary text-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive">
+          Menu <i class="fas fa-bars"></i>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item"><a class="nav-link px-lg-3" href="index.html">Home</a></li>
+            <li class="nav-item"><a class="nav-link px-lg-3" href="project.html">Project</a></li>
+            <li class="nav-item"><a class="nav-link px-lg-3" href="sumit.html">Sumit</a></li>
+            <li class="nav-item"><a class="nav-link px-lg-3" href="shrinivas.html">Shrinivas</a></li>
+            <li class="nav-item"><a class="nav-link px-lg-3" href="manjunath.html">Manjunath</a></li>
+            <li class="nav-item"><a class="nav-link px-lg-3" href="samarth.html">Samarth</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <header class="masthead masthead-small text-white text-center"></header>
+
+    <section class="page-section py-5" style="background-color:#f6fbf9;">
+      <div class="container">
+        <h2 class="text-center mb-4">Main Key Problems Solved</h2>
+        <div class="row g-4">
+          <!-- Problem 1 -->
+          <div class="col-md-6">
+            <div class="problem-card">
+              <div class="d-flex justify-content-between align-items-start">
+                <div>
+                  <div class="badge bg-light text-dark mb-2">Dijkstra's Algo</div>
+                  <h4 class="problem-title">Shortest Path Navigation</h4>
+                  <p class="mb-2">Calculating the fastest route for EVs from point A to B considering dynamic edge weights (traffic).</p>
+                </div>
+                <div>
+                  <button class="view-btn" data-bs-toggle="modal" data-bs-target="#modal1">View →</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Problem 2 -->
+          <div class="col-md-6">
+            <div class="problem-card">
+              <div class="d-flex justify-content-between align-items-start">
+                <div>
+                  <div class="badge bg-light text-dark mb-2">Ford-Fulkerson</div>
+                  <h4 class="problem-title">Max Traffic Flow</h4>
+                  <p class="mb-2">Determining maximum highway capacity during rush hour to prevent bottlenecks.</p>
+                </div>
+                <div>
+                  <button class="view-btn" data-bs-toggle="modal" data-bs-target="#modal2">View →</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Problem 3 -->
+          <div class="col-md-6">
+            <div class="problem-card">
+              <div class="d-flex justify-content-between align-items-start">
+                <div>
+                  <div class="badge bg-light text-dark mb-2">BFS</div>
+                  <h4 class="problem-title">Subway Connectivity Check</h4>
+                  <p class="mb-2">Ensure all metro stations are reachable from a central hub using BFS traversal.</p>
+                </div>
+                <div>
+                  <button class="view-btn" data-bs-toggle="modal" data-bs-target="#modal3">View →</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Problem 4 -->
+          <div class="col-md-6">
+            <div class="problem-card">
+              <div class="d-flex justify-content-between align-items-start">
+                <div>
+                  <div class="badge bg-light text-dark mb-2">Union-Find</div>
+                  <h4 class="problem-title">Road Network Maintenance</h4>
+                  <p class="mb-2">Finding connected components to identify regions affected by closures.</p>
+                </div>
+                <div>
+                  <button class="view-btn" data-bs-toggle="modal" data-bs-target="#modal4">View →</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Problem 5 -->
+          <div class="col-md-6">
+            <div class="problem-card">
+              <div class="d-flex justify-content-between align-items-start">
+                <div>
+                  <div class="badge bg-light text-dark mb-2">A* / Heuristics</div>
+                  <h4 class="problem-title">Drone Delivery Routing</h4>
+                  <p class="mb-2">Heuristic pathfinding for aerial drones avoiding no-fly zones.</p>
+                </div>
+                <div>
+                  <button class="view-btn" data-bs-toggle="modal" data-bs-target="#modal5">View →</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Modals -->
+    <!-- Modal 1 -->
+    <div class="modal fade" id="modal1" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header border-0"><h5 class="modal-title">Shortest Path Navigation</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+          <div class="modal-body">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-6">
+                  <h6 class="text-success">Problem Statement</h6>
+                  <p>Find the quickest path in a weighted city graph where edge weights reflect traffic delays and time cost.</p>
+                  <h6 class="text-success">Solution Approach</h6>
+                  <p>Use Dijkstra with a priority queue; edge weights are non-negative, complexity O(E log V).</p>
+                </div>
+                <div class="col-md-6">
+                  <h6 class="text-success">C++ Implementation</h6>
+                  <pre class="code-block"><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+void dijkstra(int src, vector<vector<pair<int,int>>>& g){
+  const int INF=1e9; int n=g.size();
+  vector<int> dist(n,INF); dist[src]=0;
+  priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>>pq;
+  pq.push({0,src});
+  while(!pq.empty()){
+    auto [d,u]=pq.top(); pq.pop();
+    if(d!=dist[u]) continue;
+    for(auto &e: g[u]){
+      int v=e.first,w=e.second;
+      if(dist[v]>d+w){ dist[v]=d+w; pq.push({dist[v],v}); }
+    }
+  }
+}
+</code></pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal 2 -->
+    <div class="modal fade" id="modal2" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header border-0"><h5 class="modal-title">Max Traffic Flow</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-6">
+                <h6 class="text-success">Problem Statement</h6>
+                <p>Compute maximum flow in the road network to prevent bottlenecks using capacity constraints.</p>
+              </div>
+              <div class="col-md-6">
+                <h6 class="text-success">Implementation</h6>
+                <pre class="code-block"><code>// Ford-Fulkerson / Edmonds-Karp placeholder
+// Implementation omitted for brevity
+</code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal 3 -->
+    <div class="modal fade" id="modal3" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header border-0"><h5 class="modal-title">Subway Connectivity Check</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-6">
+                <h6 class="text-success">Problem Statement</h6>
+                <p>Verify reachability of stations from a central hub using BFS traversal.</p>
+              </div>
+              <div class="col-md-6">
+                <h6 class="text-success">Implementation</h6>
+                <pre class="code-block"><code>// BFS traversal example
+void bfs(int s, vector<vector<int>>& g){
+  vector<int> vis(g.size()); queue<int>q; q.push(s); vis[s]=1;
+  while(!q.empty()){ int u=q.front(); q.pop(); for(int v:g[u]) if(!vis[v]){ vis[v]=1; q.push(v);} }
+}
+</code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal 4 -->
+    <div class="modal fade" id="modal4" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header border-0"><h5 class="modal-title">Road Network Maintenance</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-6">
+                <h6 class="text-success">Problem Statement</h6>
+                <p>Identify connected components so maintenance can be scheduled without disconnecting regions.</p>
+              </div>
+              <div class="col-md-6">
+                <h6 class="text-success">Implementation</h6>
+                <pre class="code-block"><code>// Union-Find example
+struct DSU{ vector<int>p; DSU(int n):p(n,-1){}
+int find(int x){ return p[x]<0?x:p[x]=find(p[x]); }
+void unite(int a,int b){ a=find(a); b=find(b); if(a==b) return; if(p[a]>p[b]) swap(a,b); p[a]+=p[b]; p[b]=a; }
+};
+</code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal 5 -->
+    <div class="modal fade" id="modal5" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header border-0"><h5 class="modal-title">Drone Delivery Routing</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+          <div class="modal-body">
+            <div class="row">
+              <div class="col-md-6">
+                <h6 class="text-success">Problem Statement</h6>
+                <p>Find heuristic paths for drones to minimize time while avoiding no-fly zones and tall obstacles.</p>
+              </div>
+              <div class="col-md-6">
+                <h6 class="text-success">Implementation</h6>
+                <pre class="code-block"><code>// A* search placeholder
+// Implementation omitted
+</code></pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer text-center py-4">
+      <div class="container"><p class="mb-0">Prajnapuri City Design — Key Problems</p></div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/scripts.js"></script>
+  </body>
+</html>
