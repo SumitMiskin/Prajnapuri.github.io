@@ -8,6 +8,29 @@
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
+    <style>
+      /* Page-specific: use Times New Roman for content */
+      body, .content-card { font-family: "Times New Roman", Times, serif; }
+      .content-card h2, .content-card h3 { font-family: "Times New Roman", Times, serif; }
+
+      /* Centered white panel style matching other idea pages */
+      .content-card{
+        background: #ffffff;
+        max-width: 980px;
+        margin: 36px auto;
+        padding: 28px 32px;
+        border-radius: 12px;
+        box-shadow: 0 12px 36px rgba(0,0,0,0.12);
+        font-size: 18px;
+        line-height: 1.6;
+        color: #222;
+      }
+      .content-card h2{ font-size: 28px; margin-bottom: 0.5rem }
+      .content-card h3{ font-size: 20px; margin-top:1rem }
+      .content-card p.lead{ font-size: 1rem; }
+      .content-card ul{ padding-left:1.1rem; }
+      .content-card ul li{ font-size: 16px; margin-bottom: 0.35rem }
+    </style>
   </head>
   <body id="page-top">
     <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
@@ -31,17 +54,51 @@
 
     <header class="masthead masthead-small text-white text-center"></header>
 
-    <section class="page-section py-5">
+    <section class="page-section py-5" style="background-color:#d6e9f5;">
       <div class="container">
-        <div class="content-card" style="max-width:900px; margin:48px auto;">
+        <div class="content-card">
           <h2>Garbage collection and Recycling</h2>
-          <p class="lead">This page describes strategies for organized garbage collection, segregation and recycling programs for Prajnapuri.</p>
+
+          <h3>Garbage collection</h3>
+          <p>For city-scale garbage collection and recycling in Prajnapuri, garbage collection is a major task to keep the city clean. The approach focuses on two key goals:</p>
           <ul>
-            <li>IoT-enabled bin-status monitoring to optimize collection routes.</li>
-            <li>Segregation at source with community resource stations.</li>
-            <li>Local recycling hubs to recover materials and reduce landfill.</li>
+            <li>How to keep the city clean.</li>
+            <li>How to recycle, reuse, decompose and process collected garbage so material is recovered and not wasted.</li>
           </ul>
-          <p><a href="sumit.html" class="btn btn-secondary mt-3">Back to ideas</a></p>
+
+          <p>We apply DAA (Design & Analysis of Algorithms) techniques to optimize collection and recycling with respect to resources, cost, route, and time so performance remains acceptable across the city.</p>
+
+          <h4>Steps</h4>
+          <ol>
+            <li>
+              <strong>Model the city as a graph</strong>: represent the road network and bins using a structured graph where:
+              <ul>
+                <li><strong>Vertices:</strong> depots, garbage bins / waste containers, transfer stations, recycling plants, landfills.</li>
+                <li><strong>Edges:</strong> roads, with weights such as travel time or fuel cost.</li>
+                <li>Attach attributes to nodes: location, capacity, current fill level, waste bin type (wet, dry, plastic, glass, metal), service time.</li>
+                <li>Model vehicles: capacity, type (recyclables vehicle vs general waste), assigned service time per area, cost per km/hour.</li>
+                <li>Data structures used: graphs (for DFS/BFS traversal), hash maps for bin metadata keyed by bin ID, and segment trees / Fenwick trees for quick updates to aggregated metrics.</li>
+              </ul>
+            </li>
+
+            <li>
+              <strong>Compute distances and base routes</strong>: precompute shortest paths on the road network. Use Dijkstra from depots (example: garbage yard located at a known city corner) and from key nodes to build a distance matrix stored as a 2D array (u, v). For small areas use Floyd–Warshall for all-pairs shortest paths. This distance matrix is the input to higher-level routing algorithms.
+            </li>
+
+            <li>
+              <strong>Vehicle types and constraints</strong>: plan vehicle fleets (trucks, mini-trucks) with limited capacities and waste-type restrictions. Optimize routes to minimize distance/cost while respecting constraints such as time windows (e.g. collect between 08:00–12:00 for certain zones) and per-vehicle capacity.
+            </li>
+          </ol>
+
+          <h3>Recycling</h3>
+          <p>After collection, separate and recycle materials where possible. We use algorithmic techniques to filter and categorize collected waste for further processing.</p>
+          <ul>
+            <li>Use pattern/filtering algorithms to categorize items for recycling (example: use string/sequence filtering techniques such as Boyer–Moore for fast pattern detection when applicable to sensor or label data).</li>
+            <li>Sort and route recyclable materials to appropriate recycling plants or local hubs.</li>
+            <li>Track throughput and reuse rates with simple hash maps and aggregate structures for reporting.</li>
+          </ul>
+
+          <p class="mt-3"><a href="sumit.html" class="btn btn-secondary">Back to ideas</a></p>
         </div>
       </div>
     </section>
