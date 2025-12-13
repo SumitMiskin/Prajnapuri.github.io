@@ -131,15 +131,15 @@
     <div class="modal fade" id="modal1" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content">
-          <div class="modal-header border-0"><h5 class="modal-title">Shortest Path Navigation</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+          <div class="modal-header border-0"><h5 class="modal-title">Optimized way for water supply</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
           <div class="modal-body">
             <div class="container-fluid">
               <div class="row">
                 <div class="col-md-6">
                   <h6 class="text-success">Problem Statement</h6>
-                  <p>Find the quickest path in a weighted city graph where edge weights reflect traffic delays and time cost.</p>
+                  <p>Providing tap water supply for each corner of the city with minimal pipe-line connection to reduce the cost for the project is bit difficult. We need to implement the pipe-line with cost and can optimize the cost and budget. We need to find the shortest path and implement these pipes in efficient manner.</p>
                   <h6 class="text-success">Solution Approach</h6>
-                  <p>Use Dijkstra with a priority queue; edge weights are non-negative, complexity O(E log V).</p>
+                  <p>To solve the pipe-line problem we are using minimum spanning tree: Prim’s algorithm. Adding vertices in each corner to cover all the area of our city and the edges are connecting each node for proper implementation.</p>
                 </div>
                 <div class="col-md-6">
                   <h6 class="text-success">C++ Implementation</h6>
@@ -172,12 +172,20 @@ void dijkstra(int src, vector<vector<pair<int,int>>>& g){
     <div class="modal fade" id="modal2" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog modal-xl modal-dialog-centered">
         <div class="modal-content">
-          <div class="modal-header border-0"><h5 class="modal-title">Max Traffic Flow</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+          <div class="modal-header border-0"><h5 class="modal-title">Soil Moisture Monitoring</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
           <div class="modal-body">
             <div class="row">
               <div class="col-md-6">
                 <h6 class="text-success">Problem Statement</h6>
-                <p>Compute maximum flow in the road network to prevent bottlenecks using capacity constraints.</p>
+                <p>In large agricultural fields, soil moisture sensors are placed at multiple locations to measure water content. Farmers often need to know:
+•	Moisture level of a specific area
+•	Average or total moisture in a range of plots
+•	Updated moisture after irrigation or rainfall
+If we check moisture one sensor at a time, it becomes:
+•	Slow
+•	Inefficient
+•	Not suitable for large farms
+</p>
               </div>
               <div class="col-md-6">
                 <h6 class="text-success">Implementation</h6>
