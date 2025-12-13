@@ -42,33 +42,46 @@
       <div class="container">
         <div class="ideas-card">
           <h2 class="text-center text-uppercase mb-4">Energy Grid (Electricity Distribution)</h2>
-        A city’s power grid is managed as a smart network of generators, substations, and consumers. The grid forms a weighted graph (nodes=power stations, edges=transmission lines). Data structures: Meter readings and consumption curves are stored in arrays or time-indexed structures; each meter or substation is a struct with fields (ID, location, capacity, load). Dynamic data (like real-time load) may use a Segment Tree or Fenwick (BIT) Tree to answer range-sum queries. Fenwick trees handle prefix-sum queries of power usage in O(log n)
-beyondit.blog
-, and segment trees answer arbitrary range queries (min, max, sum) in O(log n)
-geeksforgeeks.org
-. A sparse table may be precomputed on historical consumption data for O(1) static range queries (e.g. “what was the maximum load between day 10 and day 20?”).
+          <p class="lead"></p>A city’s power grid is managed as a smart network of generators, substations, and consumers. The grid forms a weighted graph (nodes=power stations, edges=transmission lines).</p>
 
-Graph algorithms: To design or reconfigure the grid, minimum spanning tree algorithms (Prim’s, Kruskal’s) are used. For example, a power utility uses an MST to connect all substations with minimal total wiring cost
-memgraph.com
-. Dijkstra’s or Bellman-Ford compute optimal power flow paths (minimizing transmission loss or cost) between generators and consumers. Bellman-Ford is useful if some edges represent “negative” load (e.g. net generation)
-memgraph.com
-. Floyd–Warshall could pre-calculate all-pairs shortest paths for contingency planning. BFS/DFS detect connectivity or isolate outages. Union-Find quickly merges or queries connected zones when adding new lines
-geeksforgeeks.org
-.
+          <h4>Data Structures & Storage</h4>
+          <ul>
+            <li><strong>Basic Storage:</strong> Meter readings and consumption curves are stored in arrays or time-indexed structures. Each meter is a struct (ID, location, capacity, load).</li>
+            <li><strong>Dynamic Data:</strong> Segment Trees or Fenwick (BIT) Trees handle real-time load, allowing range-sum queries. Fenwick trees handle prefix-sum queries in O(log n), while Segment trees answer arbitrary range queries (min, max, sum) in O(log n).</li>
+            <li><strong>Static Data:</strong> Sparse tables are precomputed on historical data for O(1) static range queries.</li>
+          </ul>
 
-Balanced trees: A large smart-meter database may use AVL or Red-Black trees for indexing by meter ID or timestamp, keeping operations O(log n). If meter records are static post-installation, a 2-3 tree (a form of B-tree) or skip list could similarly store sorted IDs with fast search/insert. Tries can store customer address prefixes or device codes. Hash tables map meter IDs to records for O(1) lookups (critical for real-time queries).
+          <h4>Graph Algorithms</h4>
+          <ul>
+            <li><strong>Network Design:</strong> Minimum Spanning Tree algorithms (Prim’s, Kruskal’s) connect substations with minimal total wiring cost.</li>
+            <li><strong>Optimization:</strong> Dijkstra’s or Bellman-Ford compute optimal power flow paths to minimize transmission loss. Bellman-Ford is useful for edges with "negative" load (net generation).</li>
+            <li><strong>Planning & Connectivity:</strong> Floyd–Warshall pre-calculates all-pairs shortest paths. BFS/DFS detect connectivity or outages. Union-Find manages connected zones when adding new lines.</li>
+          </ul>
 
-Range queries and updates: To track rolling totals (e.g. cumulative citywide consumption), a Fenwick tree or segment tree allows quick updates and queries. For example, when each meter reports hourly usage, a Fenwick tree can maintain the prefix sum of usage so far (O(log n) updates/queries)
-beyondit.blog
-. A segment tree can compute total usage in any interval (e.g. sum of district loads) in O(log n)
-geeksforgeeks.org
-. Both are far more efficient than recomputing sums from raw data.
+          <h4>Balanced Trees & Indexing</h4>
+          <ul>
+            <li><strong>Indexing:</strong> AVL or Red-Black trees store smart-meter data for O(log n) operations indexed by ID or timestamp.</li>
+            <li><strong>Static Records:</strong> 2-3 Trees (B-tree) or Skip Lists store sorted IDs for fast search/insert.</li>
+            <li><strong>Lookups:</strong> Hash tables provide O(1) lookups for meter IDs. Tries store customer address prefixes or device codes.</li>
+          </ul>
 
-Scheduling & sorting: Energy utilities schedule maintenance or generation dispatch. They sort machines by priority or efficiency: Heap Sort or a binary heap (priority queue) selects the next unit to activate. For example, sorting a list of transformers by load uses Quick Sort or Merge Sort; small crews might use simpler sorts like Insertion Sort.
+          <h4>Range Queries & Updates</h4>
+          <ul>
+            <li><strong>Rolling Totals:</strong> Fenwick trees track cumulative citywide consumption with quick O(log n) updates.</li>
+            <li><strong>Interval Analysis:</strong> Segment trees compute total usage in any interval (e.g., district loads) efficiently.</li>
+          </ul>
 
-Pattern/search: Smart grid logs (event logs, alerts) are scanned for keywords. For example, detecting a fault signature in logs uses string search: Brute-force or Rabin–Karp (rolling hashes) for quick substring checks, or KMP/Boyer–Moore for efficient pattern matching. Boyer–Moore’s skip-ahead heuristics are ideal for finding repeated patterns in large log files
-memgraph.com
-.  
+          <h4>Scheduling & Sorting</h4>
+          <ul>
+            <li><strong>Task Scheduling:</strong> Heap Sort or Binary Heaps (Priority Queues) select the next generation unit or maintenance task.</li>
+            <li><strong>Sorting Machines:</strong> Quick Sort or Merge Sort are used for large lists (e.g., transformers by load); Insertion Sort for small datasets.</li>
+          </ul>
+
+          <h4>Pattern Search & Log Analysis</h4>
+          <ul>
+            <li><strong>Log Scanning:</strong> Smart grid logs are scanned for keywords or fault signatures.</li>
+            <li><strong>Algorithms:</strong> Brute-force or Rabin–Karp (rolling hashes) for simple checks. KMP or Boyer–Moore are used for efficient pattern matching, with Boyer–Moore ideal for large files.</li>
+          </ul>
         </div>
       </div>
     </section>
