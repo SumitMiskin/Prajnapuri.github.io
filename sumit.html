@@ -22,23 +22,32 @@
     <link href="css/styles.css" rel="stylesheet" />
 
     <style>
-      /* Custom Styling for Boxes */
+      /* Custom Styling for Boxes (render as buttons) */
       .idea-box {
-        background: white;
+        display: block;
+        background: #ffffff;
         width: 70%;
-        margin: 15px auto;
-        padding: 18px;
-        font-size: 22px;
-        font-weight: bold;
+        margin: 18px auto;
+        padding: 18px 22px;
+        font-size: 20px;
+        font-weight: 600;
         border-radius: 12px;
         text-align: center;
-        box-shadow: 0px 4px 10px rgba(0,0,0,0.15);
-        transition: 0.3s;
+        box-shadow: 0px 8px 18px rgba(0,0,0,0.08);
+        transition: transform 0.18s ease, background 0.18s ease;
+        border: none;
+        color: #222;
+        cursor: pointer;
+      }
+
+      .idea-box:focus {
+        outline: 3px solid rgba(37,115,168,0.18);
+        outline-offset: 3px;
       }
 
       .idea-box:hover {
-        transform: scale(1.05);
-        background: #f4f4f4;
+        transform: translateY(-4px);
+        background: #fbfbfb;
       }
     </style>
   </head>
@@ -80,18 +89,11 @@
       </div>
 
       <div class="container">
-              <div class="idea-box">        <a href="shrinivas.html" class="btn btn-primary" role="button" aria-label="Garbage collection">
-Garbage collection                                    </a>
-                
-
-              </div>
-    
-        <div class="idea-box">Resource station</div>
-        <div class="idea-box">Resource Distribution</div>
-        <div class="idea-box">Traveling and routing</div>
-        <div class="idea-box">city survey</div>
-                                                                       
-
+        <button class="idea-box" type="button" aria-label="Garbage collection and Recycling">Garbage collection and Recycling</button>
+        <button class="idea-box" type="button" aria-label="Resource station">Resource station</button>
+        <button class="idea-box" type="button" aria-label="Resource Distribution">Resource Distribution</button>
+        <button class="idea-box" type="button" aria-label="Traveling and routing">Traveling and routing</button>
+        <button class="idea-box" type="button" aria-label="City survey">City survey</button>
       </div>
     </section>
 
