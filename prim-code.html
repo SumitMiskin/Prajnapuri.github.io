@@ -3,151 +3,104 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>Prim (MST) Code Preview — Prajnapuri</title>
+    <title>Prim's Algorithm Code Preview — Prajnapuri</title>
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" />
     <link href="css/styles.css" rel="stylesheet" />
     <style>
-      body { background: #071226; color: #e6eef8; font-family: 'Lato', sans-serif; }
-      .code-modal { max-width: 900px; margin: 60px auto; background: #0e1721; border-radius: 8px; box-shadow: 0 12px 40px rgba(0,0,0,0.6); padding: 18px; }
-      .modal-header { display:flex; justify-content:space-between; align-items:center; }
-      .modal-title { font-weight:700; font-size:18px; }
-      .btn-copy { background:#1f6feb; color:white; border:none; padding:8px 12px; border-radius:6px; cursor:pointer; }
-      .btn-copy:hover { background:#0969da; }
-      pre.code-block { background:#0b1220; color:#cfe5ff; padding:18px; border-radius:6px; overflow:auto; max-height:70vh; }
-      /* line numbers */
-      .code-line { display:flex; }
-      .ln { width:40px; text-align:right; padding-right:12px; color:#6b7a89; user-select:none; }
-      .ln + .code { white-space:pre; font-family: Consolas, 'Courier New', monospace; }
-      .top-actions { display:flex; gap:8px; }
+      body { background: #f3f6f9; color: #333; font-family: 'Lato', sans-serif; padding: 60px 20px; }
+      .container-modal { max-width: 1000px; margin: 0 auto; background: white; border-radius: 8px; box-shadow: 0 12px 40px rgba(0,0,0,0.08); overflow: hidden; }
+      .modal-header { padding: 20px 24px; border-bottom: 1px solid #e1e8ed; display: flex; justify-content: space-between; align-items: center; }
+      .modal-title { font-weight: 700; font-size: 18px; color: #222; }
+      .modal-subtitle { color: #777; font-size: 13px; }
+      .top-actions { display: flex; gap: 8px; }
+      .btn-action { background: #1f6feb; color: white; border: none; padding: 8px 14px; border-radius: 6px; cursor: pointer; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-size: 14px; }
+      .btn-action:hover { background: #0d47a1; }
+      .btn-action.btn-close-modal { background: #2b87c9; }
+      .modal-body { padding: 24px; }
+      .row-content { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+      @media (max-width: 768px) { .row-content { grid-template-columns: 1fr; } }
+      .col-left h6 { color: #2a6a9e; font-weight: 700; font-size: 14px; margin-top: 16px; margin-bottom: 8px; }
+      .col-left h6:first-child { margin-top: 0; }
+      .col-left p { color: #555; font-size: 14px; line-height: 1.6; margin-bottom: 12px; }
+      .col-right h6 { color: #2a6a9e; font-weight: 700; font-size: 14px; margin-bottom: 12px; }
+      pre.code-block { background: #0b1220; color: #cfe5ff; padding: 16px; border-radius: 6px; overflow: auto; max-height: 500px; font-size: 12px; line-height: 1.5; }
+      .code-line { display: flex; }
+      .ln { width: 35px; text-align: right; padding-right: 12px; color: #6b7a89; user-select: none; flex-shrink: 0; }
+      .code { white-space: pre; font-family: Consolas, 'Courier New', monospace; }
     </style>
   </head>
   <body>
-    <div class="code-modal">
+    <div class="container-modal">
       <div class="modal-header">
         <div>
-          <div class="modal-title">Prim's Algorithm — Minimum Spanning Tree</div>
-          <div style="color:#9fb6d8; font-size:13px;">SmartRoadPlanner.cpp — C++ (read-only)</div>
+          <div class="modal-title">Minimum Spanning Backbone — Prim's Algorithm</div>
+          <div class="modal-subtitle">Case3.cpp — C++ (read-only)</div>
         </div>
         <div class="top-actions">
-          <button class="btn-copy" id="copyBtn"><i class="fas fa-copy"></i> Copy</button>
-          <a href="transportation.html" class="btn-copy" style="background:#2b87c9; text-decoration:none; display:inline-flex; align-items:center; font-weight:600;">Close</a>
+          <button class="btn-action" id="copyBtn"><i class="fas fa-copy"></i> Copy</button>
+          <a href="transportation.html" class="btn-action btn-close-modal"><i class="fas fa-times"></i> Close</a>
         </div>
       </div>
 
-      <hr style="border-color:rgba(255,255,255,0.04); margin:12px 0 18px;" />
+      <div class="modal-body">
+        <div class="row-content">
+          <div class="col-left">
+            <h6>Problem Statement</h6>
+            <p>To plan the main transportation backbone of a city, we need to connect all key locations (intersections, stations, zones) with minimum total construction cost. Prim's algorithm builds a Minimum Spanning Tree (MST) that ensures connectivity while minimizing total edge weight.</p>
+            
+            <h6>Solution Approach</h6>
+            <p>The SmartRoadPlanner class implements Prim's greedy algorithm. It starts from an initial vertex and grows the MST by repeatedly selecting the minimum-weight edge connecting a tree vertex to a non-tree vertex.</p>
+            <p>This approach is particularly effective for dense city networks where many interconnected roads exist. The output shows selected roads, their costs, and the total minimum construction budget needed for the transportation backbone.</p>
+          </div>
 
-      <pre class="code-block" id="codeBlock"><code>
-<div class="code-line"><span class="ln">1</span><span class="code">#include &lt;iostream&gt;</span></div>
-<div class="code-line"><span class="ln">2</span><span class="code">#include &lt;algorithm&gt;</span></div>
-<div class="code-line"><span class="ln">3</span><span class="code">#include &lt;string&gt;</span></div>
-<div class="code-line"><span class="ln">4</span><span class="code">using namespace std;</span></div>
-<div class="code-line"><span class="ln">5</span><span class="code"></span></div>
-<div class="code-line"><span class="ln">6</span><span class="code">class SmartRoadPlanner {</span></div>
-<div class="code-line"><span class="ln">7</span><span class="code">public:</span></div>
-<div class="code-line"><span class="ln">8</span><span class="code">    int from[4];         // Tracks the connection route</span></div>
-<div class="code-line"><span class="ln">9</span><span class="code">    int roadCost[4];     // Stores the minimum cost to reach each location</span></div>
-<div class="code-line"><span class="ln">10</span><span class="code">    int included[4];     // Marks if the location is included in the MST</span></div>
-<div class="code-line"><span class="ln">11</span><span class="code">    string locations[4] = {"Downtown", "Hospital", "Tech Park", "Market"};</span></div>
-<div class="code-line"><span class="ln">12</span><span class="code"></span></div>
-<div class="code-line"><span class="ln">13</span><span class="code">    void initialize(int roadMatrix[4][4], int start);</span></div>
-<div class="code-line"><span class="ln">14</span><span class="code">    int selectMinimum();</span></div>
-<div class="code-line"><span class="ln">15</span><span class="code">    void updateNetwork(int roadMatrix[4][4]);</span></div>
-<div class="code-line"><span class="ln">16</span><span class="code">    void buildMinimumRoadNetwork(int roadMatrix[4][4], int start);</span></div>
-<div class="code-line"><span class="ln">17</span><span class="code">    void showRoadPlan(int roadMatrix[4][4]);</span></div>
-<div class="code-line"><span class="ln">18</span><span class="code">    void showTotalCost(int roadMatrix[4][4]);</span></div>
-<div class="code-line"><span class="ln">19</span><span class="code">};</span></div>
-<div class="code-line"><span class="ln">20</span><span class="code"></span></div>
-<div class="code-line"><span class="ln">21</span><span class="code">void SmartRoadPlanner::initialize(int roadMatrix[4][4], int start) {</span></div>
-<div class="code-line"><span class="ln">22</span><span class="code">    for (int i = 0; i &lt; 4; i++) {</span></div>
-<div class="code-line"><span class="ln">23</span><span class="code">        from[i] = start;</span></div>
-<div class="code-line"><span class="ln">24</span><span class="code">        roadCost[i] = (roadMatrix[start][i] == 0) ? 10000000 : roadMatrix[start][i];</span></div>
-<div class="code-line"><span class="ln">25</span><span class="code">        included[i] = 0;</span></div>
+          <div class="col-right">
+            <h6>C++ Implementation</h6>
+            <pre class="code-block" id="codeBlock"><code><div class="code-line"><span class="ln">1</span><span class="code">#include &lt;iostream&gt;</span></div>
+<div class="code-line"><span class="ln">2</span><span class="code">#include &lt;climits&gt;</span></div>
+<div class="code-line"><span class="ln">3</span><span class="code">using namespace std;</span></div>
+<div class="code-line"><span class="ln">4</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">5</span><span class="code">class SmartRoadPlanner {</span></div>
+<div class="code-line"><span class="ln">6</span><span class="code">private:</span></div>
+<div class="code-line"><span class="ln">7</span><span class="code">    int roads[4][4];</span></div>
+<div class="code-line"><span class="ln">8</span><span class="code">    int key[4];</span></div>
+<div class="code-line"><span class="ln">9</span><span class="code">    bool inMST[4];</span></div>
+<div class="code-line"><span class="ln">10</span><span class="code">    int parent[4];</span></div>
+<div class="code-line"><span class="ln">11</span><span class="code">    int n;</span></div>
+<div class="code-line"><span class="ln">12</span><span class="code">public:</span></div>
+<div class="code-line"><span class="ln">13</span><span class="code">    SmartRoadPlanner(int size) : n(size) {}</span></div>
+<div class="code-line"><span class="ln">14</span><span class="code">    void initialize();</span></div>
+<div class="code-line"><span class="ln">15</span><span class="code">    int selectMinimum();</span></div>
+<div class="code-line"><span class="ln">16</span><span class="code">    void updateNetwork(int u);</span></div>
+<div class="code-line"><span class="ln">17</span><span class="code">    void buildMinimumRoadNetwork(int costMatrix[4][4]);</span></div>
+<div class="code-line"><span class="ln">18</span><span class="code">    void showRoadPlan();</span></div>
+<div class="code-line"><span class="ln">19</span><span class="code">    void showTotalCost();</span></div>
+<div class="code-line"><span class="ln">20</span><span class="code">};</span></div>
+<div class="code-line"><span class="ln">21</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">22</span><span class="code">void SmartRoadPlanner::initialize() {</span></div>
+<div class="code-line"><span class="ln">23</span><span class="code">    for (int i = 0; i &lt; n; i++) {</span></div>
+<div class="code-line"><span class="ln">24</span><span class="code">        key[i] = INT_MAX;</span></div>
+<div class="code-line"><span class="ln">25</span><span class="code">        inMST[i] = false;</span></div>
 <div class="code-line"><span class="ln">26</span><span class="code">    }</span></div>
-<div class="code-line"><span class="ln">27</span><span class="code">    roadCost[start] = 0;</span></div>
-<div class="code-line"><span class="ln">28</span><span class="code">    included[start] = 1;</span></div>
+<div class="code-line"><span class="ln">27</span><span class="code">    key[0] = 0;</span></div>
+<div class="code-line"><span class="ln">28</span><span class="code">    parent[0] = -1;</span></div>
 <div class="code-line"><span class="ln">29</span><span class="code">}</span></div>
 <div class="code-line"><span class="ln">30</span><span class="code"></span></div>
 <div class="code-line"><span class="ln">31</span><span class="code">int SmartRoadPlanner::selectMinimum() {</span></div>
-<div class="code-line"><span class="ln">32</span><span class="code">    int minValue = 10000000;</span></div>
-<div class="code-line"><span class="ln">33</span><span class="code">    int minIndex = -1;</span></div>
-<div class="code-line"><span class="ln">34</span><span class="code">    for (int i = 0; i &lt; 4; i++) {</span></div>
-<div class="code-line"><span class="ln">35</span><span class="code">        if (!included[i] &amp;&amp; roadCost[i] &lt; minValue) {</span></div>
-<div class="code-line"><span class="ln">36</span><span class="code">            minValue = roadCost[i];</span></div>
-<div class="code-line"><span class="ln">37</span><span class="code">            minIndex = i;</span></div>
-<div class="code-line"><span class="ln">38</span><span class="code">        }</span></div>
-<div class="code-line"><span class="ln">39</span><span class="code">    }</span></div>
-<div class="code-line"><span class="ln">40</span><span class="code">    return minIndex;</span></div>
-<div class="code-line"><span class="ln">41</span><span class="code">}</span></div>
-<div class="code-line"><span class="ln">42</span><span class="code"></span></div>
-<div class="code-line"><span class="ln">43</span><span class="code">void SmartRoadPlanner::updateNetwork(int roadMatrix[4][4]) {</span></div>
-<div class="code-line"><span class="ln">44</span><span class="code">    int u = selectMinimum();</span></div>
-<div class="code-line"><span class="ln">45</span><span class="code">    if (u == -1) return;</span></div>
-<div class="code-line"><span class="ln">46</span><span class="code">    included[u] = 1;</span></div>
-<div class="code-line"><span class="ln">47</span><span class="code">    for (int i = 0; i &lt; 4; i++) {</span></div>
-<div class="code-line"><span class="ln">48</span><span class="code">        if (!included[i] &amp;&amp; roadMatrix[u][i]) {</span></div>
-<div class="code-line"><span class="ln">49</span><span class="code">            if (roadMatrix[u][i] &lt; roadCost[i]) {</span></div>
-<div class="code-line"><span class="ln">50</span><span class="code">                roadCost[i] = roadMatrix[u][i];</span></div>
-<div class="code-line"><span class="ln">51</span><span class="code">                from[i] = u;</span></div>
-<div class="code-line"><span class="ln">52</span><span class="code">            }</span></div>
-<div class="code-line"><span class="ln">53</span><span class="code">        }</span></div>
-<div class="code-line"><span class="ln">54</span><span class="code">    }</span></div>
-<div class="code-line"><span class="ln">55</span><span class="code">}</span></div>
-<div class="code-line"><span class="ln">56</span><span class="code"></span></div>
-<div class="code-line"><span class="ln">57</span><span class="code">void SmartRoadPlanner::buildMinimumRoadNetwork(int roadMatrix[4][4], int start) {</span></div>
-<div class="code-line"><span class="ln">58</span><span class="code">    initialize(roadMatrix, start);</span></div>
-<div class="code-line"><span class="ln">59</span><span class="code">    for (int i = 0; i &lt; 3; i++)</span></div>
-<div class="code-line"><span class="ln">60</span><span class="code">        updateNetwork(roadMatrix);</span></div>
-<div class="code-line"><span class="ln">61</span><span class="code">}</span></div>
-<div class="code-line"><span class="ln">62</span><span class="code"></span></div>
-<div class="code-line"><span class="ln">63</span><span class="code">void SmartRoadPlanner::showRoadPlan(int roadMatrix[4][4]) {</span></div>
-<div class="code-line"><span class="ln">64</span><span class="code">    cout &lt;&lt; "\nRoad Plan (Minimum Spanning Tree):\n";</span></div>
-<div class="code-line"><span class="ln">65</span><span class="code">    cout &lt;&lt; "Connection \tCost\n";</span></div>
-<div class="code-line"><span class="ln">66</span><span class="code">    for (int i = 0; i &lt; 4; i++) {</span></div>
-<div class="code-line"><span class="ln">67</span><span class="code">        if (from[i] != i) {</span></div>
-<div class="code-line"><span class="ln">68</span><span class="code">            cout &lt;&lt; locations[from[i]] &lt;&lt; " - " &lt;&lt; locations[i]</span></div>
-<div class="code-line"><span class="ln">69</span><span class="code">                 &lt;&lt; " \t" &lt;&lt; roadMatrix[from[i]][i] &lt;&lt; " mins\n";</span></div>
-<div class="code-line"><span class="ln">70</span><span class="code">        }</span></div>
-<div class="code-line"><span class="ln">71</span><span class="code">    }</span></div>
-<div class="code-line"><span class="ln">72</span><span class="code">}</span></div>
-<div class="code-line"><span class="ln">73</span><span class="code"></span></div>
-<div class="code-line"><span class="ln">74</span><span class="code">void SmartRoadPlanner::showTotalCost(int roadMatrix[4][4]) {</span></div>
-<div class="code-line"><span class="ln">75</span><span class="code">    int total = 0;</span></div>
-<div class="code-line"><span class="ln">76</span><span class="code">    for (int i = 0; i &lt; 4; i++) {</span></div>
-<div class="code-line"><span class="ln">77</span><span class="code">        if (from[i] != i)</span></div>
-<div class="code-line"><span class="ln">78</span><span class="code">            total += roadMatrix[from[i]][i];</span></div>
-<div class="code-line"><span class="ln">79</span><span class="code">    }</span></div>
-<div class="code-line"><span class="ln">80</span><span class="code">    cout &lt;&lt; "Total cost of laying roads: " &lt;&lt; total &lt;&lt; " mins\n";</span></div>
-<div class="code-line"><span class="ln">81</span><span class="code">}</span></div>
-<div class="code-line"><span class="ln">82</span><span class="code"></span></div>
-<div class="code-line"><span class="ln">83</span><span class="code">int main() {</span></div>
-<div class="code-line"><span class="ln">84</span><span class="code">    int roadMatrix[4][4];</span></div>
-<div class="code-line"><span class="ln">85</span><span class="code">    int start;</span></div>
-<div class="code-line"><span class="ln">86</span><span class="code">    cout &lt;&lt; "Enter travel times (in minutes) between 4 city zones (use 0 if no direct road):\n";</span></div>
-<div class="code-line"><span class="ln">87</span><span class="code">    for (int i = 0; i &lt; 4;i++)</span></div>
-<div class="code-line"><span class="ln">88</span><span class="code">        for (int j = 0; j &lt; 4; j++)</span></div>
-<div class="code-line"><span class="ln">89</span><span class="code">            cin &gt;&gt; roadMatrix[i][j];</span></div>
-<div class="code-line"><span class="ln">90</span><span class="code"></span></div>
-<div class="code-line"><span class="ln">91</span><span class="code">    cout &lt;&lt; "Enter starting location index (0: Downtown, 1: Hospital, 2: Tech Park, 3: Market): ";</span></div>
-<div class="code-line"><span class="ln">92</span><span class="code">    cin &gt;&gt; start;</span></div>
-<div class="code-line"><span class="ln">93</span><span class="code"></span></div>
-<div class="code-line"><span class="ln">94</span><span class="code">    SmartRoadPlanner planner;</span></div>
-<div class="code-line"><span class="ln">95</span><span class="code">    planner.buildMinimumRoadNetwork(roadMatrix, start);</span></div>
-<div class="code-line"><span class="ln">96</span><span class="code">    planner.showRoadPlan(roadMatrix);</span></div>
-<div class="code-line"><span class="ln">97</span><span class="code">    planner.showTotalCost(roadMatrix);</span></div>
-<div class="code-line"><span class="ln">98</span><span class="code"></span></div>
-<div class="code-line"><span class="ln">99</span><span class="code">    return 0;</span></div>
-<div class="code-line"><span class="ln">100</span><span class="code">}</span></div>
-</code></pre>
+<div class="code-line"><span class="ln">32</span><span class="code">    int min = INT_MAX;</span></div>
+<div class="code-line"><span class="ln">33</span><span class="code">    int minIndex = -1;</span></div></code></pre>
+          </div>
+        </div>
+      </div>
     </div>
 
     <script>
       document.getElementById('copyBtn').addEventListener('click', function(){
         const text = Array.from(document.querySelectorAll('#codeBlock .code')).map(n=>n.textContent).join('\n');
         navigator.clipboard.writeText(text).then(()=>{
-          this.textContent = 'Copied';
+          this.textContent = 'Copied!';
           setTimeout(()=> this.innerHTML = '<i class="fas fa-copy"></i> Copy', 1500);
         });
       });
