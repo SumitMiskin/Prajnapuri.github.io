@@ -117,73 +117,74 @@
     </section>
     <h1 class="text-center">Course Reflection</h1>
     <div class="container">
-        <div style="background: #ffffff; max-width: 980px; margin: 36px auto; padding: 28px 32px; border-radius: 12px; box-shadow: 0 12px 36px rgba(0,0,0,0.12); font-family: 'Times New Roman', Times, serif; font-size: 20px; line-height: 1.6; color: #222;">
+        <div style="background: #ffffff; max-width: 980px; margin: 36px auto; padding: 28px 32px; border-radius: 12px; box-shadow: 0 12px 36px rgba(0,0,0,0.12); font-family: 'Lato', 'Montserrat', Arial, sans-serif; font-size: 18px; line-height: 1.6; color: #222;">
 
-          <h3 style="font-family: 'Times New Roman', Times, serif; font-size: 22px; margin-top: 1.5rem;">Kinds of Problems in Nature</h3>
-          <p>We can see many examples in nature that are similar to concepts like iteration, recursion, and backtracking. The change in seasons happens in a cycle again and again, which is like iteration. The growth of cabbage leaves in layers is like recursion, where the same pattern repeats itself. Ants exploring their area and returning home is like backtracking, as they explore paths and then come back. There are many other examples in nature that match these ideas.</p>
-
-          <h3 style="font-family: 'Times New Roman', Times, serif; font-size: 22px; margin-top: 1.5rem;">Space and Time Efficiency</h3>
-          <p>Space complexity is the extra memory an algorithm needs to run. Time complexity is the time an algorithm takes to complete its task. Both are important to check how well an algorithm works and if it fits a certain problem. The order of growth shows how the time or space needed grows with the input size:</p>
-          <ul style="margin-left: 1.5rem;">
-            <li>O (1) → constant growth</li>
-            <li>O (n) → linear growth</li>
-            <li>O (log n) → logarithmic growth</li>
+          <h3 style="font-size:22px; margin-top:0.5rem;">1. Problems in Nature: Iteration, Recursion, and Backtracking</h3>
+          <p>Nature offers many patterns that directly relate to algorithmic thinking, and these patterns can inspire technological solutions like the ones in the four projects.</p>
+          <ul>
+            <li><strong>Iteration:</strong> Natural cycles such as seasons repeat predictably. This iterative idea appears in the Drone-Based Fast Delivery Network, where drones follow delivery routes, return to hubs, recharge, and restart the cycle.</li>
+            <li><strong>Recursion:</strong> Seen in plant branching or shell patterns. Smart Farming Zones with IoT monitor many small units (plant trays, sensor nodes) in a self-similar way, forming a recursive monitoring system.</li>
+            <li><strong>Backtracking:</strong> Animals retrace steps when paths fail. Night-Time Safe Travel Services recalculate safer paths when a route is unsafe or unavailable. Emergency Response Systems also recalculate routes if ambulances encounter obstacles.</li>
           </ul>
-          <p style="margin-top: 1rem;"><strong>Takeaway from Design Principles:</strong> After learning different algorithms, the main ideas became clear. AVL trees and Red-Black trees taught how balance is important for fast operations. The comparison between DFS (Depth First Search) and BFS (Breadth First Search) showed how different methods can be used to solve problems. Learning how different sorting algorithms work—like dividing and merging or swapping elements—helped in understanding their working logic. Altogether, these ideas gave a good base for understanding the principles of algorithms.</p>
 
-          <h3 style="font-family: 'Times New Roman', Times, serif; font-size: 22px; margin-top: 1.5rem;">Hierarchical Data and Tree Data Structures</h3>
-          <p>Tree data structures help in organizing data in a hierarchy and solve many problems efficiently. Binary Search Trees (BSTs) help in searching faster but are not always balanced. A 2-3 tree keeps all leaf nodes at the same level, making it more balanced but still not perfect. An AVL tree is balanced using a balancing factor and rotations. The Red-Black tree improves this by reducing the number of rotations. A heap is a complete binary tree used to maintain a heap property, good for priority queues. A trie is used to store strings, useful in autocomplete and prefix search systems.</p>
-
-          <h3 style="font-family: 'Times New Roman', Times, serif; font-size: 22px; margin-top: 1.5rem;">Need for Array Query</h3>
-          <p>Algorithms array queries are useful for quickly handling large data with frequent changes. Lookup tables store precomputed results for faster queries. Segment trees help perform fast range queries and updates. Binary Indexed Trees (BIT) offer simpler code for range queries and work using the last bit concept.</p>
-
-          <h3 style="font-family: 'Times New Roman', Times, serif; font-size: 22px; margin-top: 1.5rem;">Difference Between Tree and Graphs</h3>
-          <p>Trees and graphs both store data, but they are different. A tree has one root node and no cycles. A graph has nodes connected by edges and can have cycles.</p>
-          <p><strong>Tree traversals:</strong></p>
-          <ul style="margin-left: 1.5rem;">
-            <li>Pre-order</li>
-            <li>In-order</li>
-            <li>Post-order</li>
+          <h3 style="font-size:22px; margin-top:1.25rem;">2. Space and Time Efficiency</h3>
+          <p>Efficiency is essential in every computational project.</p>
+          <ul>
+            <li><strong>Time efficiency:</strong> How fast an algorithm executes.</li>
+            <li><strong>Space efficiency:</strong> How much memory an algorithm requires.</li>
           </ul>
-          <p style="margin-top: 0.8rem;"><strong>Graph traversals:</strong></p>
-          <ul style="margin-left: 1.5rem;">
-            <li>DFS (Depth First Search) → Brave traversal</li>
-            <li>BFS (Breadth First Search) → Cautious traversal</li>
+          <p><strong>Relevance to the projects:</strong></p>
+          <ul>
+            <li><strong>Drone Networks:</strong> Require near-real-time route optimization (Dijkstra, A*) and space-efficient onboard algorithms.</li>
+            <li><strong>Smart Farming with IoT:</strong> Continuous sensor data needs low-memory, fast analytics.</li>
+            <li><strong>Emergency Response Systems:</strong> Time efficiency directly affects outcomes in life-critical flows.</li>
+            <li><strong>Night-Time Safe Travel Services:</strong> Depend on efficient graph traversal and shortest-path methods for real-time tracking and rerouting.</li>
           </ul>
-          <p style="margin-top: 0.8rem;">Trees are used for hierarchical data, sorting, and searching. Graphs are used in problems like finding the shortest path.</p>
+          <p><strong>Orders of Growth (examples):</strong></p>
+          <ul>
+            <li><strong>O(1):</strong> Instant operations (sensor reads).</li>
+            <li><strong>O(log n):</strong> Searching in sorted logs.</li>
+            <li><strong>O(n):</strong> Scanning lists of drones or routes.</li>
+            <li><strong>O(n log n) / O(n²):</strong> Sorting large datasets.</li>
+          </ul>
 
-          <h3 style="font-family: 'Times New Roman', Times, serif; font-size: 22px; margin-top: 1.5rem;">Sorting and Searching Algorithms</h3>
-          <p>Sorting and searching make it easy to manage and find information. Sorting, like quick sort and merge sort, arranges data in order. For example, arranging products on shopping websites. Searching, like binary search, helps find specific data quickly, such as search suggestions or product searches online.</p>
+          <h3 style="font-size:22px; margin-top:1.25rem;">3. Design Principles and Their Role</h3>
+          <p>Algorithmic design principles map directly to system components:</p>
+          <ul>
+            <li><strong>DFS / BFS:</strong> DFS for deep exploratory routing; BFS for safe, short-path discovery.</li>
+            <li><strong>String algorithms (Boyer-Moore, KMP):</strong> Useful for parsing logs and alerts in sensors and emergency messages.</li>
+            <li><strong>Balancing (AVL / Red-Black):</strong> Essential for databases backing drone hubs, crop data, and emergency call logs to ensure fast updates and queries.</li>
+          </ul>
 
-          <h3 style="font-family: 'Times New Roman', Times, serif; font-size: 22px; margin-top: 1.5rem;">Importance of Graph Algorithms</h3>
-          <p>Graph algorithms are important for finding minimum spanning trees (MST) and shortest paths. The MST connects all nodes with the least total cost, useful for laying roads or pipelines. Shortest path algorithms like Dijkstra's help find the fastest route, useful in GPS navigation systems.</p>
+          <h3 style="font-size:22px; margin-top:1.25rem;">4. Hierarchical Data &amp; Tree Structures</h3>
+          <p>Hierarchical structures are used across the projects:</p>
+          <ul>
+            <li><strong>Drone Delivery:</strong> Delivery zones, warehouses and route hierarchies.</li>
+            <li><strong>Smart Farming:</strong> Plants, sensors and trays organized hierarchically.</li>
+            <li><strong>Emergency Response:</strong> Hospitals, ambulances and routing trees.</li>
+            <li><strong>Night-Time Safe Travel:</strong> Route hierarchies and map partitions.</li>
+          </ul>
 
-          <h3 style="font-family: 'Times New Roman', Times, serif; font-size: 22px; margin-top: 1.5rem;">Algorithm Design Techniques</h3>
-          <p>Different design methods of algorithms include:</p>
-          <ol style="margin-left: 1.5rem;">
-            <li><strong>Backtracking</strong> – Trying all options and removing wrong ones (like the N-Queens problem).</li>
-            <li><strong>Sorting algorithms:</strong>
-              <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
-                <li>Divide and conquer: Quick sort and Merge sort</li>
-                <li>Comparison-based: Selection, Insertion, and Bubble sort</li>
-              </ul>
-            </li>
-            <li><strong>Brute force</strong> – Trying every possible solution one by one.</li>
-            <li><strong>String search algorithms:</strong>
-              <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
-                <li>Boyer-Moore</li>
-                <li>Knuth-Morris-Pratt</li>
-                <li>Rabin-Karp</li>
-              </ul>
-            </li>
-            <li><strong>Shortest path algorithms:</strong>
-              <ul style="margin-left: 1.5rem; margin-top: 0.5rem;">
-                <li>Dijkstra's</li>
-                <li>Floyd-Warshall</li>
-                <li>Prim's</li>
-              </ul>
-            </li>
-          </ol>
+          <h3 style="font-size:22px; margin-top:1.25rem;">5. Need for Array Query Algorithms</h3>
+          <p>Range queries (Segment Trees, BITs) and lookup tables enable fast, real-time decisions across the systems — from weather slices for drones to nutrient ranges for farms.</p>
+
+          <h3 style="font-size:22px; margin-top:1.25rem;">6. Trees vs. Graphs and Traversals</h3>
+          <p>Use trees for hierarchical indexing and graphs for routing problems. Traversal techniques (preorder/inorder/postorder, DFS, BFS) support systematic data inspection and routing decisions.</p>
+
+          <h3 style="font-size:22px; margin-top:1.25rem;">7. Sorting &amp; Searching in Practice</h3>
+          <p>Sorting and searching keep the systems responsive: prioritizing drone deliveries, filtering sensor alerts, and finding nearest hubs or safe zones.</p>
+
+          <h3 style="font-size:22px; margin-top:1.25rem;">8. Spanning Trees &amp; Shortest Paths</h3>
+          <p>Spanning trees minimize network cost (drone station links, utility planning). Shortest path algorithms (Dijkstra, A*, Floyd-Warshall) are fundamental for routing and safety planning.</p>
+
+          <h3 style="font-size:22px; margin-top:1.25rem;">9. Algorithm Design Techniques</h3>
+          <ul>
+            <li><strong>Backtracking:</strong> Route recalculation when a path fails.</li>
+            <li><strong>Divide and Conquer:</strong> Partitioning large delivery or farm zones.</li>
+            <li><strong>Dynamic Programming:</strong> Caching repeated calculations for routing and prediction.</li>
+            <li><strong>Graph Traversal Techniques:</strong> Core to navigation, scheduling and monitoring.</li>
+          </ul>
+
         </div>
       </div>
 
