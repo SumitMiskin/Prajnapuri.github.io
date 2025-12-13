@@ -144,21 +144,68 @@
                 <div class="col-md-6">
                   <h6 class="text-success">C++ Implementation</h6>
                   <pre class="code-block"><code>#include &lt;bits/stdc++.h&gt;
-using namespace std;
-void dijkstra(int src, vector<vector<pair<int,int>>>& g){
-  const int INF=1e9; int n=g.size();
-  vector<int> dist(n,INF); dist[src]=0;
-  priority_queue<pair<int,int>, vector<pair<int,int>>, greater<pair<int,int>>>pq;
-  pq.push({0,src});
-  while(!pq.empty()){
-    auto [d,u]=pq.top(); pq.pop();
-    if(d!=dist[u]) continue;
-    for(auto &e: g[u]){
-      int v=e.first,w=e.second;
-      if(dist[v]>d+w){ dist[v]=d+w; pq.push({dist[v],v}); }
+#define V 100          // max number of junctions
+#define INF 1000000
+// Find vertex with minimum key value not yet in MST
+int minKey(int key[], int inMST[], int n) {
+    int min = INF, minIndex = -1;
+    for (int v = 0; v < n; v++) {
+        if (!inMST[v] && key[v] < min) {
+            min = key[v];
+            minIndex = v;
+        }
     }
-  }
+    return minIndex;
 }
+// Prim's algorithm: builds MST for given cost matrix
+void primMST(int graph[V][V], int n) {
+    int parent[V];   // parent[i] = parent of i in MST
+    int key[V];      // minimum edge weight to connect i
+    int inMST[V];    // 1 if vertex included in MST
+    for (int i = 0; i < n; i++) {
+        key[i] = INF;
+        inMST[i] = 0;
+    }
+    // Start from junction 0 (can choose any)
+    key[0] = 0;
+    parent[0] = -1;
+    // MST will have n-1 edges
+    for (int count = 0; count < n - 1; count++) {
+        int u = minKey(key, inMST, n);
+        inMST[u] = 1;
+        // Update key values of adjacent vertices
+        for (int v = 0; v < n; v++) {
+            if (graph[u][v] != INF && !inMST[v] && graph[u][v] < key[v]) {
+                parent[v] = u;
+                key[v] = graph[u][v];
+            }
+        }
+    }
+    // Print chosen pipes
+    int totalCost = 0;
+    printf("Selected pipes (MST edges): ");
+    for (int i = 1; i < n; i++) {
+        printf("Junction %d -- Junction %d  cost = %d", parent[i], i, graph[i][parent[i]]);
+        totalCost += graph[i][parent[i]];
+    }
+    printf("Total pipeline cost (MST) = %d", totalCost);
+}
+
+int main() {
+    int n;
+    int graph[V][V];
+    printf("Enter number of junctions: ");
+    scanf("%d", &n);
+    printf("Enter cost matrix (%d x %d), use %d if no direct pipe:",  n, n, INF);
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            scanf("%d", &graph[i][j]);
+        }
+    }
+    primMST(graph, n);
+    return 0;
+}
+
 </code></pre>
                 </div>
               </div>
