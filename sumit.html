@@ -84,6 +84,32 @@
         box-shadow: 0 35px 80px rgba(11,107,58,0.3); 
         animation: none;
       }
+      /* Animated arrows for introduction section */
+      .animated-arrow {
+        position: absolute;
+        stroke: #ff4444;
+        stroke-width: 3;
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+      }
+      .arrow-left {
+        animation: floatLeft 4s ease-in-out infinite;
+      }
+      .arrow-right {
+        animation: floatRight 4s ease-in-out infinite;
+      }
+      @keyframes floatLeft {
+        0%, 100% { transform: translateX(0) translateY(0); }
+        50% { transform: translateX(-20px) translateY(-10px); }
+      }
+      @keyframes floatRight {
+        0%, 100% { transform: translateX(0) translateY(0); }
+        50% { transform: translateX(20px) translateY(-10px); }
+      }
+      .intro-container {
+        position: relative;
+      }
       /* Animated gradient blob background */
       .animated-bg {
         position: fixed;
@@ -136,8 +162,22 @@
 
     <!-- Introduction Section -->
     <section id="introduction" class="page-section py-5" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
-      <div class="container">
-        <div style="background: rgba(255, 255, 255, 0.95); max-width: 700px; margin: 0 auto; padding: 40px 36px; border-radius: 16px; box-shadow: 0 16px 48px rgba(0,0,0,0.15); text-align: center;">
+      <div class="container intro-container">
+        <!-- Left animated arrows -->
+        <svg class="animated-arrow arrow-left" style="position: absolute; left: 20px; top: 50px; width: 80px; height: 120px;" viewBox="0 0 60 120">
+          <path d="M 10 30 L 35 10 M 35 10 L 30 35" />
+          <path d="M 10 70 L 35 50 M 35 50 L 30 75" />
+          <path d="M 10 110 L 35 90 M 35 90 L 30 115" />
+        </svg>
+
+        <!-- Right animated arrows -->
+        <svg class="animated-arrow arrow-right" style="position: absolute; right: 20px; top: 50px; width: 80px; height: 120px;" viewBox="0 0 60 120">
+          <path d="M 50 30 L 25 10 M 25 10 L 30 35" />
+          <path d="M 50 70 L 25 50 M 25 50 L 30 75" />
+          <path d="M 50 110 L 25 90 M 25 90 L 30 115" />
+        </svg>
+
+        <div style="background: rgba(255, 255, 255, 0.95); max-width: 700px; margin: 0 auto; padding: 40px 36px; border-radius: 16px; box-shadow: 0 16px 48px rgba(0,0,0,0.15); text-align: center; position: relative; z-index: 1;">
           <h2 style="font-family: 'Times New Roman', Times, serif; font-size: 32px; margin-bottom: 24px; color: #222; font-weight: 700;">Sumit Praveen Miskin</h2>
           
           <div style="background: #f0f0f0; padding: 20px; border-radius: 10px; margin-bottom: 20px;">
