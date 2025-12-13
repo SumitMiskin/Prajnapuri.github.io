@@ -87,7 +87,118 @@
           <ul class="text-dark mt-3">
             <li><p>In cases of traffic violation logs or vehicle identification through ANPR (Automatic Number Plate Recognition), string search algorithms like Knuth–Morris–Pratt (KMP), Boyer–Moore, or Rabin–Karp can help detect specific license patterns or flagged vehicle IDs efficiently.</p></li>
           </ul>
-        </div>
+          <h2>Algorithms and Datastructure used</h2>
+          <h3>Dijkstra's Algorithm</h3>
+          <ul class="text-dark mt-3">
+            <li><p>Dijkstra’s Algorithm plays a crucial role in smart transportation systems by helping calculate the shortest travel time between intersections, landmarks, or urban zones in a road network.</p></li>
+          </ul>
+                    <button class="btn btn-primary mt-4" data-bs-toggle="collapse" data-bs-target="#dijkstraCode">
+            <i class="fas fa-code"></i> View Code
+          </button>
+          
+          <div class="collapse mt-4" id="dijkstraCode">
+            <pre style="background-color: #1e1e1e; color: #d4d4d4; padding: 20px; border-radius: 8px; overflow-x: auto; display: flex;"><code style="flex: 1; counter-reset: line; list-style: none; padding-left: 20px;"><span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">1</span>#include &lt;bits/stdc++.h&gt;
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">2</span>#include &lt;iostream&gt;
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">3</span>#include &lt;algorithm&gt;
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">4</span>#include &lt;string&gt;
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">5</span>using namespace std;
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">6</span>
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">7</span>class SmartTransportation {
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">8</span>public:
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">9</span>    int previous[4];
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">10</span>    int travelTime[4];
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">11</span>    int visited[4];
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">12</span>
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">13</span>    void initialize(int timeMatrix[4][4], int start);
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">14</span>    int findMinimum();
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">15</span>    void update(int timeMatrix[4][4]);
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">16</span>    void computeShortestPaths(int timeMatrix[4][4], int start);
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">17</span>    void displayPaths(int start, string locationNames[4]);
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">18</span>};
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">19</span>
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">20</span>void SmartTransportation::initialize(int timeMatrix[4][4], int start) {
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">21</span>    for (int i = 0; i &lt; 4; i++) {
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">22</span>        previous[i] = start;
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">23</span>        travelTime[i] = (timeMatrix[start][i] == 0) ? 10000000 : timeMatrix[start][i];
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">24</span>        visited[i] = 0;
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">25</span>    }
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">26</span>    visited[start] = 1;
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">27</span>    travelTime[start] = 0;
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">28</span>}
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">29</span>
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">30</span>int SmartTransportation::findMinimum() {
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">31</span>    int minimum = 10000000;
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">32</span>    int minIndex = -1;
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">33</span>    for (int i = 0; i &lt; 4; i++) {
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">34</span>        if (!visited[i] && travelTime[i] &lt; minimum) {
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">35</span>            minimum = travelTime[i];
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">36</span>            minIndex = i;
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">37</span>        }
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">38</span>    }
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">39</span>    return minIndex;
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">40</span>}
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">41</span>
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">42</span>void SmartTransportation::update(int timeMatrix[4][4]) {
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">43</span>    int u = findMinimum();
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">44</span>    if (u == -1)
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">45</span>        return;
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">46</span>    visited[u] = 1;
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">47</span>    for (int i = 0; i &lt; 4; i++) {
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">48</span>        if (!visited[i]) {
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">49</span>            if (travelTime[u] + timeMatrix[u][i] &lt; travelTime[i]) {
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">50</span>                travelTime[i] = travelTime[u] + timeMatrix[u][i];
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">51</span>                previous[i] = u;
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">52</span>            }
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">53</span>        }
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">54</span>    }
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">55</span>}
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">56</span>
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">57</span>void SmartTransportation::computeShortestPaths(int timeMatrix[4][4], int start) {
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">58</span>    initialize(timeMatrix, start);
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">59</span>    for (int i = 0; i &lt; 3; i++)
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">60</span>        update(timeMatrix);
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">61</span>}
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">62</span>
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">63</span>void SmartTransportation::displayPaths(int start, string locationNames[4]) {
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">64</span>    for (int i = 0; i &lt; 4; i++) {
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">65</span>        if (i != start) {
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">66</span>            cout &lt;&lt; "Fastest route from " &lt;&lt; locationNames[start] &lt;&lt; " to " &lt;&lt; locationNames[i]
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">67</span>                 &lt;&lt; " takes " &lt;&lt; travelTime[i] &lt;&lt; " minutes via: ";
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">68</span>            int j = i;
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">69</span>            cout &lt;&lt; locationNames[j];
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">70</span>            while (previous[j] != start) {
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">71</span>                j = previous[j];
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">72</span>                cout &lt;&lt; " <- " &lt;&lt; locationNames[j];
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">73</span>            }
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">74</span>            cout &lt;&lt; " <- " &lt;&lt; locationNames[start] &lt;&lt; endl;
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">75</span>        }
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">76</span>    }
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">77</span>}
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">78</span>
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">79</span>int main() {
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">80</span>    int start;
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">81</span>    int timeMatrix[4][4];
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">82</span>    string locationNames[4] = {"Central Junction", "Hospital", "City Market", "Tech Park"};
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">83</span>
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">84</span>    cout &lt;&lt; "Enter the starting location (0 - Central Junction, 1 - Hospital, 2 - City Market, 3 - Tech Park): ";
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">85</span>    cin &gt;&gt; start;
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">86</span>
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">87</span>    cout &lt;&lt; "Enter the travel time matrix (in minutes) between intersections:\n";
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">88</span>    for (int i = 0; i &lt; 4; i++) {
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">89</span>        for (int j = 0; j &lt; 4; j++) {
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">90</span>            cin &gt;&gt; timeMatrix[i][j];
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">91</span>        }
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">92</span>    }
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">93</span>
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">94</span>    SmartTransportation trafficSystem;
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">95</span>    trafficSystem.computeShortestPaths(timeMatrix, start);
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">96</span>    trafficSystem.displayPaths(start, locationNames);
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">97</span>
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">98</span>    return 0;
+<span style="display: inline-block; width: 30px; margin-right: 15px; text-align: right; color: #858585; user-select: none; line-height: 1.5;">99</span>}
+</code></pre>
+          </div>
+                  </div>
       </div>
     </section>
 
