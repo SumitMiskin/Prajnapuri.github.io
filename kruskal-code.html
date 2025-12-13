@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Kruskal Code Preview — Prajnapuri</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
+    <style>
+      body { background: #071226; color: #e6eef8; font-family: 'Lato', sans-serif; }
+      .code-modal { max-width: 900px; margin: 60px auto; background: #0e1721; border-radius: 8px; box-shadow: 0 12px 40px rgba(0,0,0,0.6); padding: 18px; }
+      .modal-header { display:flex; justify-content:space-between; align-items:center; }
+      .modal-title { font-weight:700; font-size:18px; }
+      .btn-copy { background:#1f6feb; color:white; border:none; padding:8px 12px; border-radius:6px; cursor:pointer; }
+      .btn-copy:hover { background:#0969da; }
+      pre.code-block { background:#0b1220; color:#cfe5ff; padding:18px; border-radius:6px; overflow:auto; max-height:70vh; }
+      /* line numbers */
+      .code-line { display:flex; }
+      .ln { width:40px; text-align:right; padding-right:12px; color:#6b7a89; user-select:none; }
+      .ln + .code { white-space:pre; font-family: Consolas, 'Courier New', monospace; }
+      .top-actions { display:flex; gap:8px; }
+    </style>
+  </head>
+  <body>
+    <div class="code-modal">
+      <div class="modal-header">
+        <div>
+          <div class="modal-title">Kruskal's Algorithm — Minimum Spanning Tree</div>
+          <div style="color:#9fb6d8; font-size:13px;">SmartRoadNetworkKruskal.cpp — C++ (read-only)</div>
+        </div>
+        <div class="top-actions">
+          <button class="btn-copy" id="copyBtn"><i class="fas fa-copy"></i> Copy</button>
+          <a href="transportation.html" class="btn-copy" style="background:#2b87c9; text-decoration:none; display:inline-flex; align-items:center; font-weight:600;">Close</a>
+        </div>
+      </div>
+
+      <hr style="border-color:rgba(255,255,255,0.04); margin:12px 0 18px;" />
+
+      <pre class="code-block" id="codeBlock"><code>
+<div class="code-line"><span class="ln">1</span><span class="code">#include &lt;iostream&gt;</span></div>
+<div class="code-line"><span class="ln">2</span><span class="code">#include &lt;string&gt;</span></div>
+<div class="code-line"><span class="ln">3</span><span class="code">using namespace std;</span></div>
+<div class="code-line"><span class="ln">4</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">5</span><span class="code">// Check if two zones belong to the same group (to avoid cycles)</span></div>
+<div class="code-line"><span class="ln">6</span><span class="code">int isConnected(int zoneGroup[], int a, int b) {</span></div>
+<div class="code-line"><span class="ln">7</span><span class="code">    return zoneGroup[a] == zoneGroup[b];</span></div>
+<div class="code-line"><span class="ln">8</span><span class="code">}</span></div>
+<div class="code-line"><span class="ln">9</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">10</span><span class="code">// Merge two zone groups</span></div>
+<div class="code-line"><span class="ln">11</span><span class="code">void connectZones(int zoneGroup[], int n, int a, int b) {</span></div>
+<div class="code-line"><span class="ln">12</span><span class="code">    int oldGroup = zoneGroup[a];</span></div>
+<div class="code-line"><span class="ln">13</span><span class="code">    for (int i = 0; i &lt; n; i++) {</span></div>
+<div class="code-line"><span class="ln">14</span><span class="code">        if (zoneGroup[i] == oldGroup)</span></div>
+<div class="code-line"><span class="ln">15</span><span class="code">            zoneGroup[i] = zoneGroup[b];</span></div>
+<div class="code-line"><span class="ln">16</span><span class="code">    }</span></div>
+<div class="code-line"><span class="ln">17</span><span class="code">}</span></div>
+<div class="code-line"><span class="ln">18</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">19</span><span class="code">// Partition function for QuickSort (sorts by road cost)</span></div>
+<div class="code-line"><span class="ln">20</span><span class="code">int partition(int cost[], int from[], int to[], int l, int r) {</span></div>
+<div class="code-line"><span class="ln">21</span><span class="code">    int pivot = cost[l];</span></div>
+<div class="code-line"><span class="ln">22</span><span class="code">    int pivotFrom = from[l];</span></div>
+<div class="code-line"><span class="ln">23</span><span class="code">    int pivotTo = to[l];</span></div>
+<div class="code-line"><span class="ln">24</span><span class="code">    int i = l, j = r + 1;</span></div>
+<div class="code-line"><span class="ln">25</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">26</span><span class="code">    while (true) {</span></div>
+<div class="code-line"><span class="ln">27</span><span class="code">        while (i &lt;= r &amp;&amp; cost[++i] &lt;= pivot);</span></div>
+<div class="code-line"><span class="ln">28</span><span class="code">        while (cost[--j] &gt; pivot);</span></div>
+<div class="code-line"><span class="ln">29</span><span class="code">        if (i &gt;= j) break;</span></div>
+<div class="code-line"><span class="ln">30</span><span class="code">        swap(cost[i], cost[j]);</span></div>
+<div class="code-line"><span class="ln">31</span><span class="code">        swap(from[i], from[j]);</span></div>
+<div class="code-line"><span class="ln">32</span><span class="code">        swap(to[i], to[j]);</span></div>
+<div class="code-line"><span class="ln">33</span><span class="code">    }</span></div>
+<div class="code-line"><span class="ln">34</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">35</span><span class="code">    swap(cost[l], cost[j]);</span></div>
+<div class="code-line"><span class="ln">36</span><span class="code">    swap(from[l], from[j]);</span></div>
+<div class="code-line"><span class="ln">37</span><span class="code">    swap(to[l], to[j]);</span></div>
+<div class="code-line"><span class="ln">38</span><span class="code">    return j;</span></div>
+<div class="code-line"><span class="ln">39</span><span class="code">}</span></div>
+<div class="code-line"><span class="ln">40</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">41</span><span class="code">void quickSort(int cost[], int from[], int to[], int l, int r) {</span></div>
+<div class="code-line"><span class="ln">42</span><span class="code">    if (l &lt; r) {</span></div>
+<div class="code-line"><span class="ln">43</span><span class="code">        int p = partition(cost, from, to, l, r);</span></div>
+<div class="code-line"><span class="ln">44</span><span class="code">        quickSort(cost, from, to, l, p - 1);</span></div>
+<div class="code-line"><span class="ln">45</span><span class="code">        quickSort(cost, from, to, p + 1, r);</span></div>
+<div class="code-line"><span class="ln">46</span><span class="code">    }</span></div>
+<div class="code-line"><span class="ln">47</span><span class="code">}</span></div>
+<div class="code-line"><span class="ln">48</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">49</span><span class="code">// Kruskal's MST algorithm adapted for smart roads</span></div>
+<div class="code-line"><span class="ln">50</span><span class="code">void planSmartRoadNetwork(int n, int e, int from[], int to[], int cost[], string locationNames[]) {</span></div>
+<div class="code-line"><span class="ln">51</span><span class="code">    int zoneGroup[n];</span></div>
+<div class="code-line"><span class="ln">52</span><span class="code">    for (int i = 0; i &lt; n; i++) zoneGroup[i] = i;</span></div>
+<div class="code-line"><span class="ln">53</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">54</span><span class="code">    int totalCost = 0;</span></div>
+<div class="code-line"><span class="ln">55</span><span class="code">    quickSort(cost, from, to, 0, e - 1);</span></div>
+<div class="code-line"><span class="ln">56</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">57</span><span class="code">    cout &lt;&lt; "\nOptimized Road Plan (Minimum Spanning Tree):\n";</span></div>
+<div class="code-line"><span class="ln">58</span><span class="code">    for (int i = 0; i &lt; e; i++) {</span></div>
+<div class="code-line"><span class="ln">59</span><span class="code">        if (!isConnected(zoneGroup, from[i], to[i])) {</span></div>
+<div class="code-line"><span class="ln">60</span><span class="code">            connectZones(zoneGroup, n, from[i], to[i]);</span></div>
+<div class="code-line"><span class="ln">61</span><span class="code">            totalCost += cost[i];</span></div>
+<div class="code-line"><span class="ln">62</span><span class="code">            cout &lt;&lt; locationNames[from[i]] &lt;&lt; " - " &lt;&lt; locationNames[to[i]]</span></div>
+<div class="code-line"><span class="ln">63</span><span class="code">                 &lt;&lt; " (Cost: " &lt;&lt; cost[i] &lt;&lt; " mins)\n";</span></div>
+<div class="code-line"><span class="ln">64</span><span class="code">        }</span></div>
+<div class="code-line"><span class="ln">65</span><span class="code">    }</span></div>
+<div class="code-line"><span class="ln">66</span><span class="code">    cout &lt;&lt; "Total minimum infrastructure cost: " &lt;&lt; totalCost &lt;&lt; " mins\n";</span></div>
+<div class="code-line"><span class="ln">67</span><span class="code">}</span></div>
+<div class="code-line"><span class="ln">68</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">69</span><span class="code">int main() {</span></div>
+<div class="code-line"><span class="ln">70</span><span class="code">    int n, e;</span></div>
+<div class="code-line"><span class="ln">71</span><span class="code">    cout &lt;&lt; "Enter number of city locations and proposed roads: ";</span></div>
+<div class="code-line"><span class="ln">72</span><span class="code">    cin &gt;&gt; n &gt;&gt; e;</span></div>
+<div class="code-line"><span class="ln">73</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">74</span><span class="code">    string locationNames[100];</span></div>
+<div class="code-line"><span class="ln">75</span><span class="code">    cout &lt;&lt; "Enter names of " &lt;&lt; n &lt;&lt; " city locations:\n";</span></div>
+<div class="code-line"><span class="ln">76</span><span class="code">    for (int i = 0; i &lt; n; i++) cin &gt;&gt; locationNames[i];</span></div>
+<div class="code-line"><span class="ln">77</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">78</span><span class="code">    int from[100], to[100], cost[100];</span></div>
+<div class="code-line"><span class="ln">79</span><span class="code">    cout &lt;&lt; "\nEnter each road in the format: &lt;from_index&gt; &lt;to_index&gt; &lt;travel_cost&gt;:\n";</span></div>
+<div class="code-line"><span class="ln">80</span><span class="code">    for (int i = 0; i &lt; e; i++) {</span></div>
+<div class="code-line"><span class="ln">81</span><span class="code">        cin &gt;&gt; from[i] &gt;&gt; to[i] &gt;&gt; cost[i];</span></div>
+<div class="code-line"><span class="ln">82</span><span class="code">    }</span></div>
+<div class="code-line"><span class="ln">83</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">84</span><span class="code">    cout &lt;&lt; "\nRoads entered:\n";</span></div>
+<div class="code-line"><span class="ln">85</span><span class="code">    for (int i = 0; i &lt; e; i++) {</span></div>
+<div class="code-line"><span class="ln">86</span><span class="code">        cout &lt;&lt; locationNames[from[i]] &lt;&lt; " - " &lt;&lt; locationNames[to[i]]</span></div>
+<div class="code-line"><span class="ln">87</span><span class="code">             &lt;&lt; " (Cost: " &lt;&lt; cost[i] &lt;&lt; " mins)\n";</span></div>
+<div class="code-line"><span class="ln">88</span><span class="code">    }</span></div>
+<div class="code-line"><span class="ln">89</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">90</span><span class="code">    planSmartRoadNetwork(n, e, from, to, cost, locationNames);</span></div>
+<div class="code-line"><span class="ln">91</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">92</span><span class="code">    return 0;</span></div>
+<div class="code-line"><span class="ln">93</span><span class="code">}</span></div>
+</code></pre>
+    </div>
+
+    <script>
+      document.getElementById('copyBtn').addEventListener('click', function(){
+        const text = Array.from(document.querySelectorAll('#codeBlock .code')).map(n=>n.textContent).join('\n');
+        navigator.clipboard.writeText(text).then(()=>{
+          this.textContent = 'Copied';
+          setTimeout(()=> this.innerHTML = '<i class="fas fa-copy"></i> Copy', 1500);
+        });
+      });
+    </script>
+  </body>
+</html>
