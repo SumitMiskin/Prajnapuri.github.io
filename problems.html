@@ -100,7 +100,7 @@
                   <p class="mb-2">Finding connected components to identify regions affected by closures.</p>
                 </div>
                 <div>
-                  <button class="view-btn" data-bs-toggle="modal" data-bs-target="#modal4">View →</button>
+                  <button class="view-btn" data-bs-toggle="modal" data-bs-target="#modal4">Watch-out →</button>
                 </div>
               </div>
             </div>
@@ -111,12 +111,12 @@
             <div class="problem-card">
               <div class="d-flex justify-content-between align-items-start">
                 <div>
-                  <div class="badge bg-light text-dark mb-2">A* / Heuristics</div>
-                  <h4 class="problem-title">Drone Delivery Routing</h4>
-                  <p class="mb-2">Heuristic pathfinding for aerial drones avoiding no-fly zones.</p>
+                  <div class="badge bg-light text-dark mb-2">Dijkstra's Algorithm</div>
+                  <h4 class="problem-title">Electricity Cabel-line implementation</h4>
+                  <p class="mb-2">Providing a sufficient and stable electricity for our city Prajnapuri from the Main power-station.</p>
                 </div>
                 <div>
-                  <button class="view-btn" data-bs-toggle="modal" data-bs-target="#modal5">View →</button>
+                  <button class="view-btn" data-bs-toggle="modal" data-bs-target="#modal5">Watch-out →</button>
                 </div>
               </div>
             </div>
@@ -390,12 +390,66 @@ void unite(int a,int b){ a=find(a); b=find(b); if(a==b) return; if(p[a]>p[b]) sw
             <div class="row">
               <div class="col-md-6">
                 <h6 class="text-success">Problem Statement</h6>
-                <p>Find heuristic paths for drones to minimize time while avoiding no-fly zones and tall obstacles.</p>
-              </div>
+                <p>Providing a sufficient and stable electricity for our city Prajnapuri as it has covered major part as IT sector and electricity plays a major role here. In this project we’re planning to provide a stable 24/7 electricity which is provided by the main Power station of the located in the city (source place). </p>
+                <h6 class="text-success">Solution Approach</h6>
+                <p>To solve the Electricity problem we are using mostly popular algorithm Dijkstra’s algorithm. Adding vertices in each corner to cover all the area of our city and the edges are connecting each node for proper implementation. </p>
+                </div>
               <div class="col-md-6">
                 <h6 class="text-success">Implementation</h6>
-                <pre class="code-block"><code>// A* search placeholder
-// Implementation omitted
+                <pre class="code-block"><code>#include <iostream>
+using namespace std;
+#define MAXN 100
+#define INF 999
+int main() {
+    int n;
+    cout << "Enter the number of Vertices of the city Prajnapuri\n";
+    cin >> n;
+    int cost[MAXN][MAXN];
+    cout << "Enter the cost matrix: (Enter 999 for Infinity)\n";
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            cin >> cost[i][j];
+        }
+    }
+    int source;
+    cout << "Enter the source\n";
+    cin >> source;	//source as the Main power station
+
+    int dist[MAXN], path[MAXN], visited[MAXN];
+    for (int i = 0; i < n; i++) {
+        dist[i] = cost[source][i];
+        path[i] = source;
+        visited[i] = 0;
+    }
+    visited[source] = 1;
+    for (int iter = 0; iter < n - 1; iter++) {
+        int u = -1;
+        int min = INF + 1;
+        for (int i = 0; i < n; i++) {
+            if (!visited[i] && dist[i] < min) {
+                min = dist[i];
+                u = i;
+            }
+        }
+        if (u == -1)
+            break;
+        visited[u] = 1;
+        for (int v = 0; v < n; v++) {
+            if (!visited[v] && cost[u][v] != INF) {
+                if (dist[u] + cost[u][v] < dist[v]) {
+                    dist[v] = dist[u] + cost[u][v];
+                    path[v] = u;
+                }
+            }
+        }
+    }
+    cout << "\nVertex   Dist   Path\n";
+    for (int i = 0; i < n; i++) {
+        cout << i << "        " << dist[i] << "      " << path[i] << "\n";
+    }
+    return 0;
+}
+
 </code></pre>
               </div>
             </div>
