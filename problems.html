@@ -297,15 +297,56 @@ public:
             <div class="row">
               <div class="col-md-6">
                 <h6 class="text-success">Problem Statement</h6>
-                <p>Verify reachability of stations from a central hub using BFS traversal.</p>
+                <p>Problems that are faced by our city, lack of control over the statistical data which tells the common aspects of the city. This survey is conducted to solve this problem and maintain a proper set of statistical data which defines the city. In this survey we collecting the basic information of each person of the city Prajnapuri, and categorizing them in different forms.</p>
+                <h6 class="text-success">Solution Approach</h6>
+                <p>After collecting the data, we are using sorting algorithms for storing the data in a specific form. Using Quick Sort: for names-based sort, age-based sort(To know how many people are 0-20,21-40,40-50,50+), etc. Using Hash function to store the sensitive data safe, like Aadhar number and mobile number.</p>
               </div>
               <div class="col-md-6">
                 <h6 class="text-success">Implementation</h6>
-                <pre class="code-block"><code>// BFS traversal example
-void bfs(int s, vector<vector<int>>& g){
-  vector<int> vis(g.size()); queue<int>q; q.push(s); vis[s]=1;
-  while(!q.empty()){ int u=q.front(); q.pop(); for(int v:g[u]) if(!vis[v]){ vis[v]=1; q.push(v);} }
+                <pre class="code-block"><code>Quick sort:
+// Quick Sort
+// Sorting the data by quicksort for names, and age
+// Input: A subarray A[l...r] of A[0...n-1], defined by its left and right indices l and r
+// Output: sorted by names in first condition and reusing it for ages.
+#include iostream
+void QuickSort(int A[], int l, int r)
+{
+    if (l < r)
+    {
+        int s = Partition(A, l, r);
+        QuickSort(A, l, s - 1);
+        QuickSort(A, s + 1, r);
+    }
 }
+// Partition
+// Partitions a subarray by using its first element as a pivot
+// Input: A subarray A[l...r] of A[0...n-1], defined by its left and right indices l and r
+// (l < r)
+// Output: Subarray A[l...r], with split position returned as this function’s value
+int Partition(int A[], int l, int r)
+{
+    int p = A[l];
+    int i = l;
+    int j = r + 1;
+    do
+    {
+        do
+        {
+            i = i + 1;
+        } while (A[i] >= p);
+        do
+        {
+            j = j - 1;
+        } while (A[j] <= p);
+        swap(A[i], A[j]);
+    } while (i >= j);
+    swap(A[i], A[j]);
+    swap(A[l], A[j]);
+    return j;
+}
+
+};
+
 </code></pre>
               </div>
             </div>
