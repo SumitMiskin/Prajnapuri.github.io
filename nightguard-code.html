@@ -45,7 +45,10 @@
 
         <p>The following code samples illustrate algorithms used in NightGuard routing, safety analysis and prioritization. These are illustrative C++ snippets and pseudocode used for teaching and prototyping — they should be adapted and hardened before production.</p>
 
-        <h4>1. Dijkstra's Algorithm (Safest Route)</h4>
+        <h4>1. Dijkstra's Algorithm (Safest Route)
+          <button class="btn btn-sm btn-outline-info ms-2" data-bs-toggle="collapse" data-bs-target="#def-dijkstra" aria-expanded="false">Definition</button>
+        </h4>
+        <div class="collapse" id="def-dijkstra"><div class="p-3 bg-light mb-2">Purpose: Finds the safest route between source and destination on a graph where edge weights represent risk (lighting, crime). Time complexity: O(E log V).</div></div>
         <pre><code>#include <bits/stdc++.h>
     using namespace std;
 
@@ -109,7 +112,10 @@
     }
     </code></pre>
 
-        <h4>2. Floyd–Warshall (All-Pairs Safest Routes)</h4>
+        <h4>2. Floyd–Warshall (All-Pairs Safest Routes)
+          <button class="btn btn-sm btn-outline-info ms-2" data-bs-toggle="collapse" data-bs-target="#def-floyd" aria-expanded="false">Definition</button>
+        </h4>
+        <div class="collapse" id="def-floyd"><div class="p-3 bg-light mb-2">Purpose: Computes shortest/safest paths between all pairs of nodes. Useful for preprocessing alternative routes. Time complexity: O(n³).</div></div>
         <pre><code>#include <bits/stdc++.h>
     using namespace std;
     #define INF 1e9
@@ -153,7 +159,10 @@
     }
     </code></pre>
 
-        <h4>3. Union–Find (Disjoint Set Union) — Connected Safe Zones</h4>
+        <h4>3. Union–Find (Disjoint Set Union) — Connected Safe Zones
+          <button class="btn btn-sm btn-outline-info ms-2" data-bs-toggle="collapse" data-bs-target="#def-union" aria-expanded="false">Definition</button>
+        </h4>
+        <div class="collapse" id="def-union"><div class="p-3 bg-light mb-2">Purpose: Maintain connected components (safe zones) quickly. Used to avoid routing through isolated unsafe regions. Nearly O(1) per operation with path compression.</div></div>
         <pre><code>#include <bits/stdc++.h>
     using namespace std;
 
@@ -192,7 +201,10 @@
     }
     </code></pre>
 
-        <h4>4. Quick Sort (Prioritization)</h4>
+        <h4>4. Quick Sort (Prioritization)
+          <button class="btn btn-sm btn-outline-info ms-2" data-bs-toggle="collapse" data-bs-target="#def-quicksort" aria-expanded="false">Definition</button>
+        </h4>
+        <div class="collapse" id="def-quicksort"><div class="p-3 bg-light mb-2">Purpose: Sort ride requests by priority (urgency, vulnerability, distance). Average time O(n log n). Fast for large datasets.</div></div>
         <pre><code>#include <bits/stdc++.h>
     using namespace std;
 
@@ -220,7 +232,10 @@
     }
     </code></pre>
 
-        <h4>5. Priority Queue / Heap (Emergency Requests)</h4>
+        <h4>5. Priority Queue / Heap (Emergency Requests)
+          <button class="btn btn-sm btn-outline-info ms-2" data-bs-toggle="collapse" data-bs-target="#def-pq" aria-expanded="false">Definition</button>
+        </h4>
+        <div class="collapse" id="def-pq"><div class="p-3 bg-light mb-2">Purpose: Always extract the most urgent emergency request first. Implements O(log n) insert and extract.</div></div>
         <pre><code>#include <bits/stdc++.h>
     using namespace std;
     int main() {
@@ -234,7 +249,10 @@
     }
     </code></pre>
 
-        <h4>6. Segment Tree (Range Crime Density)</h4>
+        <h4>6. Segment Tree (Range Crime Density)
+          <button class="btn btn-sm btn-outline-info ms-2" data-bs-toggle="collapse" data-bs-target="#def-segtree" aria-expanded="false">Definition</button>
+        </h4>
+        <div class="collapse" id="def-segtree"><div class="p-3 bg-light mb-2">Purpose: Fast range queries (e.g., sum or max) over crime/lighting data. Query and update in O(log n).</div></div>
         <pre><code>#include <bits/stdc++.h>
     using namespace std;
 
@@ -263,7 +281,10 @@
       cout<<"Crime risk between location 2 and 5: "<<st.rangeQuery(2,5)<<endl; return 0; }
     </code></pre>
 
-        <h4>7. Fenwick Tree (Real-Time Incident Tracking)</h4>
+        <h4>7. Fenwick Tree (Real-Time Incident Tracking)
+          <button class="btn btn-sm btn-outline-info ms-2" data-bs-toggle="collapse" data-bs-target="#def-fenwick" aria-expanded="false">Definition</button>
+        </h4>
+        <div class="collapse" id="def-fenwick"><div class="p-3 bg-light mb-2">Purpose: Lightweight structure for prefix sums and dynamic updates (e.g., real-time incident counts). Operations in O(log n).</div></div>
         <pre><code>#include <bits/stdc++.h>
     using namespace std;
 
@@ -278,7 +299,10 @@
       cout<<"Incidents between location 2 and 6: "<<ft.rangeQuery(2,6)<<endl; return 0; }
     </code></pre>
 
-        <h4>8. Trie &amp; KMP (Text search and pattern detection)</h4>
+        <h4>8. Trie &amp; KMP (Text search and pattern detection)
+          <button class="btn btn-sm btn-outline-info ms-2" data-bs-toggle="collapse" data-bs-target="#def-trie" aria-expanded="false">Definition</button>
+        </h4>
+        <div class="collapse" id="def-trie"><div class="p-3 bg-light mb-2">Purpose: Trie for prefix-based autocomplete of locations; KMP for efficient pattern detection in user reports. Trie operations O(L), KMP O(n + m).</div></div>
         <pre><code>// Trie: used for autocomplete (not fully expanded here)
     // KMP: used for pattern detection in reports
 
