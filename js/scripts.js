@@ -98,4 +98,26 @@ window.addEventListener('DOMContentLoaded', event => {
     markActiveNav();
     window.addEventListener('hashchange', markActiveNav);
 
+        // Theme toggle: if a toggle button exists on the page attach behavior
+        const initThemeToggle = () => {
+                const btn = document.getElementById('themeToggle');
+                const apply = (mode)=>{
+                    if(mode==='dark') document.documentElement.classList.add('dark-mode');
+                    else document.documentElement.classList.remove('dark-mode');
+                    if(btn) btn.textContent = mode==='dark' ? '☀️' : '🌙';
+                };
+                const saved = localStorage.getItem('theme');
+                if(saved) apply(saved);
+                else if(window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) apply('dark');
+                else apply('light');
+                if(!btn) return;
+                btn.addEventListener('click', ()=>{
+                    const isDark = document.documentElement.classList.toggle('dark-mode');
+                    const mode = isDark ? 'dark' : 'light';
+                    localStorage.setItem('theme', mode);
+                    btn.textContent = mode==='dark' ? '☀️' : '🌙';
+                });
+        };
+        initThemeToggle();
+
 });
