@@ -98,52 +98,105 @@
           
           <div class="collapse mt-4" id="dijkstraCode">
             <pre style="background-color: #1e1e1e; color: #d4d4d4; padding: 20px; border-radius: 8px; overflow-x: auto;"><code>#include &lt;bits/stdc++.h&gt;
+#include <iostream>
+#include <algorithm>
+#include <string>
 using namespace std;
 
-const int INF = 1e9;
+class SmartTransportation {
+public:
+    int previous[4];
+    int travelTime[4];
+    int visited[4];
 
-int main() {
-    int n, m;
-    cin &gt;&gt; n &gt;&gt; m;
-    
-    // Adjacency list: vector of pairs {weight, destination}
-    vector&lt;vector&lt;pair&lt;int, int&gt;&gt;&gt; adj(n + 1);
-    
-    for (int i = 0; i &lt; m; i++) {
-        int u, v, w;
-        cin &gt;&gt; u &gt;&gt; v &gt;&gt; w;
-        adj[u].push_back({w, v});
-        adj[v].push_back({w, u}); // For undirected graph
+    void initialize(int timeMatrix[4][4], int start);
+    int findMinimum();
+    void update(int timeMatrix[4][4]);
+    void computeShortestPaths(int timeMatrix[4][4], int start);
+    void displayPaths(int start, string locationNames[4]);
+};
+
+void SmartTransportation::initialize(int timeMatrix[4][4], int start) {
+    for (int i = 0; i < 4; i++) {
+        previous[i] = start;
+        travelTime[i] = (timeMatrix[start][i] == 0) ? 10000000 : timeMatrix[start][i];
+        visited[i] = 0;
     }
-    
-    // Dijkstra's Algorithm
-    vector&lt;int&gt; dist(n + 1, INF);
-    priority_queue&lt;pair&lt;int, int&gt;, vector&lt;pair&lt;int, int&gt;&gt;, greater&lt;pair&lt;int, int&gt;&gt;&gt; pq;
-    
-    int source = 1; // Starting node
-    dist[source] = 0;
-    pq.push({0, source});
-    
-    while (!pq.empty()) {
-        auto [d, u] = pq.top();
-        pq.pop();
-        
-        if (d &gt; dist[u]) continue;
-        
-        for (auto [w, v] : adj[u]) {
-            if (dist[u] + w &lt; dist[v]) {
-                dist[v] = dist[u] + w;
-                pq.push({dist[v], v});
+    visited[start] = 1;
+    travelTime[start] = 0;
+}
+
+int SmartTransportation::findMinimum() {
+    int minimum = 10000000;
+    int minIndex = -1;
+    for (int i = 0; i < 4; i++) {
+        if (!visited[i] && travelTime[i] < minimum) {
+            minimum = travelTime[i];
+            minIndex = i;
+        }
+    }
+    return minIndex;
+}
+
+void SmartTransportation::update(int timeMatrix[4][4]) {
+    int u = findMinimum();
+    if (u == -1)
+        return;
+    visited[u] = 1;
+    for (int i = 0; i < 4; i++) {
+        if (!visited[i]) {
+            if (travelTime[u] + timeMatrix[u][i] < travelTime[i]) {
+                travelTime[i] = travelTime[u] + timeMatrix[u][i];
+                previous[i] = u;
             }
         }
     }
-    
-    // Print shortest distances
-    for (int i = 1; i &lt;= n; i++) {
-        cout &lt;&lt; "Node " &lt;&lt; i &lt;&lt; ": " &lt;&lt; dist[i] &lt;&lt; "\n";
+}
+
+void SmartTransportation::computeShortestPaths(int timeMatrix[4][4], int start) {
+    initialize(timeMatrix, start);
+    for (int i = 0; i < 3; i++)
+        update(timeMatrix);
+}
+
+void SmartTransportation::displayPaths(int start, string locationNames[4]) {
+    for (int i = 0; i < 4; i++) {
+        if (i != start) {
+            cout << "Fastest route from " << locationNames[start] << " to " << locationNames[i]
+                 << " takes " << travelTime[i] << " minutes via: ";
+            int j = i;
+            cout << locationNames[j];
+            while (previous[j] != start) {
+                j = previous[j];
+                cout << " <- " << locationNames[j];
+            }
+            cout << " <- " << locationNames[start] << endl;
+        }
     }
-    
+}
+
+int main() {
+    int start;
+    int timeMatrix[4][4];
+    string locationNames[4] = {"Central Junction", "Hospital", "City Market", "Tech Park"};
+
+    cout << "Enter the starting location (0 - Central Junction, 1 - Hospital, 2 - City Market, 3 - Tech Park): ";
+    cin >> start;
+
+    cout << "Enter the travel time matrix (in minutes) between intersections:\n";
+    for (int i = 0; i < 4; i++) {
+        for (int j = 0; j < 4; j++) {
+            cin >> timeMatrix[i][j];
+        }
+    }
+
+    SmartTransportation trafficSystem;
+    trafficSystem.computeShortestPaths(timeMatrix, start);
+    trafficSystem.displayPaths(start, locationNames);
+
     return 0;
+}
+
 }</code></pre>
           </div>
                   </div>
