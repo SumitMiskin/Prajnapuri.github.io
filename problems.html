@@ -224,20 +224,62 @@ int main() {
             <div class="row">
               <div class="col-md-6">
                 <h6 class="text-success">Problem Statement</h6>
-                <p>In large agricultural fields, soil moisture sensors are placed at multiple locations to measure water content. Farmers often need to know:
-•	Moisture level of a specific area
-•	Average or total moisture in a range of plots
-•	Updated moisture after irrigation or rainfall
-If we check moisture one sensor at a time, it becomes:
-•	Slow
-•	Inefficient
-•	Not suitable for large farms
-</p>
+                <p>In large agricultural fields, soil moisture sensors are placed at multiple locations to measure water content. Farmers often need to know:</p>
+                <ul>
+                  <li>Moisture level of a specific area</li>
+                  <li>Average or total moisture in a range of plots</li>
+                  <li>Updated moisture after irrigation or rainfall</li>
+                </ul>
+                <p>If we check moisture one sensor at a time, it becomes:</p>
+                <ul>
+                  <li>Slow</li>
+                  <li>Inefficient</li>
+                  <li>Not suitable for large farms</li>
+                </ul>
+                <h6 class="text-success">Solution Approach</h6>
+                <p>A Segment Tree is a special data structure used to:</p>
+                <ul>
+                  <li>Store data in segments (ranges)</li>
+                  <li>Answer range queries efficiently</li>
+                  <li>Update values quickly</li>
+                </ul>
+                <p>Instead of checking each sensor individually, the segment tree divides the field into smaller segments and stores their moisture data in a tree structure. This is where a Segment Tree becomes useful.</p>
+
               </div>
               <div class="col-md-6">
                 <h6 class="text-success">Implementation</h6>
-                <pre class="code-block"><code>// Ford-Fulkerson / Edmonds-Karp placeholder
-// Implementation omitted for brevity
+                <pre class="code-block"><code>#include iostream
+using namespace std;
+class SegmentTree {
+    int *tree, *arr, n;
+public:
+    SegmentTree(int input[], int size) {
+        n = size;
+        arr = input;
+        tree = new int[4 * n];
+        build(0, 0, n - 1);
+    }
+    void build(int node, int start, int end) {
+        if (start == end) {
+            tree[node] = arr[start];
+        } else {
+            int mid = (start + end) / 2;
+            build(2 * node + 1, start, mid);
+            build(2 * node + 2, mid + 1, end);
+            tree[node] = tree[2 * node + 1] + tree[2 * node + 2];
+        }
+    }
+    int query(int node, int start, int end, int l, int r) {
+        if (r < start || l > end)
+            return 0;
+        if (l <= start && end <= r)
+            return tree[node];
+        int mid = (start + end) / 2;
+        return query(2 * node + 1, start, mid, l, r) +
+               query(2 * node + 2, mid + 1, end, l, r);
+    }
+};
+
 </code></pre>
               </div>
             </div>
