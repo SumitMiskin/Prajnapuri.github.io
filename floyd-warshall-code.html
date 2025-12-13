@@ -40,7 +40,7 @@
           <div class="modal-subtitle">Case2.cpp — C++ (read-only)</div>
         </div>
         <div class="top-actions">
-          <button class="btn-action" id="copyBtn"><i class="fas fa-copy"></i> Copy</button>
+        
           <a href="transportation.html" class="btn-action btn-close-modal"><i class="fas fa-times"></i> Close</a>
         </div>
       </div>
@@ -58,36 +58,95 @@
 
           <div class="col-right">
             <h6>C++ Implementation</h6>
-            <pre class="code-block" id="codeBlock"><code><div class="code-line"><span class="ln">1</span><span class="code">#include &lt;iostream&gt;</span></div>
-<div class="code-line"><span class="ln">2</span><span class="code">#include &lt;algorithm&gt;</span></div>
-<div class="code-line"><span class="ln">3</span><span class="code">using namespace std;</span></div>
-<div class="code-line"><span class="ln">4</span><span class="code"></span></div>
-<div class="code-line"><span class="ln">5</span><span class="code">class SmartTrafficNetwork {</span></div>
-<div class="code-line"><span class="ln">6</span><span class="code">private:</span></div>
-<div class="code-line"><span class="ln">7</span><span class="code">    int dist[4][4];</span></div>
-<div class="code-line"><span class="ln">8</span><span class="code">    int n;</span></div>
-<div class="code-line"><span class="ln">9</span><span class="code">public:</span></div>
-<div class="code-line"><span class="ln">10</span><span class="code">    SmartTrafficNetwork(int size) : n(size) {}</span></div>
-<div class="code-line"><span class="ln">11</span><span class="code">    void inputTravelTimes(int travelMatrix[4][4]);</span></div>
-<div class="code-line"><span class="ln">12</span><span class="code">    void computeAllShortestRoutes();</span></div>
-<div class="code-line"><span class="ln">13</span><span class="code">    void displayTravelTimeMatrix();</span></div>
-<div class="code-line"><span class="ln">14</span><span class="code">};</span></div>
-<div class="code-line"><span class="ln">15</span><span class="code"></span></div>
-<div class="code-line"><span class="ln">16</span><span class="code">void SmartTrafficNetwork::inputTravelTimes(int travelMatrix[4][4]) {</span></div>
-<div class="code-line"><span class="ln">17</span><span class="code">    for (int i = 0; i &lt; n; i++) {</span></div>
-<div class="code-line"><span class="ln">18</span><span class="code">        for (int j = 0; j &lt; n; j++) {</span></div>
-<div class="code-line"><span class="ln">19</span><span class="code">            dist[i][j] = travelMatrix[i][j];</span></div>
-<div class="code-line"><span class="ln">20</span><span class="code">        }</span></div>
-<div class="code-line"><span class="ln">21</span><span class="code">    }</span></div>
-<div class="code-line"><span class="ln">22</span><span class="code">}</span></div>
-<div class="code-line"><span class="ln">23</span><span class="code"></span></div>
-<div class="code-line"><span class="ln">24</span><span class="code">void SmartTrafficNetwork::computeAllShortestRoutes() {</span></div>
-<div class="code-line"><span class="ln">25</span><span class="code">    for (int k = 0; k &lt; n; k++) {</span></div>
-<div class="code-line"><span class="ln">26</span><span class="code">        for (int i = 0; i &lt; n; i++) {</span></div>
-<div class="code-line"><span class="ln">27</span><span class="code">            for (int j = 0; j &lt; n; j++) {</span></div>
-<div class="code-line"><span class="ln">28</span><span class="code">                if (dist[i][k] + dist[k][j] &lt; dist[i][j]) {</span></div>
-<div class="code-line"><span class="ln">29</span><span class="code">                    dist[i][j] = dist[i][k] + dist[k][j];</span></div>
-<div class="code-line"><span class="ln">30</span><span class="code">                }</span></div></code></pre>
+            <pre class="code-block" id="codeBlock"><code><div class="code-line">
+              #include <iostream>
+#include <string>
+#define MAX 100
+using namespace std;
+
+class SmartTrafficNetwork {
+public:
+    int numLocations;
+    int travelTime[MAX][MAX];
+    string locationNames[MAX];
+
+    SmartTrafficNetwork(int locations);
+    void inputTravelTimes();
+    void displayTravelTimeMatrix();
+    void computeAllShortestRoutes();
+    void displayAllShortestPaths();
+};
+
+SmartTrafficNetwork::SmartTrafficNetwork(int locations) {
+    numLocations = locations;
+}
+
+void SmartTrafficNetwork::inputTravelTimes() {
+    cout << "Enter the names of " << numLocations << " locations (e.g., JunctionA, Market, Hospital...):\n";
+    for (int i = 1; i <= numLocations; i++) {
+        cin >> locationNames[i];
+    }
+
+    cout << "\nEnter the travel time matrix (use 999 for no direct road):\n";
+    for (int i = 1; i <= numLocations; i++) {
+        for (int j = 1; j <= numLocations; j++) {
+            cin >> travelTime[i][j];
+        }
+    }
+}
+
+void SmartTrafficNetwork::displayTravelTimeMatrix() {
+    cout << "\nTravel Time Matrix (in minutes):\n\t";
+    for (int j = 1; j <= numLocations; j++) {
+        cout << locationNames[j] << "\t";
+    }
+    cout << endl;
+
+    for (int i = 1; i <= numLocations; i++) {
+        cout << locationNames[i] << "\t";
+        for (int j = 1; j <= numLocations; j++) {
+            if (travelTime[i][j] == 999)
+                cout << "INF\t";
+            else
+                cout << travelTime[i][j] << "\t";
+        }
+        cout << endl;
+    }
+}
+
+void SmartTrafficNetwork::computeAllShortestRoutes() {
+    for (int k = 1; k <= numLocations; k++) {
+        for (int i = 1; i <= numLocations; i++) {
+            for (int j = 1; j <= numLocations; j++) {
+                if (travelTime[i][k] != 999 && travelTime[k][j] != 999 &&
+                    (travelTime[i][k] + travelTime[k][j] < travelTime[i][j])) {
+                    travelTime[i][j] = travelTime[i][k] + travelTime[k][j];
+                }
+            }
+        }
+    }
+}
+
+void SmartTrafficNetwork::displayAllShortestPaths() {
+    cout << "\nAll-Pairs Shortest Travel Times Between Locations:\n";
+    displayTravelTimeMatrix();
+}
+
+int main() {
+    int numLocations;
+    cout << "Enter the number of city locations (e.g., intersections, key points): ";
+    cin >> numLocations;
+
+    SmartTrafficNetwork cityTraffic(numLocations);
+    cityTraffic.inputTravelTimes();
+    cityTraffic.displayTravelTimeMatrix();
+    cityTraffic.computeAllShortestRoutes();
+    cityTraffic.displayAllShortestPaths();
+
+    return 0;
+}
+
+            </pre>
           </div>
         </div>
       </div>
