@@ -42,17 +42,41 @@
       <div class="container">
         <div class="ideas-card">
           <h2 class="text-center text-uppercase mb-4">Healthcare (Hospital & Patient Data)</h2>
-          <p class="lead">Smart Healthcare supports SDG 3 (Good Health and Wellbeing) and SDG 11 by ensuring accessible, efficient, and connected healthcare services using smart platforms and digital systems.</p>
-          
-          <h4 class="mt-4 mb-3">Key Contributions:</h4>
-          <ul>
-            <li>Providing real-time emergency medical assistance.</li>
-            <li>Enabling digital health records and telemedicine.</li>
-            <li>Improving health service availability for citizens.</li>
-          </ul>
+        <p class="lead"></p>A hospital network manages patient records, sensors, and resource scheduling, requiring efficient data structures for real-time access and updates.</p>
 
-          <h4 class="mt-4 mb-3">Benefits:</h4>
-          <p>Smart healthcare systems improve accessibility and quality of medical services, enable better patient care through data-driven insights, and support emergency response capabilities in urban environments.</p>
+        <h4>Hospital & Patient Data Storage</h4>
+        <ul>
+          <li><strong>Patient Records:</strong> Stored in arrays or structs. Linked Lists or Skip Lists allow quick dynamic updates.</li>
+          <li><strong>Indexing:</strong> Binary Search Trees (AVL, Red-Black) index records by ID/name for fast lookup. Hash Tables map Patient IDs to records for O(1) retrieval.</li>
+          <li><strong>Medical Terms:</strong> Tries store drug names and terms for quick prefix searches (auto-complete).</li>
+        </ul>
+
+        <h4>Graph Analysis & Epidemic Tracking</h4>
+        <ul>
+          <li><strong>Contact Tracing:</strong> Patients and contacts form a graph. BFS finds nearest contacts (level-by-level), while DFS explores deep exposure paths.</li>
+          <li><strong>Clustering:</strong> Union-Find groups patients by connectivity (infection clusters). BFS segmentation identifies affected wards or regions.</li>
+        </ul>
+
+        <h4>Time-Series & Range Queries</h4>
+        <ul>
+          <li><strong>Vital Signs:</strong> Segment Trees allow O(log n) queries for range maxima (e.g., highest heart rate in the last hour).</li>
+          <li><strong>Real-Time Updates:</strong> Fenwick Trees efficiently update prefix sums (e.g., total dosage given).</li>
+          <li><strong>Historical Data:</strong> Sparse Tables provide constant-time O(1) range queries for fixed datasets.</li>
+        </ul>
+
+        <h4>Medical Record Search</h4>
+        <ul>
+          <li><strong>Pattern Matching:</strong> KMP finds patterns in linear time. Rabin-Karp uses hashing for multi-pattern search (e.g., multiple diseases).</li>
+          <li><strong>Large Documents:</strong> Boyer-Moore efficiently scans large notes by skipping sections on mismatches.</li>
+        </ul>
+
+        <h4>Scheduling, Priority & Logistics</h4>
+        <ul>
+          <li><strong>Triage:</strong> Min-Heaps (Priority Queues) order patients by criticality for surgeries/treatment.</li>
+          <li><strong>Appointments:</strong> Skip Lists or Sorted Lists enable O(log n) search/insertion.</li>
+          <li><strong>Sorting:</strong> Merge/Quick Sort for large patient lists; Insertion/Selection Sort for small daily schedules.</li>
+          <li><strong>Resource Routing:</strong> Dijkstra/Bellman-Ford model supply truck routes. Floyd-Warshall plans optimal transfer times between wards.</li>
+        </ul>
         </div>
       </div>
     </section>
