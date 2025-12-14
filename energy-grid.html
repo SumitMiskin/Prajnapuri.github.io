@@ -1,63 +1,316 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>Energy Grid — Prajnapuri Design</title>
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" />
-    <link href="css/styles.css" rel="stylesheet" />
-    <style>
-      .ideas-section { background-color: #d6e9f5; padding: 60px 20px; margin-top: 80px; }
-      .ideas-card { background: #ffffff; max-width: 980px; margin: 0 auto; padding: 28px; border-radius: 12px; box-shadow: 0 12px 36px rgba(0,0,0,0.12); }
-      .ideas-card h2 { font-size: 24px; margin-bottom: 16px; color: #222; }
-      .ideas-card .lead { font-size: 16px; color: #333; }
-      .ideas-card ul { font-size: 16px; color: #333; }
-      .ideas-card ul li { margin-bottom: 8px; }
-      .back-ideas { position: fixed; top: 100px; left: 20px; z-index: 1000; padding: 12px 20px; font-size: 16px; font-weight: 600; background-color: #2b87c9; color: #fff; border: none; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); transition: 0.2s ease; text-decoration: none; display: inline-block; }
-    </style>
-  </head>
-  <body id="page-top">
-    <a href="manjunath.html" class="back-ideas btn btn-light btn-sm">← </a>
-    <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
-      <div class="container">
-        <a class="navbar-brand" href="index.html">Prajnapuri Design</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive">Menu <i class="fas fa-bars"></i></button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="project.html">Project</a></li>
-            <li class="nav-item"><a class="nav-link" href="sumit.html">Sumit</a></li>
-            <li class="nav-item"><a class="nav-link" href="shrinivas.html">Shrinivas</a></li>
-            <li class="nav-item"><a class="nav-link" href="manjunath.html">Manjunath</a></li>
-            <li class="nav-item"><a class="nav-link" href="samarth.html">Samarth</a></li>
-          </ul>
-        </div>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>Energy Grid — Prajnapuri Design</title>
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" />
+  <link href="css/styles.css" rel="stylesheet" />
+  <style>
+    .ideas-section {
+      background-color: #d6e9f5;
+      padding: 60px 20px;
+      margin-top: 80px;
+    }
+
+    .ideas-card {
+      background: #ffffff;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 28px;
+      border-radius: 12px;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.12);
+    }
+
+    .ideas-card h2 {
+      font-size: 24px;
+      margin-bottom: 16px;
+      color: #222;
+    }
+
+    .ideas-card .lead {
+      font-size: 16px;
+      color: #333;
+    }
+
+    .ideas-card ul {
+      font-size: 16px;
+      color: #333;
+    }
+
+    .ideas-card ul li {
+      margin-bottom: 8px;
+    }
+
+    .back-ideas {
+      position: fixed;
+      top: 100px;
+      left: 20px;
+      z-index: 1000;
+      padding: 12px 20px;
+      font-size: 16px;
+      font-weight: 600;
+      background-color: #2b87c9;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      transition: 0.2s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    /* Algorithm card grid styles */
+    .algo-card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 18px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+    }
+
+    .algo-title {
+      font-weight: 700;
+      color: #2a6a9e;
+    }
+
+    .algo-link {
+      background: transparent;
+      border: none;
+      color: #2a6a9e;
+      font-weight: 700;
+      padding: 0;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .algo-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body id="page-top">
+  <a href="manjunath.html" class="back-ideas btn btn-light btn-sm">← </a>
+  <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Prajnapuri Design</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive">Menu <i
+          class="fas fa-bars"></i></button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="project.html">Project</a></li>
+          <li class="nav-item"><a class="nav-link" href="sumit.html">Sumit</a></li>
+          <li class="nav-item"><a class="nav-link" href="shrinivas.html">Shrinivas</a></li>
+          <li class="nav-item"><a class="nav-link" href="manjunath.html">Manjunath</a></li>
+          <li class="nav-item"><a class="nav-link" href="samarth.html">Samarth</a></li>
+        </ul>
       </div>
-    </nav>
+    </div>
+  </nav>
 
-    <section class="ideas-section">
-      <div class="container">
-        <div class="ideas-card">
-          <h2 class="text-center text-uppercase mb-4">Energy Grid (Electricity Distribution)</h2>
-          <p class="lead">Smart Energy Grids align with SDG 7 (Affordable and Clean Energy) and SDG 11 (Sustainable Cities) by enabling clean energy utilization, reducing wastage and improving distribution efficiency across urban regions.</p>
-          
-          <h4 class="mt-4 mb-3">Key Contributions:</h4>
-          <ul>
-            <li>Integrating renewable energy sources in urban areas.</li>
-            <li>Reducing power losses using smart grid automation.</li>
-            <li>Providing reliable and uninterrupted energy supply to citizens.</li>
-          </ul>
+  <section class="ideas-section">
+    <div class="container">
+      <div class="ideas-card">
+        <h2 class="text-center text-uppercase mb-4">Energy Grid (Electricity Distribution)</h2>
+        <img src="assets/img/portfolio/image copy.png" class="img-fluid mb-4 rounded d-block mx-auto"
+          alt="Energy Grid Diagram" style="width: 50%; height: auto;">
+        <p class="lead">A city’s power grid is managed as a smart network of generators, substations, and consumers. The
+          grid forms a weighted graph (nodes=power stations, edges=transmission lines).</p>
 
-          <h4 class="mt-4 mb-3">Benefits:</h4>
-          <p>Smart energy grids optimize electricity distribution, reduce energy wastage, and enable seamless integration of renewable energy sources, making cities more sustainable and resilient.</p>
-        </div>
+        <h4>Data Structures & Storage</h4>
+        <ul>
+          <li><strong>Basic Storage:</strong> Meter readings and consumption curves are stored in arrays or time-indexed
+            structures. Each meter is a struct (ID, location, capacity, load).</li>
+          <li><strong>Dynamic Data:</strong> Segment Trees or Fenwick (BIT) Trees handle real-time load, allowing
+            range-sum queries. Fenwick trees handle prefix-sum queries in O(log n), while Segment trees answer arbitrary
+            range queries (min, max, sum) in O(log n).</li>
+          <li><strong>Static Data:</strong> Sparse tables are precomputed on historical data for O(1) static range
+            queries.</li>
+        </ul>
+
+        <h4>Graph Algorithms</h4>
+        <ul>
+          <li><strong>Network Design:</strong> Minimum Spanning Tree algorithms (Prim’s, Kruskal’s) connect substations
+            with minimal total wiring cost.</li>
+          <li><strong>Optimization:</strong> Dijkstra’s or Bellman-Ford compute optimal power flow paths to minimize
+            transmission loss. Bellman-Ford is useful for edges with "negative" load (net generation).</li>
+          <li><strong>Planning & Connectivity:</strong> Floyd–Warshall pre-calculates all-pairs shortest paths. BFS/DFS
+            detect connectivity or outages. Union-Find manages connected zones when adding new lines.</li>
+        </ul>
+
+        <h4>Balanced Trees & Indexing</h4>
+        <ul>
+          <li><strong>Indexing:</strong> AVL or Red-Black trees store smart-meter data for O(log n) operations indexed
+            by ID or timestamp.</li>
+          <li><strong>Static Records:</strong> 2-3 Trees (B-tree) or Skip Lists store sorted IDs for fast search/insert.
+          </li>
+          <li><strong>Lookups:</strong> Hash tables provide O(1) lookups for meter IDs. Tries store customer address
+            prefixes or device codes.</li>
+        </ul>
+
+        <h4>Range Queries & Updates</h4>
+        <ul>
+          <li><strong>Rolling Totals:</strong> Fenwick trees track cumulative citywide consumption with quick O(log n)
+            updates.</li>
+          <li><strong>Interval Analysis:</strong> Segment trees compute total usage in any interval (e.g., district
+            loads) efficiently.</li>
+        </ul>
+
+        <h4>Scheduling & Sorting</h4>
+        <ul>
+          <li><strong>Task Scheduling:</strong> Heap Sort or Binary Heaps (Priority Queues) select the next generation
+            unit or maintenance task.</li>
+          <li><strong>Sorting Machines:</strong> Quick Sort or Merge Sort are used for large lists (e.g., transformers
+            by load); Insertion Sort for small datasets.</li>
+        </ul>
+
+        <h4>Pattern Search & Log Analysis</h4>
+        <ul>
+          <li><strong>Log Scanning:</strong> Smart grid logs are scanned for keywords or fault signatures.</li>
+          <li><strong>Algorithms:</strong> Brute-force or Rabin–Karp (rolling hashes) for simple checks. KMP or
+            Boyer–Moore are used for efficient pattern matching, with Boyer–Moore ideal for large files.</li>
+        </ul>
       </div>
-    </section>
+      <h1 class="text-center">-</h1>
+      <h2 class="text-center text-uppercase mb-4">Algorithms and Datastructure used</h2>
+      <div class="ideas-card">
+        <div class="row g-4">
+          <div class="col-md-6">
+            <div class="algo-card">
+              <div class="d-flex justify-content-between align-items-start">
+                <div>
+                  <div class="badge bg-light text-dark mb-2">Segment Tree</div>
+                  <h4 class="algo-title">Energy Monitoring</h4>
+                  <p class="mb-0">Efficiently query total power consumption over specific districts and handle real-time
+                    updates from smart meters using a Segment Tree data structure (O(log n) operations).</p>
+                </div>
+                <div>
+                  <a href="energy-monitor-code.html" class="algo-link">Watch out →</a>
+                </div>
+              </div>
+            </div>
+          </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/scripts.js"></script>
-  </body>
+          <div class="col-md-6">
+            <div class="algo-card">
+              <div class="d-flex justify-content-between align-items-start">
+                <div>
+                  <div class="badge bg-light text-dark mb-2">Sparse Table</div>
+                  <h4 class="algo-title">Voltage Stability</h4>
+                  <p class="mb-0">Instantly retrieve the minimum voltage recorded in any range of checkpoints using
+                    precomputed Sparse Tables (O(1) query time) to detect stability issues.</p>
+                </div>
+                <div>
+                  <a href="sparse-table-code.html" class="algo-link">Watch out →</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="algo-card">
+              <div class="d-flex justify-content-between align-items-start">
+                <div>
+                  <div class="badge bg-light text-dark mb-2">Bellman-Ford</div>
+                  <h4 class="algo-title">Loss Minimization</h4>
+                  <p class="mb-0">Compute optimal power flow paths with minimum transmission loss, handling complex
+                    scenarios where some lines may have negative costs (gains).</p>
+                </div>
+                <div>
+                  <a href="bellman-ford-code.html" class="algo-link">Watch out →</a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="algo-card">
+              <div class="d-flex justify-content-between align-items-start">
+                <div>
+                  <div class="badge bg-light text-dark mb-2">AVL Tree</div>
+                  <h4 class="algo-title">Fast Meter Indexing</h4>
+                  <p class="mb-0">Maintain a balanced library of millions of time-stamped meter readings with guaranteed
+                    O(log n) lookups for rapid billing and historical analysis.</p>
+                </div>
+                <div>
+                  <a href="avl-tree-code.html" class="algo-link">Watch out →</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="algo-card">
+              <div class="d-flex justify-content-between align-items-start">
+                <div>
+                  <div class="badge bg-light text-dark mb-2">Skip List</div>
+                  <h4 class="algo-title">Fast Meter Search</h4>
+                  <p class="mb-0">A probabilistic data structure offering O(log n) search and insertion, serving as an
+                    efficient alternative to balanced trees for maintaining ordered meter IDs.</p>
+                </div>
+                <div>
+                  <a href="skip-list-code.html" class="algo-link">Watch out →</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="algo-card">
+              <div class="d-flex justify-content-between align-items-start">
+                <div>
+                  <div class="badge bg-light text-dark mb-2">Min Heap</div>
+                  <h4 class="algo-title">Priority Scheduling</h4>
+                  <p class="mb-0">Using a Priority Queue (Min-Heap) to instantly select and deploy the most critical
+                    generation units or maintenance tasks based on urgency.</p>
+                </div>
+                <div>
+                  <a href="energy-heap-code.html" class="algo-link">Watch out →</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="algo-card">
+              <div class="d-flex justify-content-between align-items-start">
+                <div>
+                  <div class="badge bg-light text-dark mb-2">Sorting</div>
+                  <h4 class="algo-title">Load Analytics</h4>
+                  <p class="mb-0">Ranking transformers and generation units by load using Quick Sort, Merge Sort, or
+                    Insertion Sort to identify potential overloads or maintenance targets.</p>
+                </div>
+                <div>
+                  <a href="sorting-code.html" class="algo-link">Watch out →</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="algo-card">
+              <div class="d-flex justify-content-between align-items-start">
+                <div>
+                  <div class="badge bg-light text-dark mb-2">Boyer-Moore</div>
+                  <h4 class="algo-title">Log Pattern Matching</h4>
+                  <p class="mb-0">Efficiently scanning massive grid logs using the Boyer-Moore string search algorithm
+                    to instantly detect critical keywords like "overload" or "fault".</p>
+                </div>
+                <div>
+                  <a href="string-search-code.html" class="algo-link">Watch out →</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/scripts.js"></script>
+</body>
+
 </html>

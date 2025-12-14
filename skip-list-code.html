@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Smart Meter Search Code Preview — Prajnapuri</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
+    <style>
+        body {
+            background: #f3f6f9;
+            color: #333;
+            font-family: 'Lato', sans-serif;
+            padding: 60px 20px;
+        }
+
+        .container-modal {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        .modal-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid #e1e8ed;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-weight: 700;
+            font-size: 18px;
+            color: #222;
+        }
+
+        .modal-subtitle {
+            color: #777;
+            font-size: 13px;
+        }
+
+        .top-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-action {
+            background: #1f6feb;
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+        }
+
+        .btn-action:hover {
+            background: #0d47a1;
+        }
+
+        .btn-action.btn-close-modal {
+            background: #2b87c9;
+        }
+
+        .modal-body {
+            padding: 24px;
+        }
+
+        .row-content {
+            display: grid;
+            grid-template-columns: 40% 60%;
+            gap: 24px;
+        }
+
+        @media (max-width: 768px) {
+            .row-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .col-left h6 {
+            color: #2a6a9e;
+            font-weight: 700;
+            font-size: 14px;
+            margin-top: 16px;
+            margin-bottom: 8px;
+        }
+
+        .col-left h6:first-child {
+            margin-top: 0;
+        }
+
+        .col-left p {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .col-right h6 {
+            color: #2a6a9e;
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        pre.code-block {
+            background: #0b1220;
+            color: #cfe5ff;
+            padding: 16px;
+            border-radius: 6px;
+            overflow: auto;
+            max-height: 500px;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .code-line {
+            display: flex;
+        }
+
+        .ln {
+            width: 35px;
+            text-align: right;
+            padding-right: 12px;
+            color: #6b7a89;
+            user-select: none;
+            flex-shrink: 0;
+        }
+
+        .code {
+            white-space: pre;
+            font-family: Consolas, 'Courier New', monospace;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-modal">
+        <div class="modal-header">
+            <div>
+                <div class="modal-title">Smart Meter Search — Skip List</div>
+                <div class="modal-subtitle">SkipList.cpp — C++ (read-only)</div>
+            </div>
+            <div class="top-actions">
+                <button class="btn-action" id="copyBtn"><i class="fas fa-copy"></i> Copy</button>
+                <a href="energy-grid.html" class="btn-action btn-close-modal"><i class="fas fa-times"></i> Close</a>
+            </div>
+        </div>
+
+        <div class="modal-body">
+            <div class="row-content">
+                <div class="col-left">
+                    <h6>Problem Statement</h6>
+                    <p>Smart meter networks require a scalable way to maintain an ordered list of active meter IDs for
+                        fast lookups, insertions, and validation. As the network expands, we need a data structure that
+                        offers efficient search performance similar to balanced trees but is easier to implement and
+                        maintain.</p>
+
+                    <h6>Solution Approach</h6>
+                    <p>A **Skip List** is a probabilistic data structure that allows **O(log n)** search complexity
+                        essentially by maintaining multiple layers of linked lists. It "skips" over elements to find the
+                        target quickly, providing a highly efficient alternative to binary search trees for dynamic
+                        datasets in the energy grid.</p>
+                </div>
+
+                <div class="col-right">
+                    <h6>C++ Implementation</h6>
+                    <pre class="code-block" id="codeBlock"><code><div class="code-line"><span class="ln">1</span><span class="code">#include &lt;iostream&gt;</span></div>
+<div class="code-line"><span class="ln">2</span><span class="code">#include &lt;cstdlib&gt;</span></div>
+<div class="code-line"><span class="ln">3</span><span class="code">#include &lt;ctime&gt;</span></div>
+<div class="code-line"><span class="ln">4</span><span class="code">using namespace std;</span></div>
+<div class="code-line"><span class="ln">5</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">6</span><span class="code">#define MAX_LEVEL 6</span></div>
+<div class="code-line"><span class="ln">7</span><span class="code">float P = 0.5;</span></div>
+<div class="code-line"><span class="ln">8</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">9</span><span class="code">struct Node {</span></div>
+<div class="code-line"><span class="ln">10</span><span class="code">    int key;</span></div>
+<div class="code-line"><span class="ln">11</span><span class="code">    Node** forward;</span></div>
+<div class="code-line"><span class="ln">12</span><span class="code">    Node(int key, int level) {</span></div>
+<div class="code-line"><span class="ln">13</span><span class="code">        this-&gt;key = key;</span></div>
+<div class="code-line"><span class="ln">14</span><span class="code">        forward = new Node*[level + 1];</span></div>
+<div class="code-line"><span class="ln">15</span><span class="code">        for (int i = 0; i &lt;= level; i++) {</span></div>
+<div class="code-line"><span class="ln">16</span><span class="code">            forward[i] = nullptr;</span></div>
+<div class="code-line"><span class="ln">17</span><span class="code">        }</span></div>
+<div class="code-line"><span class="ln">18</span><span class="code">    }</span></div>
+<div class="code-line"><span class="ln">19</span><span class="code">};</span></div>
+<div class="code-line"><span class="ln">20</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">21</span><span class="code">class SkipList {</span></div>
+<div class="code-line"><span class="ln">22</span><span class="code">    int level;</span></div>
+<div class="code-line"><span class="ln">23</span><span class="code">    Node* header;</span></div>
+<div class="code-line"><span class="ln">24</span><span class="code">public:</span></div>
+<div class="code-line"><span class="ln">25</span><span class="code">    SkipList() {</span></div>
+<div class="code-line"><span class="ln">26</span><span class="code">        level = 0;</span></div>
+<div class="code-line"><span class="ln">27</span><span class="code">        header = new Node(-1, MAX_LEVEL);  // Dummy header</span></div>
+<div class="code-line"><span class="ln">28</span><span class="code">    }</span></div>
+<div class="code-line"><span class="ln">29</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">30</span><span class="code">    int randomLevel() {</span></div>
+<div class="code-line"><span class="ln">31</span><span class="code">        int lvl = 0;</span></div>
+<div class="code-line"><span class="ln">32</span><span class="code">        while (((float)rand() / RAND_MAX) &lt; P &amp;&amp; lvl &lt; MAX_LEVEL)</span></div>
+<div class="code-line"><span class="ln">33</span><span class="code">            lvl++;</span></div>
+<div class="code-line"><span class="ln">34</span><span class="code">        return lvl;</span></div>
+<div class="code-line"><span class="ln">35</span><span class="code">    }</span></div>
+<div class="code-line"><span class="ln">36</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">37</span><span class="code">    void insert(int key) {</span></div>
+<div class="code-line"><span class="ln">38</span><span class="code">        Node* current = header;</span></div>
+<div class="code-line"><span class="ln">39</span><span class="code">        Node* update[MAX_LEVEL + 1];</span></div>
+<div class="code-line"><span class="ln">40</span><span class="code">        for (int i = level; i &gt;= 0; i--) {</span></div>
+<div class="code-line"><span class="ln">41</span><span class="code">            while (current-&gt;forward[i] &amp;&amp; current-&gt;forward[i]-&gt;key &lt; key)</span></div>
+<div class="code-line"><span class="ln">42</span><span class="code">                current = current-&gt;forward[i];</span></div>
+<div class="code-line"><span class="ln">43</span><span class="code">            update[i] = current;</span></div>
+<div class="code-line"><span class="ln">44</span><span class="code">        }</span></div>
+<div class="code-line"><span class="ln">45</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">46</span><span class="code">        current = current-&gt;forward[0];</span></div>
+<div class="code-line"><span class="ln">47</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">48</span><span class="code">        if (!current || current-&gt;key != key) {</span></div>
+<div class="code-line"><span class="ln">49</span><span class="code">            int rlevel = randomLevel();</span></div>
+<div class="code-line"><span class="ln">50</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">51</span><span class="code">            if (rlevel &gt; level) {</span></div>
+<div class="code-line"><span class="ln">52</span><span class="code">                for (int i = level + 1; i &lt;= rlevel; i++) {</span></div>
+<div class="code-line"><span class="ln">53</span><span class="code">                    update[i] = header;</span></div>
+<div class="code-line"><span class="ln">54</span><span class="code">                }</span></div>
+<div class="code-line"><span class="ln">55</span><span class="code">                level = rlevel;</span></div>
+<div class="code-line"><span class="ln">56</span><span class="code">            }</span></div>
+<div class="code-line"><span class="ln">57</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">58</span><span class="code">            Node* newNode = new Node(key, rlevel);</span></div>
+<div class="code-line"><span class="ln">59</span><span class="code">            for (int i = 0; i &lt;= rlevel; i++) {</span></div>
+<div class="code-line"><span class="ln">60</span><span class="code">                newNode-&gt;forward[i] = update[i]-&gt;forward[i];</span></div>
+<div class="code-line"><span class="ln">61</span><span class="code">                update[i]-&gt;forward[i] = newNode;</span></div>
+<div class="code-line"><span class="ln">62</span><span class="code">            }</span></div>
+<div class="code-line"><span class="ln">63</span><span class="code">            cout &lt;&lt; "Inserted smart meter ID: " &lt;&lt; key &lt;&lt; endl;</span></div>
+<div class="code-line"><span class="ln">64</span><span class="code">        }</span></div>
+<div class="code-line"><span class="ln">65</span><span class="code">    }</span></div>
+<div class="code-line"><span class="ln">66</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">67</span><span class="code">    void search(int key) {</span></div>
+<div class="code-line"><span class="ln">68</span><span class="code">        Node* current = header;</span></div>
+<div class="code-line"><span class="ln">69</span><span class="code">        for (int i = level; i &gt;= 0; i--) {</span></div>
+<div class="code-line"><span class="ln">70</span><span class="code">            while (current-&gt;forward[i] &amp;&amp; current-&gt;forward[i]-&gt;key &lt; key)</span></div>
+<div class="code-line"><span class="ln">71</span><span class="code">                current = current-&gt;forward[i];</span></div>
+<div class="code-line"><span class="ln">72</span><span class="code">        }</span></div>
+<div class="code-line"><span class="ln">73</span><span class="code">        current = current-&gt;forward[0];</span></div>
+<div class="code-line"><span class="ln">74</span><span class="code">        if (current &amp;&amp; current-&gt;key == key)</span></div>
+<div class="code-line"><span class="ln">75</span><span class="code">            cout &lt;&lt; "Smart meter ID " &lt;&lt; key &lt;&lt; " found.\n";</span></div>
+<div class="code-line"><span class="ln">76</span><span class="code">        else</span></div>
+<div class="code-line"><span class="ln">77</span><span class="code">            cout &lt;&lt; "Smart meter ID " &lt;&lt; key &lt;&lt; " not found.\n";</span></div>
+<div class="code-line"><span class="ln">78</span><span class="code">    }</span></div>
+<div class="code-line"><span class="ln">79</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">80</span><span class="code">    void display() {</span></div>
+<div class="code-line"><span class="ln">81</span><span class="code">        cout &lt;&lt; "\nSkip List (smart meter IDs):\n";</span></div>
+<div class="code-line"><span class="ln">82</span><span class="code">        for (int i = 0; i &lt;= level; i++) {</span></div>
+<div class="code-line"><span class="ln">83</span><span class="code">            Node* node = header-&gt;forward[i];</span></div>
+<div class="code-line"><span class="ln">84</span><span class="code">            cout &lt;&lt; "Level " &lt;&lt; i &lt;&lt; ": ";</span></div>
+<div class="code-line"><span class="ln">85</span><span class="code">            while (node) {</span></div>
+<div class="code-line"><span class="ln">86</span><span class="code">                cout &lt;&lt; node-&gt;key &lt;&lt; " ";</span></div>
+<div class="code-line"><span class="ln">87</span><span class="code">                node = node-&gt;forward[i];</span></div>
+<div class="code-line"><span class="ln">88</span><span class="code">            }</span></div>
+<div class="code-line"><span class="ln">89</span><span class="code">            cout &lt;&lt; "\n";</span></div>
+<div class="code-line"><span class="ln">90</span><span class="code">        }</span></div>
+<div class="code-line"><span class="ln">91</span><span class="code">    }</span></div>
+<div class="code-line"><span class="ln">92</span><span class="code">};</span></div>
+<div class="code-line"><span class="ln">93</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">94</span><span class="code">int main() {</span></div>
+<div class="code-line"><span class="ln">95</span><span class="code">    srand(time(0));</span></div>
+<div class="code-line"><span class="ln">96</span><span class="code">    SkipList list;</span></div>
+<div class="code-line"><span class="ln">97</span><span class="code">    int choice, id;</span></div>
+<div class="code-line"><span class="ln">98</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">99</span><span class="code">    do {</span></div>
+<div class="code-line"><span class="ln">100</span><span class="code">        cout &lt;&lt; "\n1. Insert Smart Meter ID\n2. Search ID\n3. Display List\n4. Exit\nChoice: ";</span></div>
+<div class="code-line"><span class="ln">101</span><span class="code">        cin &gt;&gt; choice;</span></div>
+<div class="code-line"><span class="ln">102</span><span class="code">        switch (choice) {</span></div>
+<div class="code-line"><span class="ln">103</span><span class="code">        case 1:</span></div>
+<div class="code-line"><span class="ln">104</span><span class="code">            cout &lt;&lt; "Enter smart meter ID to insert: ";</span></div>
+<div class="code-line"><span class="ln">105</span><span class="code">            cin &gt;&gt; id;</span></div>
+<div class="code-line"><span class="ln">106</span><span class="code">            list.insert(id);</span></div>
+<div class="code-line"><span class="ln">107</span><span class="code">            break;</span></div>
+<div class="code-line"><span class="ln">108</span><span class="code">        case 2:</span></div>
+<div class="code-line"><span class="ln">109</span><span class="code">            cout &lt;&lt; "Enter ID to search: ";</span></div>
+<div class="code-line"><span class="ln">110</span><span class="code">            cin &gt;&gt; id;</span></div>
+<div class="code-line"><span class="ln">111</span><span class="code">            list.search(id);</span></div>
+<div class="code-line"><span class="ln">112</span><span class="code">            break;</span></div>
+<div class="code-line"><span class="ln">113</span><span class="code">        case 3:</span></div>
+<div class="code-line"><span class="ln">114</span><span class="code">            list.display();</span></div>
+<div class="code-line"><span class="ln">115</span><span class="code">            break;</span></div>
+<div class="code-line"><span class="ln">116</span><span class="code">        }</span></div>
+<div class="code-line"><span class="ln">117</span><span class="code">    } while (choice != 4);</span></div>
+<div class="code-line"><span class="ln">118</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">119</span><span class="code">    return 0;</span></div>
+<div class="code-line"><span class="ln">120</span><span class="code">}</span></div></code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('copyBtn').addEventListener('click', function () {
+            const text = Array.from(document.querySelectorAll('#codeBlock .code')).map(n => n.textContent).join('\n');
+            navigator.clipboard.writeText(text).then(() => {
+                this.textContent = 'Copied!';
+                setTimeout(() => this.innerHTML = '<i class="fas fa-copy"></i> Copy', 1500);
+            });
+        });
+    </script>
+</body>
+
+</html>
