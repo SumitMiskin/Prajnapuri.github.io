@@ -691,90 +691,7 @@ int main() {
               </div>
             </div>
 
-                      <!-- Modal 7 -->
-                      <div class="modal fade" id="modal7" tabindex="-1" aria-hidden="true">
-                        <div class="modal-dialog modal-xl modal-dialog-centered">
-                          <div class="modal-content">
-                            <div class="modal-header border-0"><h5 class="modal-title">Bellman–Ford Algorithm — Shortest Path with Negative Costs</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
-                            <div class="modal-body">
-                              <div class="row">
-                                <div class="col-md-6">
-                                  <h6 class="text-success">Problem</h6>
-                                  <p>In a city transport or logistics system:</p>
-                                  <ul>
-                                    <li>Roads may have tolls, fuel costs, or subsidies</li>
-                                    <li>Some routes may have <strong>negative costs</strong> (discounts or incentives)</li>
-                                    <li>Authorities need to find the <strong>shortest path</strong> from one location to all others</li>
-                                    <li>Also need to <strong>detect negative cycles</strong> (routes causing infinite profit or loss)</li>
-                                  </ul>
-                                  <h6 class="text-success">DAA Solution</h6>
-                                  <p>Bellman–Ford algorithm — computes shortest paths with negative edge weights and detects negative cycles. Useful for transport planning, network routing, and financial analysis.</p>
-                                  <h6 class="text-success">How it works (summary)</h6>
-                                  <ul>
-                                    <li>Relax all edges repeatedly (V−1 times)</li>
-                                    <li>Check for negative cycles in one extra iteration</li>
-                                  </ul>
-                                  <p><strong>Time Complexity:</strong> O(V × E)</p>
-                                </div>
-                                <div class="col-md-6">
-                                  <h6 class="text-success">C++ Implementation</h6>
-                                  <pre class="code-block"><code>#include &lt;bits/stdc++.h&gt;
-            using namespace std;
-
-            struct edge {
-                int u, v, w;
-            };
-
-            int main() {
-                int n, m;
-                cin &gt;&gt; n &gt;&gt; m; // n = vertices, m = edges
-
-                vector&lt;edge&gt; e(m);
-                for (int i = 0; i &lt; m; i++)
-                    cin &gt;&gt; e[i].u &gt;&gt; e[i].v &gt;&gt; e[i].w;
-
-                int src;
-                cin &gt;&gt; src; // source vertex
-
-                const int inf = 1e9;
-                vector&lt;int&gt; dist(n, inf);
-                dist[src] = 0;
-
-                // Relax all edges n-1 times
-                for (int i = 0; i &lt; n - 1; i++) {
-                    for (auto &x : e) {
-                        if (dist[x.u] != inf &amp;&amp; dist[x.u] + x.w &lt; dist[x.v])
-                            dist[x.v] = dist[x.u] + x.w;
-                    }
-                }
-
-                // Check for negative cycle
-                bool neg = false;
-                for (auto &x : e) {
-                    if (dist[x.u] != inf &amp;&amp; dist[x.u] + x.w &lt; dist[x.v]) {
-                        neg = true;
-                        break;
-                    }
-                }
-
-                if (neg) cout &lt;&lt; "Graph contains negative cycle\n";
-                else {
-                    cout &lt;&lt; "Shortest distances from vertex " &lt;&lt; src &lt;&lt; ":\n";
-                    for (int i = 0; i &lt; n; i++)
-                        cout &lt;&lt; i &lt;&lt; " : " &lt;&lt; dist[i] &lt;&lt; "\n";
-                }
-
-                return 0;
-            }
-            </code></pre>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-            </div>
-          </div>
+            
 
           <!-- CSV Data Modal -->
     <div class="modal fade" id="csvModal3" tabindex="-1" aria-hidden="true">
@@ -788,6 +705,89 @@ int main() {
           </div>
         </div>
       </div>
+
+          <!-- Modal 7 (Bellman-Ford) - placed at top-level for proper Bootstrap positioning -->
+          <div class="modal fade" id="modal7" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header border-0"><h5 class="modal-title">Bellman–Ford Algorithm — Shortest Path with Negative Costs</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+                <div class="modal-body">
+                  <div class="row">
+                    <div class="col-md-6">
+                      <h6 class="text-success">Problem</h6>
+                      <p>In a city transport or logistics system:</p>
+                      <ul>
+                        <li>Roads may have tolls, fuel costs, or subsidies</li>
+                        <li>Some routes may have <strong>negative costs</strong> (discounts or incentives)</li>
+                        <li>Authorities need to find the <strong>shortest path</strong> from one location to all others</li>
+                        <li>Also need to <strong>detect negative cycles</strong> (routes causing infinite profit or loss)</li>
+                      </ul>
+                      <h6 class="text-success">DAA Solution</h6>
+                      <p>Bellman–Ford algorithm — computes shortest paths with negative edge weights and detects negative cycles. Useful for transport planning, network routing, and financial analysis.</p>
+                      <h6 class="text-success">How it works (summary)</h6>
+                      <ul>
+                        <li>Relax all edges repeatedly (V−1 times)</li>
+                        <li>Check for negative cycles in one extra iteration</li>
+                      </ul>
+                      <p><strong>Time Complexity:</strong> O(V × E)</p>
+                    </div>
+                    <div class="col-md-6">
+                      <h6 class="text-success">C++ Implementation</h6>
+                      <pre class="code-block"><code>#include &lt;bits/stdc++.h&gt;
+      using namespace std;
+
+      struct edge {
+          int u, v, w;
+      };
+
+      int main() {
+          int n, m;
+          cin &gt;&gt; n &gt;&gt; m; // n = vertices, m = edges
+
+          vector&lt;edge&gt; e(m);
+          for (int i = 0; i &lt; m; i++)
+              cin &gt;&gt; e[i].u &gt;&gt; e[i].v &gt;&gt; e[i].w;
+
+          int src;
+          cin &gt;&gt; src; // source vertex
+
+          const int inf = 1e9;
+          vector&lt;int&gt; dist(n, inf);
+          dist[src] = 0;
+
+          // Relax all edges n-1 times
+          for (int i = 0; i &lt; n - 1; i++) {
+              for (auto &x : e) {
+                  if (dist[x.u] != inf &amp;&amp; dist[x.u] + x.w &lt; dist[x.v])
+                      dist[x.v] = dist[x.u] + x.w;
+              }
+          }
+
+          // Check for negative cycle
+          bool neg = false;
+          for (auto &x : e) {
+              if (dist[x.u] != inf &amp;&amp; dist[x.u] + x.w &lt; dist[x.v]) {
+                  neg = true;
+                  break;
+              }
+          }
+
+          if (neg) cout &lt;&lt; "Graph contains negative cycle\n";
+          else {
+              cout &lt;&lt; "Shortest distances from vertex " &lt;&lt; src &lt;&lt; ":\n";
+              for (int i = 0; i &lt; n; i++)
+                  cout &lt;&lt; i &lt;&lt; " : " &lt;&lt; dist[i] &lt;&lt; "\n";
+          }
+
+          return 0;
+      }
+      </code></pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
     </div>
 
     <!-- Footer -->
@@ -830,6 +830,19 @@ int main() {
 
       // Load CSV when modal is shown
       document.getElementById('csvModal3').addEventListener('show.bs.modal', loadCSVData);
+      // Ensure Problem 7 button opens modal7 even if data attributes fail
+      (function(){
+        const btn = document.querySelector('[data-bs-target="#modal7"]');
+        if (btn) {
+          btn.addEventListener('click', function(e){
+            var modalEl = document.getElementById('modal7');
+            if (modalEl) {
+              var bsModal = bootstrap.Modal.getOrCreateInstance(modalEl);
+              bsModal.show();
+            }
+          });
+        }
+      })();
     </script>
   </body>
 </html>
