@@ -40,6 +40,7 @@
 
     <section class="page-section py-5" style="background-color:#f6fbf9;">
       <div class="container">
+        <p></p>
         <h2 class="text-center mb-4">Main Key Problems Solved</h2>
         <div class="row g-4">
           <!-- Problem 1 -->
@@ -384,15 +385,74 @@ int Partition(int A[], int l, int r)
             <div class="row">
               <div class="col-md-6">
                 <h6 class="text-success">Problem Statement</h6>
-                <p>Identify connected components so maintenance can be scheduled without disconnecting regions.</p>
+                <p>Grouping Areas Covered by Emergency Stations. A city has multiple emergency stations (fire, ambulance).
+Each station covers nearby city sectors.
+If two sectors are covered by overlapping stations, they belong to the same emergency response zone. City authorities need to:Check whether two sectors fall under the same response zone
+
+,Count the total number of independent emergency zones</p>
+                <h6 class="text-success">Solution Approach</h6>
+                <p>We can use the Disjoint Set Union (DSU) data structure to efficiently manage and query the emergency zones. Each city sector is represented as an element in the DSU. When two sectors are covered by overlapping stations, we perform a union operation to merge their sets. To check if two sectors belong to the same zone, we use the find operation to see if they have the same root parent. To count the total number of zones, we can iterate through all sectors and count unique root parents.</p>
+                 <h6 class="text-success">DAA Concept used:</h6>
+                <p>Union-find</p>
               </div>
               <div class="col-md-6">
                 <h6 class="text-success">Implementation</h6>
-                <pre class="code-block"><code>// Union-Find example
-struct DSU{ vector<int>p; DSU(int n):p(n,-1){}
-int find(int x){ return p[x]<0?x:p[x]=find(p[x]); }
-void unite(int a,int b){ a=find(a); b=find(b); if(a==b) return; if(p[a]>p[b]) swap(a,b); p[a]+=p[b]; p[b]=a; }
+                <pre class="code-block"><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+/* ---------- DISJOINT SET ---------- */
+class dsu {
+    vector&lt;int&gt; p;
+public:
+    dsu(int n) {
+        p.resize(n);
+        for (int i = 0; i &lt; n; i++)
+            p[i] = i;
+    }
+
+    int find(int x) {
+        if (p[x] != x)
+            p[x] = find(p[x]);   // path compression
+        return p[x];
+    }
+
+    void unite(int a, int b) {
+        a = find(a);
+        b = find(b);
+        if (a != b)
+            p[b] = a;
+    }
 };
+
+/* ---------- MAIN ---------- */
+int main() {
+    int n = 9;   // city sectors
+    dsu d(n);
+
+    // overlapping emergency coverage
+    d.unite(0, 1);
+    d.unite(1, 2);
+    d.unite(3, 4);
+    d.unite(4, 5);
+    d.unite(6, 7);
+
+    cout &lt;&lt; "emergency zone check:\n";
+
+    cout &lt;&lt; "sector 0 and 2: "
+         &lt;&lt; (d.find(0) == d.find(2) ? "same zone" : "different zone") &lt;&lt; endl;
+
+    cout &lt;&lt; "sector 2 and 6: "
+         &lt;&lt; (d.find(2) == d.find(6) ? "same zone" : "different zone") &lt;&lt; endl;
+
+    // count emergency zones
+    unordered_set&lt;int&gt; s;
+    for (int i = 0; i &lt; n; i++)
+        s.insert(d.find(i));
+
+    cout &lt;&lt; "total emergency zones: " &lt;&lt; s.size() &lt;&lt; endl;
+
+    return 0;
+}
 </code></pre>
               </div>
             </div>
@@ -413,6 +473,8 @@ void unite(int a,int b){ a=find(a); b=find(b); if(a==b) return; if(p[a]>p[b]) sw
                 <p>Providing a sufficient and stable electricity for our city Prajnapuri as it has covered major part as IT sector and electricity plays a major role here. In this project we’re planning to provide a stable 24/7 electricity which is provided by the main Power station of the located in the city (source place). </p>
                 <h6 class="text-success">Solution Approach</h6>
                 <p>To solve the Electricity problem we are using mostly popular algorithm Dijkstra’s algorithm. Adding vertices in each corner to cover all the area of our city and the edges are connecting each node for proper implementation. </p>                <div style="margin-top: 20px; text-align: center;">
+                  <h6 class="text-success">DAA Concepts used:</h6>
+                <p>Dijkstra’s Algorithm</p>
                   <img src="assets/img/portfolio/Dijkstra's problem.png" alt="Dijkstra's Algorithm Diagram" style="max-width: 100%; height: auto; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
                 </div>                </div>
               <div class="col-md-6">
