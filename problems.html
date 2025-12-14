@@ -384,7 +384,15 @@ int Partition(int A[], int l, int r)
             <div class="row">
               <div class="col-md-6">
                 <h6 class="text-success">Problem Statement</h6>
-                <p>Identify connected components so maintenance can be scheduled without disconnecting regions.</p>
+                <p>Grouping Areas Covered by Emergency Stations. A city has multiple emergency stations (fire, ambulance).
+Each station covers nearby city sectors.
+If two sectors are covered by overlapping stations, they belong to the same emergency response zone. City authorities need to:Check whether two sectors fall under the same response zone
+
+,Count the total number of independent emergency zones</p>
+                <h6 class="text-success">Solution Approach</h6>
+                <p>We can use the Disjoint Set Union (DSU) data structure to efficiently manage and query the emergency zones. Each city sector is represented as an element in the DSU. When two sectors are covered by overlapping stations, we perform a union operation to merge their sets. To check if two sectors belong to the same zone, we use the find operation to see if they have the same root parent. To count the total number of zones, we can iterate through all sectors and count unique root parents.</p>
+                 <h6 class="text-success">DAA Concept used:</h6>
+                <p>Union-find</p>
               </div>
               <div class="col-md-6">
                 <h6 class="text-success">Implementation</h6>
