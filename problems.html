@@ -122,6 +122,22 @@
             </div>
           </div>
 
+          <!-- Problem 6 -->
+          <div class="col-md-6">
+            <div class="problem-card">
+              <div class="d-flex justify-content-between align-items-start">
+                <div>
+                  <div class="badge bg-light text-dark mb-2">Smart Agriculture (DAA)</div>
+                  <h4 class="problem-title">Crop selection & Irrigation Management</h4>
+                  <p class="mb-2">Selecting crops based on soil, weather and market; efficient irrigation scheduling and monitoring soil parameters.</p>
+                </div>
+                <div>
+                  <button class="view-btn" data-bs-toggle="modal" data-bs-target="#modal6">Watch-out →</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
@@ -460,6 +476,139 @@ int main() {
             </div>
           </div>
         </div>
+              <!-- Modal 6 -->
+              <div class="modal fade" id="modal6" tabindex="-1" aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header border-0"><h5 class="modal-title">Crop selection & Irrigation Management (Smart Agriculture)</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+                  <div class="modal-body">
+                  <div class="row">
+                    <div class="col-md-6">
+                    <h6 class="text-success">Problem Statement</h6>
+                    <p>Farmers find it difficult to decide which crop to grow in a particular season based on soil type, weather conditions, and market demand. Water is often wasted due to uneven irrigation and lack of planning. Monitoring soil nutrients and deciding the right amount of fertilizer manually is difficult and time-consuming. Managing irrigation channels and ensuring proper water flow to all areas is complex.</p>
+                    <h6 class="text-success">Solution Taken</h6>
+                    <p>Solving the problems using DAA concepts which overcomes the problems. Store soil type, season, weather conditions, and suitable crops for quick lookup. Rank crops based on profitability, water requirement, and yield. Give priority to crops or fields with higher water needs. Schedule irrigation in an orderly manner. Efficiently track soil parameters (moisture, pH, nutrients) over different land sections. Store soil data for quick access. Represent fields and water channels as nodes and edges to manage irrigation paths and detect issues like blockages.</p>
+                    </div>
+                    <div class="col-md-6">
+                    <h6 class="text-success">C++ Implementation</h6>
+                    <pre class="code-block"><code>#include &lt;bits/stdc++.h&gt;
+            using namespace std;
+            /* ---------- CROP STRUCT ---------- */
+            struct crop {
+              string n;
+              int w, p;
+            };
+            /* ---------- CROP DATA ---------- */
+            unordered_map&lt;string, vector&lt;crop&gt;&gt; mp = {
+              {"summer", {{"rice",80,5000}, {"maize",50,4000}, {"cotton",60,4500}}}
+            };
+            /* ---------- CROP SELECTION ---------- */
+            void sel(const string& s) {
+              auto &v = mp[s];
+              sort(v.begin(), v.end(),
+                 [](const crop& a, const crop& b) {
+                   return a.p &gt; b.p;
+                 });
+
+              cout &lt;&lt; "\nbest crop for " &lt;&lt; s &lt;&lt; ": " &lt;&lt; v[0].n &lt;&lt; endl;
+            }
+            /* ---------- WATER DISTRIBUTION ---------- */
+            void water(const vector&lt;crop&gt;&amp; v) {
+              priority_queue&lt;pair&lt;int,string&gt;&gt; pq;
+              for (const auto& c : v)
+                pq.emplace(c.w, c.n);
+              cout &lt;&lt; "\nwater priority:\n";
+              while (!pq.empty()) {
+                cout &lt;&lt; pq.top().second
+                   &lt;&lt; " -> " &lt;&lt; pq.top().first &lt;&lt; endl;
+                pq.pop();
+              }
+            }
+            /* ---------- SEGMENT TREE ---------- */
+            class seg {
+              vector&lt;int&gt; t;
+              int n;
+              void build(const vector&lt;int&gt;&amp; a, int i, int l, int r) {
+                if (l == r) {
+                  t[i] = a[l];
+                  return;
+                }
+                int m = (l + r) / 2;
+                build(a, 2*i, l, m);
+                build(a, 2*i+1, m+1, r);
+                t[i] = t[2*i] + t[2*i+1];
+              }
+              int qry(int i, int l, int r, int ql, int qr) const {
+                if (qr &lt; l || ql &gt; r) return 0;
+                if (ql &lt;= l && r &lt;= qr) return t[i];
+                int m = (l + r) / 2;
+                return qry(2*i, l, m, ql, qr)
+                   + qry(2*i+1, m+1, r, ql, qr);
+              }
+            public:
+              seg(const vector&lt;int&gt;&amp; a) {
+                n = a.size();
+                t.resize(4*n);
+                build(a, 1, 0, n-1);
+              }
+              int get(int l, int r) const {
+                return qry(1, 0, n-1, l, r);
+              }
+            };
+            /* ---------- IRRIGATION GRAPH (BFS) ---------- */
+            void net() {
+              vector&lt;vector&lt;int&gt;&gt; g = {
+                {1,2}, {3}, {4}, {}, {}
+              };
+              vector&lt;bool&gt; vis(g.size(), false);
+              queue&lt;int&gt; q;
+              cout &lt;&lt; "\nirrigation flow:\n";
+              q.emplace(0);
+              vis[0] = true;
+              while (!q.empty()) {
+                int x = q.front(); q.pop();
+                cout &lt;&lt; "water reached field " &lt;&lt; x &lt;&lt; endl;
+                for (int y : g[x]) {
+                  if (!vis[y]) {
+                    vis[y] = true;
+                    q.emplace(y);
+                  }
+                }
+              }
+            }
+            /* ---------- IRRIGATION SCHEDULE ---------- */
+            void sch() {
+              queue&lt;string&gt; q;
+              q.emplace("field a");
+              q.emplace("field b");
+              q.emplace("field c");
+              cout &lt;&lt; "\nirrigation schedule:\n";
+              while (!q.empty()) {
+                cout &lt;&lt; "irrigating " &lt;&lt; q.front() &lt;&lt; endl;
+                q.pop();
+              }
+            }
+            /* ---------- MAIN ---------- */
+            int main() {
+              cout &lt;&lt; "smart agriculture management system\n";
+              sel("summer");
+              water(mp["summer"]);
+              vector&lt;int&gt; soil = {10,20,30,40,50};
+              seg st(soil);
+              cout &lt;&lt; "\nsoil data (1-3): " &lt;&lt; st.get(1,3) &lt;&lt; endl;
+              net();
+              sch();
+              cout &lt;&lt; "\nsystem executed successfully\n";
+              return 0;
+            }
+
+            </code></pre>
+                    </div>
+                  </div>
+                  </div>
+                </div>
+                </div>
+              </div>
       </div>
     </div>
 
