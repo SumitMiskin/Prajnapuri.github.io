@@ -139,6 +139,22 @@
             </div>
           </div>
 
+          <!-- Problem 7 -->
+          <div class="col-md-6">
+            <div class="problem-card">
+              <div class="d-flex justify-content-between align-items-start">
+                <div>
+                  <div class="badge bg-light text-dark mb-2">Bellman–Ford</div>
+                  <h4 class="problem-title">Shortest Path with Negative Costs</h4>
+                  <p class="mb-2">Compute shortest paths in graphs that may have negative edge weights and detect negative cycles.</p>
+                </div>
+                <div>
+                  <button class="view-btn" data-bs-toggle="modal" data-bs-target="#modal7">Watch-out →</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
     </section>
@@ -674,8 +690,8 @@ int main() {
               </div>
               </div>
             </div>
-            </div>
-          </div>
+
+            
 
           <!-- CSV Data Modal -->
     <div class="modal fade" id="csvModal3" tabindex="-1" aria-hidden="true">
@@ -689,6 +705,79 @@ int main() {
           </div>
         </div>
       </div>
+
+         <!-- Modal 7 -->
+          <div class="modal fade" id="modal7" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header border-0"><h5 class="modal-title">Shortest Path with Negative Costs</h5><button class="btn-close" data-bs-dismiss="modal"></button></div>
+              <div class="modal-body">
+              <div class="row">
+                <div class="col-md-6">
+                <h6 class="text-success">Problem Statement</h6>
+                <p>Farmers find it difficult to decide which crop to grow in a particular season based on soil type, weather conditions, and market demand. Water is often wasted due to uneven irrigation and lack of planning. Monitoring soil nutrients and deciding the right amount of fertilizer manually is difficult and time-consuming. Managing irrigation channels and ensuring proper water flow to all areas is complex.</p>
+                <h6 class="text-success">Solution Taken</h6>
+                <p>Solving the problems using DAA concepts which overcomes the problems. Store soil type, season, weather conditions, and suitable crops for quick lookup. Rank crops based on profitability, water requirement, and yield. Give priority to crops or fields with higher water needs. Schedule irrigation in an orderly manner. Efficiently track soil parameters (moisture, pH, nutrients) over different land sections. Store soil data for quick access. Represent fields and water channels as nodes and edges to manage irrigation paths and detect issues like blockages.</p>
+                <h6 class="text-success">DAA Concepts used:</h6>
+                <p>Segment-tree,priority_queue,Hash-map,Sorting,BFS,DFS</p>
+              </div>
+                <div class="col-md-6">
+                <h6 class="text-success">C++ Implementation</h6>
+                <pre class="code-block"><code>#include &lt;bits/stdc++.h&gt;
+      using namespace std;
+
+      struct edge {
+          int u, v, w;
+      };
+
+      int main() {
+          int n, m;
+          cin &gt;&gt; n &gt;&gt; m; // n = vertices, m = edges
+
+          vector&lt;edge&gt; e(m);
+          for (int i = 0; i &lt; m; i++)
+              cin &gt;&gt; e[i].u &gt;&gt; e[i].v &gt;&gt; e[i].w;
+
+          int src;
+          cin &gt;&gt; src; // source vertex
+
+          const int inf = 1e9;
+          vector&lt;int&gt; dist(n, inf);
+          dist[src] = 0;
+
+          // Relax all edges n-1 times
+          for (int i = 0; i &lt; n - 1; i++) {
+              for (auto &x : e) {
+                  if (dist[x.u] != inf &amp;&amp; dist[x.u] + x.w &lt; dist[x.v])
+                      dist[x.v] = dist[x.u] + x.w;
+              }
+          }
+
+          // Check for negative cycle
+          bool neg = false;
+          for (auto &x : e) {
+              if (dist[x.u] != inf &amp;&amp; dist[x.u] + x.w &lt; dist[x.v]) {
+                  neg = true;
+                  break;
+              }
+          }
+
+          if (neg) cout &lt;&lt; "Graph contains negative cycle\n";
+          else {
+              cout &lt;&lt; "Shortest distances from vertex " &lt;&lt; src &lt;&lt; ":\n";
+              for (int i = 0; i &lt; n; i++)
+                  cout &lt;&lt; i &lt;&lt; " : " &lt;&lt; dist[i] &lt;&lt; "\n";
+          }
+
+          return 0;
+      }
+      </code></pre>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
     </div>
 
     <!-- Footer -->
@@ -731,6 +820,19 @@ int main() {
 
       // Load CSV when modal is shown
       document.getElementById('csvModal3').addEventListener('show.bs.modal', loadCSVData);
+      // Ensure Problem 7 button opens modal7 even if data attributes fail
+      (function(){
+        const btn = document.querySelector('[data-bs-target="#modal7"]');
+        if (btn) {
+          btn.addEventListener('click', function(e){
+            var modalEl = document.getElementById('modal7');
+            if (modalEl) {
+              var bsModal = bootstrap.Modal.getOrCreateInstance(modalEl);
+              bsModal.show();
+            }
+          });
+        }
+      })();
     </script>
   </body>
 </html>
