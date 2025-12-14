@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Smart Meter Indexing Code Preview — Prajnapuri</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
+    <style>
+        body {
+            background: #f3f6f9;
+            color: #333;
+            font-family: 'Lato', sans-serif;
+            padding: 60px 20px;
+        }
+
+        .container-modal {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        .modal-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid #e1e8ed;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-weight: 700;
+            font-size: 18px;
+            color: #222;
+        }
+
+        .modal-subtitle {
+            color: #777;
+            font-size: 13px;
+        }
+
+        .top-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-action {
+            background: #1f6feb;
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+        }
+
+        .btn-action:hover {
+            background: #0d47a1;
+        }
+
+        .btn-action.btn-close-modal {
+            background: #2b87c9;
+        }
+
+        .modal-body {
+            padding: 24px;
+        }
+
+        .row-content {
+            display: grid;
+            grid-template-columns: 40% 60%;
+            gap: 24px;
+        }
+
+        @media (max-width: 768px) {
+            .row-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .col-left h6 {
+            color: #2a6a9e;
+            font-weight: 700;
+            font-size: 14px;
+            margin-top: 16px;
+            margin-bottom: 8px;
+        }
+
+        .col-left h6:first-child {
+            margin-top: 0;
+        }
+
+        .col-left p {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .col-right h6 {
+            color: #2a6a9e;
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        pre.code-block {
+            background: #0b1220;
+            color: #cfe5ff;
+            padding: 16px;
+            border-radius: 6px;
+            overflow: auto;
+            max-height: 500px;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .code-line {
+            display: flex;
+        }
+
+        .ln {
+            width: 35px;
+            text-align: right;
+            padding-right: 12px;
+            color: #6b7a89;
+            user-select: none;
+            flex-shrink: 0;
+        }
+
+        .code {
+            white-space: pre;
+            font-family: Consolas, 'Courier New', monospace;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-modal">
+        <div class="modal-header">
+            <div>
+                <div class="modal-title">Smart Meter Indexing — AVL Tree</div>
+                <div class="modal-subtitle">SmartMeterAVL.cpp — C++ (read-only)</div>
+            </div>
+            <div class="top-actions">
+                <button class="btn-action" id="copyBtn"><i class="fas fa-copy"></i> Copy</button>
+                <a href="energy-grid.html" class="btn-action btn-close-modal"><i class="fas fa-times"></i> Close</a>
+            </div>
+        </div>
+
+        <div class="modal-body">
+            <div class="row-content">
+                <div class="col-left">
+                    <h6>Problem Statement</h6>
+                    <p>Smart meters generate massive amounts of time-stamped usage data throughout the day. To support
+                        fast billing inquiries and historical analysis, we need a way to store these records such that
+                        we can quickly search for a specific timestamp, even as new data points are continually added.
+                    </p>
+
+                    <h6>Solution Approach</h6>
+                    <p>We use an **AVL Tree** (Assumption-less Balanced Binary Search Tree) to store meter readings
+                        indexed by timestamp. Since AVL trees self-balance after every insertion, they guarantee **O(log
+                        n)** time complexity for search, insertion, and deletion.</p>
+                    <p>This ensures that even with millions of records, retrieving a specific reading remains extremely
+                        fast and consistent.</p>
+                </div>
+
+                <div class="col-right">
+                    <h6>C++ Implementation</h6>
+                    <pre class="code-block" id="codeBlock"><code><div class="code-line"><span class="ln">1</span><span class="code">#include &lt;iostream&gt;</span></div>
+<div class="code-line"><span class="ln">2</span><span class="code">using namespace std;</span></div>
+<div class="code-line"><span class="ln">3</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">4</span><span class="code">struct MeterData {</span></div>
+<div class="code-line"><span class="ln">5</span><span class="code">    int timestamp;  // or meter ID</span></div>
+<div class="code-line"><span class="ln">6</span><span class="code">    float reading;</span></div>
+<div class="code-line"><span class="ln">7</span><span class="code">};</span></div>
+<div class="code-line"><span class="ln">8</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">9</span><span class="code">struct AVLNode {</span></div>
+<div class="code-line"><span class="ln">10</span><span class="code">    MeterData data;</span></div>
+<div class="code-line"><span class="ln">11</span><span class="code">    AVLNode* left;</span></div>
+<div class="code-line"><span class="ln">12</span><span class="code">    AVLNode* right;</span></div>
+<div class="code-line"><span class="ln">13</span><span class="code">    int height;</span></div>
+<div class="code-line"><span class="ln">14</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">15</span><span class="code">    AVLNode(MeterData val) {</span></div>
+<div class="code-line"><span class="ln">16</span><span class="code">        data = val;</span></div>
+<div class="code-line"><span class="ln">17</span><span class="code">        left = right = nullptr;</span></div>
+<div class="code-line"><span class="ln">18</span><span class="code">        height = 1;</span></div>
+<div class="code-line"><span class="ln">19</span><span class="code">    }</span></div>
+<div class="code-line"><span class="ln">20</span><span class="code">};</span></div>
+<div class="code-line"><span class="ln">21</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">22</span><span class="code">int getHeight(AVLNode* node) {</span></div>
+<div class="code-line"><span class="ln">23</span><span class="code">    return node ? node-&gt;height : 0;</span></div>
+<div class="code-line"><span class="ln">24</span><span class="code">}</span></div>
+<div class="code-line"><span class="ln">25</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">26</span><span class="code">int getBalance(AVLNode* node) {</span></div>
+<div class="code-line"><span class="ln">27</span><span class="code">    return node ? getHeight(node-&gt;left) - getHeight(node-&gt;right) : 0;</span></div>
+<div class="code-line"><span class="ln">28</span><span class="code">}</span></div>
+<div class="code-line"><span class="ln">29</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">30</span><span class="code">AVLNode* rightRotate(AVLNode* y) {</span></div>
+<div class="code-line"><span class="ln">31</span><span class="code">    AVLNode* x = y-&gt;left;</span></div>
+<div class="code-line"><span class="ln">32</span><span class="code">    AVLNode* T2 = x-&gt;right;</span></div>
+<div class="code-line"><span class="ln">33</span><span class="code">    x-&gt;right = y;</span></div>
+<div class="code-line"><span class="ln">34</span><span class="code">    y-&gt;left = T2;</span></div>
+<div class="code-line"><span class="ln">35</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">36</span><span class="code">    y-&gt;height = max(getHeight(y-&gt;left), getHeight(y-&gt;right)) + 1;</span></div>
+<div class="code-line"><span class="ln">37</span><span class="code">    x-&gt;height = max(getHeight(x-&gt;left), getHeight(x-&gt;right)) + 1;</span></div>
+<div class="code-line"><span class="ln">38</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">39</span><span class="code">    return x;</span></div>
+<div class="code-line"><span class="ln">40</span><span class="code">}</span></div>
+<div class="code-line"><span class="ln">41</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">42</span><span class="code">AVLNode* leftRotate(AVLNode* x) {</span></div>
+<div class="code-line"><span class="ln">43</span><span class="code">    AVLNode* y = x-&gt;right;</span></div>
+<div class="code-line"><span class="ln">44</span><span class="code">    AVLNode* T2 = y-&gt;left;</span></div>
+<div class="code-line"><span class="ln">45</span><span class="code">    y-&gt;left = x;</span></div>
+<div class="code-line"><span class="ln">46</span><span class="code">    x-&gt;right = T2;</span></div>
+<div class="code-line"><span class="ln">47</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">48</span><span class="code">    x-&gt;height = max(getHeight(x-&gt;left), getHeight(x-&gt;right)) + 1;</span></div>
+<div class="code-line"><span class="ln">49</span><span class="code">    y-&gt;height = max(getHeight(y-&gt;left), getHeight(y-&gt;right)) + 1;</span></div>
+<div class="code-line"><span class="ln">50</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">51</span><span class="code">    return y;</span></div>
+<div class="code-line"><span class="ln">52</span><span class="code">}</span></div>
+<div class="code-line"><span class="ln">53</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">54</span><span class="code">AVLNode* insert(AVLNode* node, MeterData data) {</span></div>
+<div class="code-line"><span class="ln">55</span><span class="code">    if (!node)</span></div>
+<div class="code-line"><span class="ln">56</span><span class="code">        return new AVLNode(data);</span></div>
+<div class="code-line"><span class="ln">57</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">58</span><span class="code">    if (data.timestamp &lt; node-&gt;data.timestamp)</span></div>
+<div class="code-line"><span class="ln">59</span><span class="code">        node-&gt;left = insert(node-&gt;left, data);</span></div>
+<div class="code-line"><span class="ln">60</span><span class="code">    else if (data.timestamp &gt; node-&gt;data.timestamp)</span></div>
+<div class="code-line"><span class="ln">61</span><span class="code">        node-&gt;right = insert(node-&gt;right, data);</span></div>
+<div class="code-line"><span class="ln">62</span><span class="code">    else</span></div>
+<div class="code-line"><span class="ln">63</span><span class="code">        return node; // duplicate timestamp not allowed</span></div>
+<div class="code-line"><span class="ln">64</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">65</span><span class="code">    node-&gt;height = 1 + max(getHeight(node-&gt;left), getHeight(node-&gt;right));</span></div>
+<div class="code-line"><span class="ln">66</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">67</span><span class="code">    int balance = getBalance(node);</span></div>
+<div class="code-line"><span class="ln">68</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">69</span><span class="code">    if (balance &gt; 1 &amp;&amp; data.timestamp &lt; node-&gt;left-&gt;data.timestamp)</span></div>
+<div class="code-line"><span class="ln">70</span><span class="code">        return rightRotate(node);</span></div>
+<div class="code-line"><span class="ln">71</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">72</span><span class="code">    if (balance &lt; -1 &amp;&amp; data.timestamp &gt; node-&gt;right-&gt;data.timestamp)</span></div>
+<div class="code-line"><span class="ln">73</span><span class="code">        return leftRotate(node);</span></div>
+<div class="code-line"><span class="ln">74</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">75</span><span class="code">    if (balance &gt; 1 &amp;&amp; data.timestamp &gt; node-&gt;left-&gt;data.timestamp) {</span></div>
+<div class="code-line"><span class="ln">76</span><span class="code">        node-&gt;left = leftRotate(node-&gt;left);</span></div>
+<div class="code-line"><span class="ln">77</span><span class="code">        return rightRotate(node);</span></div>
+<div class="code-line"><span class="ln">78</span><span class="code">    }</span></div>
+<div class="code-line"><span class="ln">79</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">80</span><span class="code">    if (balance &lt; -1 &amp;&amp; data.timestamp &lt; node-&gt;right-&gt;data.timestamp) {</span></div>
+<div class="code-line"><span class="ln">81</span><span class="code">        node-&gt;right = rightRotate(node-&gt;right);</span></div>
+<div class="code-line"><span class="ln">82</span><span class="code">        return leftRotate(node);</span></div>
+<div class="code-line"><span class="ln">83</span><span class="code">    }</span></div>
+<div class="code-line"><span class="ln">84</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">85</span><span class="code">    return node;</span></div>
+<div class="code-line"><span class="ln">86</span><span class="code">}</span></div>
+<div class="code-line"><span class="ln">87</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">88</span><span class="code">void inOrder(AVLNode* root) {</span></div>
+<div class="code-line"><span class="ln">89</span><span class="code">    if (root) {</span></div>
+<div class="code-line"><span class="ln">90</span><span class="code">        inOrder(root-&gt;left);</span></div>
+<div class="code-line"><span class="ln">91</span><span class="code">        cout &lt;&lt; "Timestamp: " &lt;&lt; root-&gt;data.timestamp</span></div>
+<div class="code-line"><span class="ln">92</span><span class="code">             &lt;&lt; " | Reading: " &lt;&lt; root-&gt;data.reading &lt;&lt; " kWh" &lt;&lt; endl;</span></div>
+<div class="code-line"><span class="ln">93</span><span class="code">        inOrder(root-&gt;right);</span></div>
+<div class="code-line"><span class="ln">94</span><span class="code">    }</span></div>
+<div class="code-line"><span class="ln">95</span><span class="code">}</span></div>
+<div class="code-line"><span class="ln">96</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">97</span><span class="code">AVLNode* search(AVLNode* root, int timestamp) {</span></div>
+<div class="code-line"><span class="ln">98</span><span class="code">    if (!root || root-&gt;data.timestamp == timestamp)</span></div>
+<div class="code-line"><span class="ln">99</span><span class="code">        return root;</span></div>
+<div class="code-line"><span class="ln">100</span><span class="code">    if (timestamp &lt; root-&gt;data.timestamp)</span></div>
+<div class="code-line"><span class="ln">101</span><span class="code">        return search(root-&gt;left, timestamp);</span></div>
+<div class="code-line"><span class="ln">102</span><span class="code">    return search(root-&gt;right, timestamp);</span></div>
+<div class="code-line"><span class="ln">103</span><span class="code">}</span></div>
+<div class="code-line"><span class="ln">104</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">105</span><span class="code">int main() {</span></div>
+<div class="code-line"><span class="ln">106</span><span class="code">    AVLNode* root = nullptr;</span></div>
+<div class="code-line"><span class="ln">107</span><span class="code">    int n;</span></div>
+<div class="code-line"><span class="ln">108</span><span class="code">    cout &lt;&lt; "Enter number of smart meter readings: ";</span></div>
+<div class="code-line"><span class="ln">109</span><span class="code">    cin &gt;&gt; n;</span></div>
+<div class="code-line"><span class="ln">110</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">111</span><span class="code">    for (int i = 0; i &lt; n; ++i) {</span></div>
+<div class="code-line"><span class="ln">112</span><span class="code">        MeterData m;</span></div>
+<div class="code-line"><span class="ln">113</span><span class="code">        cout &lt;&lt; "Enter timestamp: ";</span></div>
+<div class="code-line"><span class="ln">114</span><span class="code">        cin &gt;&gt; m.timestamp;</span></div>
+<div class="code-line"><span class="ln">115</span><span class="code">        cout &lt;&lt; "Enter reading (kWh): ";</span></div>
+<div class="code-line"><span class="ln">116</span><span class="code">        cin &gt;&gt; m.reading;</span></div>
+<div class="code-line"><span class="ln">117</span><span class="code">        root = insert(root, m);</span></div>
+<div class="code-line"><span class="ln">118</span><span class="code">    }</span></div>
+<div class="code-line"><span class="ln">119</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">120</span><span class="code">    cout &lt;&lt; "\nStored Smart Meter Data (sorted by timestamp):\n";</span></div>
+<div class="code-line"><span class="ln">121</span><span class="code">    inOrder(root);</span></div>
+<div class="code-line"><span class="ln">122</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">123</span><span class="code">    int t;</span></div>
+<div class="code-line"><span class="ln">124</span><span class="code">    cout &lt;&lt; "\nEnter timestamp to search: ";</span></div>
+<div class="code-line"><span class="ln">125</span><span class="code">    cin &gt;&gt; t;</span></div>
+<div class="code-line"><span class="ln">126</span><span class="code">    AVLNode* result = search(root, t);</span></div>
+<div class="code-line"><span class="ln">127</span><span class="code">    if (result)</span></div>
+<div class="code-line"><span class="ln">128</span><span class="code">        cout &lt;&lt; "Reading at timestamp " &lt;&lt; t &lt;&lt; " is: " &lt;&lt; result-&gt;data.reading &lt;&lt; " kWh\n";</span></div>
+<div class="code-line"><span class="ln">129</span><span class="code">    else</span></div>
+<div class="code-line"><span class="ln">130</span><span class="code">        cout &lt;&lt; "No reading found for timestamp " &lt;&lt; t &lt;&lt; endl;</span></div>
+<div class="code-line"><span class="ln">131</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">132</span><span class="code">    return 0;</span></div>
+<div class="code-line"><span class="ln">133</span><span class="code">}</span></div></code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('copyBtn').addEventListener('click', function () {
+            const text = Array.from(document.querySelectorAll('#codeBlock .code')).map(n => n.textContent).join('\n');
+            navigator.clipboard.writeText(text).then(() => {
+                this.textContent = 'Copied!';
+                setTimeout(() => this.innerHTML = '<i class="fas fa-copy"></i> Copy', 1500);
+            });
+        });
+    </script>
+</body>
+
+</html>
