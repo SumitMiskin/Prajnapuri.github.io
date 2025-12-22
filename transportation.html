@@ -1,101 +1,223 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>Transportation — Prajnapuri Design</title>
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" />
-    <link href="css/styles.css" rel="stylesheet" />
-    <style>
-      .ideas-section { background-color: #d6e9f5; padding: 60px 20px; margin-top: 80px; }
-      .ideas-card { background: #ffffff; max-width: 980px; margin: 0 auto; padding: 28px; border-radius: 12px; box-shadow: 0 12px 36px rgba(0,0,0,0.12); }
-      .ideas-card h2 { font-size: 24px; margin-bottom: 16px; color: #222; }
-      .ideas-card .lead { font-size: 16px; color: #333; }
-      .ideas-card ul { font-size: 18px; color: #333; }
-      .ideas-card ul li { margin-bottom: 8px; font-size: 18px; }
-      .back-ideas { position: fixed; top: 100px; left: 20px; z-index: 1000; padding: 12px 20px; font-size: 16px; font-weight: 600; background-color: #2b87c9; color: #fff; border: none; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.2); transition: 0.2s ease; text-decoration: none; display: inline-block; }
-      /* Algorithm card grid styles */
-      .algo-card { background: #fff; border-radius: 10px; padding: 18px; box-shadow: 0 10px 30px rgba(0,0,0,0.06); }
-      .algo-title { font-weight: 700; color: #2a6a9e; }
-      .algo-link { background: transparent; border: none; color: #2a6a9e; font-weight: 700; padding: 0; cursor: pointer; text-decoration: none; font-size: 14px; }
-      .algo-link:hover { text-decoration: underline; }
-    </style>
-  </head>
-  <body id="page-top">
-    <a href="manjunath.html" class="back-ideas btn btn-light btn-sm">← </a>
-    <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
-      <div class="container">
-        <a class="navbar-brand" href="index.html">Prajnapuri Design</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive">Menu <i class="fas fa-bars"></i></button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-            <li class="nav-item"><a class="nav-link" href="project.html">Project</a></li>
-            <li class="nav-item"><a class="nav-link" href="sumit.html">Sumit</a></li>
-            <li class="nav-item"><a class="nav-link" href="shrinivas.html">Shrinivas</a></li>
-            <li class="nav-item"><a class="nav-link" href="manjunath.html">Manjunath</a></li>
-            <li class="nav-item"><a class="nav-link" href="samarth.html">Samarth</a></li>
-          </ul>
-        </div>
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <title>Transportation — Prajnapuri Design</title>
+  <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+  <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" />
+  <link href="css/styles.css" rel="stylesheet" />
+  <style>
+    .ideas-section {
+      background-color: #d6e9f5;
+      padding: 60px 20px;
+      margin-top: 80px;
+    }
+
+    .ideas-card {
+      background: #ffffff;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 28px;
+      border-radius: 12px;
+      box-shadow: 0 12px 36px rgba(0, 0, 0, 0.12);
+    }
+
+    .ideas-card h2 {
+      font-size: 24px;
+      margin-bottom: 16px;
+      color: #222;
+    }
+
+    .ideas-card .lead {
+      font-size: 16px;
+      color: #333;
+    }
+
+    .ideas-card ul {
+      font-size: 18px;
+      color: #333;
+    }
+
+    .ideas-card ul li {
+      margin-bottom: 8px;
+      font-size: 18px;
+    }
+
+    .back-ideas {
+      position: fixed;
+      top: 100px;
+      left: 20px;
+      z-index: 1000;
+      padding: 12px 20px;
+      font-size: 16px;
+      font-weight: 600;
+      background-color: #2b87c9;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      transition: 0.2s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    /* Algorithm card grid styles */
+    .algo-card {
+      background: #fff;
+      border-radius: 10px;
+      padding: 18px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+    }
+
+    .algo-title {
+      font-weight: 700;
+      color: #2a6a9e;
+    }
+
+    .algo-link {
+      background: transparent;
+      border: none;
+      color: #2a6a9e;
+      font-weight: 700;
+      padding: 0;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 14px;
+    }
+
+    .algo-link:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body id="page-top">
+  <a href="manjunath.html" class="back-ideas btn btn-light btn-sm">← </a>
+  <nav class="navbar navbar-expand-lg bg-secondary text-uppercase fixed-top" id="mainNav">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">Prajnapuri Design</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive">Menu <i
+          class="fas fa-bars"></i></button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="project.html">Project</a></li>
+          <li class="nav-item"><a class="nav-link" href="sumit.html">Sumit</a></li>
+          <li class="nav-item"><a class="nav-link" href="shrinivas.html">Shrinivas</a></li>
+          <li class="nav-item"><a class="nav-link" href="manjunath.html">Manjunath</a></li>
+          <li class="nav-item"><a class="nav-link" href="samarth.html">Samarth</a></li>
+        </ul>
       </div>
-    </nav>
+    </div>
+  </nav>
 
-    <section class="ideas-section">
-      <div class="container">
-        <h2 class="text-center text-uppercase mb-4">Transportation (Traffic & Mobility)</h2>
-        <div class="ideas-card">
-          <img src="assets/img/portfolio/image.png" class="d-block mx-auto mb-4" style="max-width: 50%; height: auto;" alt="Transportation concept image" />
-          
-          <ul class="text-dark">
-            <li><p class="mb-2">Building a Smart Transportation system is essential for a developing city, as it ensures smooth traffic flow, reduces congestion and pollution, and enhances commuter safety. Efficient mobility also supports economic activity, improves emergency response times, and contributes to better urban planning.</p></li>
-          </ul>
+  <section class="ideas-section">
+    <div class="container">
+      <h2 class="text-center text-uppercase mb-4">Transportation (Traffic & Mobility)</h2>
+      <div class="ideas-card">
+        <img src="assets/img/portfolio/image.png" class="d-block mx-auto mb-4" style="max-width: 50%; height: auto;"
+          alt="Transportation concept image" />
 
-          <ul class="text-dark mt-3">
-            <li><p class="mb-2">To implement a Smart Transportation system, multiple algorithms and data structures can be used to manage and optimize road networks, traffic signals, routing, and commuter analytics. We model the city's road network as a graph, with intersections and key points as nodes, and roads between them as edges weighted by distance or congestion.</p></li>
-          </ul>
+        <ul class="text-dark">
+          <li>
+            <p class="mb-2">Building a Smart Transportation system is essential for a developing city, as it ensures
+              smooth traffic flow, reduces congestion and pollution, and enhances commuter safety. Efficient mobility
+              also supports economic activity, improves emergency response times, and contributes to better urban
+              planning.</p>
+          </li>
+        </ul>
 
-          <ul class="text-dark mt-3">
-            <li><p class="mb-2">We can use Dijkstra's algorithm to calculate the shortest travel time between key locations like hospitals, schools, or police stations. This helps in navigation apps and emergency vehicle dispatch systems. For a larger-scale pre-computation of travel times between all pairs of locations, Floyd–Warshall's algorithm can be applied.</p></li>
-          </ul>
+        <ul class="text-dark mt-3">
+          <li>
+            <p class="mb-2">To implement a Smart Transportation system, multiple algorithms and data structures can be
+              used to manage and optimize road networks, traffic signals, routing, and commuter analytics. We model the
+              city's road network as a graph, with intersections and key points as nodes, and roads between them as
+              edges weighted by distance or congestion.</p>
+          </li>
+        </ul>
 
-          <ul class="text-dark mt-3">
-            <li><p class="mb-2">When planning the main transportation backbone (e.g., placement of highways or rapid transit routes), we can use Prim's algorithm to compute the Minimum Spanning Tree (MST) that connects important regions with minimum total construction cost. Prim's is particularly effective for dense city networks, as it grows the MST from a starting node and works well with many interconnected roads.</p></li>
-          </ul>
+        <ul class="text-dark mt-3">
+          <li>
+            <p class="mb-2">We can use Dijkstra's algorithm to calculate the shortest travel time between key locations
+              like hospitals, schools, or police stations. This helps in navigation apps and emergency vehicle dispatch
+              systems. For a larger-scale pre-computation of travel times between all pairs of locations,
+              Floyd–Warshall's algorithm can be applied.</p>
+          </li>
+        </ul>
 
-          <ul class="text-dark mt-3">
-            <li><p class="mb-2">Kruskal's algorithm can be used for the initial planning of large, less-connected zones (e.g., rural outskirts), where the network is sparse and edge weights differ significantly. It sorts all possible connections and adds the shortest valid ones without creating cycles.</p></li>
-          </ul>
+        <ul class="text-dark mt-3">
+          <li>
+            <p class="mb-2">When planning the main transportation backbone (e.g., placement of highways or rapid transit
+              routes), we can use Prim's algorithm to compute the Minimum Spanning Tree (MST) that connects important
+              regions with minimum total construction cost. Prim's is particularly effective for dense city networks, as
+              it grows the MST from a starting node and works well with many interconnected roads.</p>
+          </li>
+        </ul>
 
-          <ul class="text-dark mt-3">
-            <li><p class="mb-2">Heap data structures (priority queues) are used internally in Dijkstra's algorithm and also independently to prioritize traffic events, such as traffic light updates, road maintenance scheduling, or routing emergency vehicles. We can apply Heap Sort for ranking routes or sorting locations based on congestion severity.</p></li>
-          </ul>
+        <ul class="text-dark mt-3">
+          <li>
+            <p class="mb-2">Kruskal's algorithm can be used for the initial planning of large, less-connected zones
+              (e.g., rural outskirts), where the network is sparse and edge weights differ significantly. It sorts all
+              possible connections and adds the shortest valid ones without creating cycles.</p>
+          </li>
+        </ul>
 
-          <ul class="text-dark mt-3">
-            <li><p class="mb-2">For managing real-time sensor data (vehicle count, speed, signal status), we can use a Lookup Table for constant-time access to location-wise traffic data. A Fenwick Tree (BIT) can be employed to maintain and query cumulative vehicle counts over time across different checkpoints.</p></li>
-          </ul>
+        <ul class="text-dark mt-3">
+          <li>
+            <p class="mb-2">Heap data structures (priority queues) are used internally in Dijkstra's algorithm and also
+              independently to prioritize traffic events, such as traffic light updates, road maintenance scheduling, or
+              routing emergency vehicles. We can apply Heap Sort for ranking routes or sorting locations based on
+              congestion severity.</p>
+          </li>
+        </ul>
 
-          <ul class="text-dark mt-3">
-            <li><p class="mb-2">To analyze the road network's structure and detect possible alternate paths or cycles, we use DFS (Depth First Search) and BFS (Breadth First Search). These help in identifying redundant paths or connected zones, and in congestion pattern analysis.</p></li>
-          </ul>
+        <ul class="text-dark mt-3">
+          <li>
+            <p class="mb-2">For managing real-time sensor data (vehicle count, speed, signal status), we can use a
+              Lookup Table for constant-time access to location-wise traffic data. A Fenwick Tree (BIT) can be employed
+              to maintain and query cumulative vehicle counts over time across different checkpoints.</p>
+          </li>
+        </ul>
 
-          <ul class="text-dark mt-3">
-            <li><p class="mb-2">Hash tables are used to map vehicle IDs, routes, or sensor codes to their corresponding metadata quickly. For indexing road names or routes, a Trie enables fast prefix-based searches, improving GPS and map-search functionalities.</p></li>
-          </ul>
+        <ul class="text-dark mt-3">
+          <li>
+            <p class="mb-2">To analyze the road network's structure and detect possible alternate paths or cycles, we
+              use DFS (Depth First Search) and BFS (Breadth First Search). These help in identifying redundant paths or
+              connected zones, and in congestion pattern analysis.</p>
+          </li>
+        </ul>
 
-          <ul class="text-dark mt-3">
-            <li><p class="mb-2">We can also apply sorting algorithms like Merge Sort or Quick Sort to organize areas based on traffic density, allowing dynamic planning of signal timing or rerouting strategies. For smaller lists like nearby intersections or event queues, Insertion Sort or Selection Sort may suffice.</p></li>
-          </ul>
+        <ul class="text-dark mt-3">
+          <li>
+            <p class="mb-2">Hash tables are used to map vehicle IDs, routes, or sensor codes to their corresponding
+              metadata quickly. For indexing road names or routes, a Trie enables fast prefix-based searches, improving
+              GPS and map-search functionalities.</p>
+          </li>
+        </ul>
 
-          <ul class="text-dark mt-3">
-            <li><p>In cases of traffic violation logs or vehicle identification through ANPR (Automatic Number Plate Recognition), string search algorithms like Knuth–Morris–Pratt (KMP), Boyer–Moore, or Rabin–Karp can help detect specific license patterns or flagged vehicle IDs efficiently.</p></li>
-          </ul>
-        </div>
-        <h1 class="text-center">-</h1>
-        <h2 class="text-center text-uppercase mb-4">Algorithms and Datastructure used</h2>
-        <div class="ideas-card">
+        <ul class="text-dark mt-3">
+          <li>
+            <p class="mb-2">We can also apply sorting algorithms like Merge Sort or Quick Sort to organize areas based
+              on traffic density, allowing dynamic planning of signal timing or rerouting strategies. For smaller lists
+              like nearby intersections or event queues, Insertion Sort or Selection Sort may suffice.</p>
+          </li>
+        </ul>
+
+        <ul class="text-dark mt-3">
+          <li>
+            <p>In cases of traffic violation logs or vehicle identification through ANPR (Automatic Number Plate
+              Recognition), string search algorithms like Knuth–Morris–Pratt (KMP), Boyer–Moore, or Rabin–Karp can help
+              detect specific license patterns or flagged vehicle IDs efficiently.</p>
+          </li>
+        </ul>
+      </div>
+      <h1 class="text-center">-</h1>
+      <h2 class="text-center text-uppercase mb-4">Algorithms and Datastructure used</h2>
+      <div class="ideas-card">
         <div class="row g-4">
           <!-- Dijkstra -->
           <div class="col-md-6">
@@ -104,7 +226,13 @@
                 <div>
                   <div class="badge bg-light text-dark mb-2">Dijkstra's Algorithm</div>
                   <h4 class="algo-title">Shortest-path routing</h4>
-                  <p class="mb-0">Dijkstra's Algorithm plays a crucial role in smart transportation systems by helping calculate the shortest travel time between intersections, landmarks, or urban zones in a road network.</p>
+                  <p class="mb-0">Dijkstra's Algorithm plays a crucial role in smart transportation systems by helping
+                    calculate the shortest travel time between intersections, landmarks, or urban zones in a road
+                    network.</p>
+                  <p class="mt-2 text-muted small">
+                    <strong>Time:</strong> O((V+E) log V) <br>
+                    <strong>Space:</strong> O(V+E)
+                  </p>
                 </div>
                 <div>
                   <a href="dijkstra-code.html" class="algo-link">Watch out →</a>
@@ -120,7 +248,15 @@
                 <div>
                   <div class="badge bg-light text-dark mb-2">Floyd–Warshall</div>
                   <h4 class="algo-title">All-pairs shortest routes</h4>
-                  <p class="mb-0">Floyd-Warshall's algorithm is essential for computing shortest paths between all pairs of locations in a city network. Unlike Dijkstra which finds paths from a single source, Floyd-Warshall pre-computes optimal routes between every pair of intersections, making it ideal for offline route planning, congestion analysis, and traffic optimization across the entire city network.</p>
+                  <p class="mb-0">Floyd-Warshall's algorithm is essential for computing shortest paths between all pairs
+                    of locations in a city network. Unlike Dijkstra which finds paths from a single source,
+                    Floyd-Warshall pre-computes optimal routes between every pair of intersections, making it ideal for
+                    offline route planning, congestion analysis, and traffic optimization across the entire city
+                    network.</p>
+                  <p class="mt-2 text-muted small">
+                    <strong>Time:</strong> O(V³) <br>
+                    <strong>Space:</strong> O(V²)
+                  </p>
                 </div>
                 <div>
                   <a href="floyd-warshall-code.html" class="algo-link">Watch out →</a>
@@ -136,7 +272,13 @@
                 <div>
                   <div class="badge bg-light text-dark mb-2">Prim's Algorithm</div>
                   <h4 class="algo-title">Minimum spanning backbone</h4>
-                  <p class="mb-0">Prim's Algorithm is a greedy algorithm used to design a Minimum Spanning Tree (MST) — the most cost-efficient way to connect all key locations (e.g., intersections, stations, or zones) in a city with roads or transit lines, ensuring there are no redundant routes or loops.</p>
+                  <p class="mb-0">Prim's Algorithm is a greedy algorithm used to design a Minimum Spanning Tree (MST) —
+                    the most cost-efficient way to connect all key locations (e.g., intersections, stations, or zones)
+                    in a city with roads or transit lines, ensuring there are no redundant routes or loops.</p>
+                  <p class="mt-2 text-muted small">
+                    <strong>Time:</strong> O(E log V) <br>
+                    <strong>Space:</strong> O(V+E)
+                  </p>
                 </div>
                 <div>
                   <a href="prim-code.html" class="algo-link">Watch out →</a>
@@ -152,7 +294,13 @@
                 <div>
                   <div class="badge bg-light text-dark mb-2">Kruskal's Algorithm</div>
                   <h4 class="algo-title">Sparse-network MST</h4>
-                  <p class="mb-0">Kruskal's Algorithm is a greedy algorithm used to design a Minimum Spanning Tree (MST) — the most cost-effective way to connect key locations in a city with roads or transit routes while avoiding redundancy and ensuring full connectivity.</p>
+                  <p class="mb-0">Kruskal's Algorithm is a greedy algorithm used to design a Minimum Spanning Tree (MST)
+                    — the most cost-effective way to connect key locations in a city with roads or transit routes while
+                    avoiding redundancy and ensuring full connectivity.</p>
+                  <p class="mt-2 text-muted small">
+                    <strong>Time:</strong> O(E log V) <br>
+                    <strong>Space:</strong> O(V+E)
+                  </p>
                 </div>
                 <div>
                   <a href="kruskal-code.html" class="algo-link">Watch out →</a>
@@ -160,7 +308,7 @@
               </div>
             </div>
           </div>
-          
+
           <!-- Heap Sort -->
           <div class="col-md-6">
             <div class="algo-card">
@@ -168,7 +316,12 @@
                 <div>
                   <div class="badge bg-light text-dark mb-2">Heap Sort</div>
                   <h4 class="algo-title">Route congestion sort</h4>
-                  <p class="mb-0">Use a binary heap to rank routes by congestion severity so planners can prioritize interventions and schedule maintenance effectively.</p>
+                  <p class="mb-0">Use a binary heap to rank routes by congestion severity so planners can prioritize
+                    interventions and schedule maintenance effectively.</p>
+                  <p class="mt-2 text-muted small">
+                    <strong>Time:</strong> O(N log N) <br>
+                    <strong>Space:</strong> O(1)
+                  </p>
                 </div>
                 <div>
                   <a href="heap-sort-code.html" class="algo-link">Watch out →</a>
@@ -184,7 +337,12 @@
                 <div>
                   <div class="badge bg-light text-dark mb-2">Fenwick Tree (BIT)</div>
                   <h4 class="algo-title">Traffic monitoring & queries</h4>
-                  <p class="mb-0">Maintain cumulative vehicle counts across checkpoints with fast point-updates and prefix-sum queries using a Binary Indexed Tree.</p>
+                  <p class="mb-0">Maintain cumulative vehicle counts across checkpoints with fast point-updates and
+                    prefix-sum queries using a Binary Indexed Tree.</p>
+                  <p class="mt-2 text-muted small">
+                    <strong>Time:</strong> O(log N) <br>
+                    <strong>Space:</strong> O(N)
+                  </p>
                 </div>
                 <div>
                   <a href="bit-code.html" class="algo-link">Watch out →</a>
@@ -200,7 +358,12 @@
                 <div>
                   <div class="badge bg-light text-dark mb-2">BFS & DFS</div>
                   <h4 class="algo-title">Network connectivity exploration</h4>
-                  <p class="mb-0">Use BFS and DFS to find all reachable zones, detect isolated regions, explore alternate paths during congestion, and analyze network structure for cycle detection.</p>
+                  <p class="mb-0">Use BFS and DFS to find all reachable zones, detect isolated regions, explore
+                    alternate paths during congestion, and analyze network structure for cycle detection.</p>
+                  <p class="mt-2 text-muted small">
+                    <strong>Time:</strong> O(V+E) <br>
+                    <strong>Space:</strong> O(V)
+                  </p>
                 </div>
                 <div>
                   <a href="bfs-dfs-code.html" class="algo-link">Watch out →</a>
@@ -216,7 +379,12 @@
                 <div>
                   <div class="badge bg-light text-dark mb-2">Hash Table</div>
                   <h4 class="algo-title">Sensor data indexing</h4>
-                  <p class="mb-0">Efficiently store and retrieve real-time traffic sensor data (vehicle counts, signal status, congestion levels) with O(1) average-case lookup using hash tables with chaining.</p>
+                  <p class="mb-0">Efficiently store and retrieve real-time traffic sensor data (vehicle counts, signal
+                    status, congestion levels) with O(1) average-case lookup using hash tables with chaining.</p>
+                  <p class="mt-2 text-muted small">
+                    <strong>Time:</strong> O(1) avg <br>
+                    <strong>Space:</strong> O(N)
+                  </p>
                 </div>
                 <div>
                   <a href="hash-table-code.html" class="algo-link">Watch out →</a>
@@ -232,7 +400,12 @@
                 <div>
                   <div class="badge bg-light text-dark mb-2">Rabin-Karp</div>
                   <h4 class="algo-title">Vehicle plate pattern matching</h4>
-                  <p class="mb-0">Efficiently search ANPR (Automatic Number Plate Recognition) logs to identify flagged vehicles, stolen vehicles, or violators using rolling-hash pattern matching.</p>
+                  <p class="mb-0">Efficiently search ANPR (Automatic Number Plate Recognition) logs to identify flagged
+                    vehicles, stolen vehicles, or violators using rolling-hash pattern matching.</p>
+                  <p class="mt-2 text-muted small">
+                    <strong>Time:</strong> O(N+M) avg <br>
+                    <strong>Space:</strong> O(1)
+                  </p>
                 </div>
                 <div>
                   <a href="rabin-karp-code.html" class="algo-link">Watch out →</a>
@@ -240,13 +413,14 @@
               </div>
             </div>
           </div>
-           
+
         </div>
       </div>
-      </div>
-    </section>
+    </div>
+  </section>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/scripts.js"></script>
-  </body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/scripts.js"></script>
+</body>
+
 </html>
