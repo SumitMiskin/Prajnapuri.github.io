@@ -270,7 +270,186 @@
 
 </div>
 
+ <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f4f7fb;
+    }
+    pre {
+      background: #0f172a;
+      color: #e5e7eb;
+      padding: 16px;
+      border-radius: 12px;
+      font-size: 14px;
+      overflow-x: auto;
+    }
+    .algo-card {
+      border-radius: 18px;
+    }
+    .badge-algo {
+      background: #0d6efd;
+    }
+  </style>
+
     <!-- Page content placeholder -->
+
+            <h2 class="page-section-heading text-center text-uppercase mb-4">
+          Implementation in c programme</h2>
+
+          <div class="container-fluid bg-primary text-white py-5 mb-5">
+  <div class="container text-center">
+    <h1 class="fw-bold">City Population Analysis</h1>
+    <p class="lead">C Algorithm Implementations</p>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- Sorting Algorithm -->
+<div class="card algo-card shadow mb-5">
+  <div class="card-body">
+    <span class="badge badge-algo mb-2">Sorting Algorithm</span>
+    <h3 class="text-primary mt-2">Bubble Sort – Population Ordering</h3>
+    <p>Sort cities by population (highest to lowest).</p>
+<pre><code>#include &lt;stdio.h&gt;
+
+struct City {
+    char name[20];
+    int population;
+};
+
+int main() {
+    struct City cities[3] = {
+        {"ZoneA", 50000},
+        {"ZoneB", 75000},
+        {"ZoneC", 30000}
+    };
+
+    struct City temp;
+    for(int i=0;i&lt;2;i++) {
+        for(int j=0;j&lt;2-i;j++) {
+            if(cities[j].population &lt; cities[j+1].population) {
+                temp = cities[j];
+                cities[j] = cities[j+1];
+                cities[j+1] = temp;
+            }
+        }
+    }
+
+    for(int i=0;i&lt;3;i++)
+        printf("%s - %d\n", cities[i].name, cities[i].population);
+
+    return 0;
+}</code></pre>
+  </div>
+</div>
+
+<!-- Searching Algorithm -->
+<div class="card algo-card shadow mb-5">
+  <div class="card-body">
+    <span class="badge badge-algo mb-2">Searching Algorithm</span>
+    <h3 class="text-primary mt-2">Linear Search – Zone Population</h3>
+    <p>Search population of a specific zone.</p>
+<pre><code>#include &lt;stdio.h&gt;
+#include &lt;string.h&gt;
+
+int main() {
+    char zones[3][10] = {"ZoneA","ZoneB","ZoneC"};
+    int pop[3] = {50000,75000,30000};
+    char key[10];
+
+    scanf("%s", key);
+
+    for(int i=0;i&lt;3;i++) {
+        if(strcmp(zones[i], key)==0) {
+            printf("Population: %d", pop[i]);
+            return 0;
+        }
+    }
+    printf("Zone not found");
+    return 0;
+}</code></pre>
+  </div>
+</div>
+
+<!-- Graph Algorithm -->
+<div class="card algo-card shadow mb-5">
+  <div class="card-body">
+    <span class="badge badge-algo mb-2">Graph Algorithm</span>
+    <h3 class="text-primary mt-2">BFS – Population Movement</h3>
+    <p>Analyze migration between city areas.</p>
+<pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    int graph[4][4] = {
+        {0,1,1,0},
+        {1,0,1,0},
+        {1,1,0,1},
+        {0,0,1,0}
+    };
+
+    int visited[4]={0}, q[4], f=0, r=0;
+    q[r++]=0; visited[0]=1;
+
+    while(f&lt;r) {
+        int n=q[f++];
+        printf("Area %d ", n);
+        for(int i=0;i&lt;4;i++) {
+            if(graph[n][i] && !visited[i]) {
+                visited[i]=1;
+                q[r++]=i;
+            }
+        }
+    }
+    return 0;
+}</code></pre>
+  </div>
+</div>
+
+<!-- Clustering -->
+<div class="card algo-card shadow mb-5">
+  <div class="card-body">
+    <span class="badge badge-algo mb-2">Clustering</span>
+    <h3 class="text-primary mt-2">Density Classification</h3>
+    <p>Group areas by population density.</p>
+<pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    int pop[5]={120000,60000,30000,90000,20000};
+
+    for(int i=0;i&lt;5;i++) {
+        if(pop[i]&gt;80000)
+            printf("Area %d: High Density\n", i);
+        else if(pop[i]&gt;40000)
+            printf("Area %d: Medium Density\n", i);
+        else
+            printf("Area %d: Low Density\n", i);
+    }
+    return 0;
+}</code></pre>
+  </div>
+</div>
+
+<!-- Prediction -->
+<div class="card algo-card shadow mb-5">
+  <div class="card-body">
+    <span class="badge badge-algo mb-2">Prediction Algorithm</span>
+    <h3 class="text-primary mt-2">Linear Growth Model</h3>
+    <p>Predict population after 10 years.</p>
+<pre><code>#include &lt;stdio.h&gt;
+
+int main() {
+    int current=100000, growth=2000, years=10;
+    int future = current + (growth * years);
+
+    printf("Future Population: %d", future);
+    return 0;
+}</code></pre>
+  </div>
+</div>
+
+</div>
+
     
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
