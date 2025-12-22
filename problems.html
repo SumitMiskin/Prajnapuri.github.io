@@ -884,64 +884,62 @@ int main() {
           </div>
         </div>
       </div>
-    </div>
+      <!-- Footer -->
+      <footer class="footer text-center py-4">
+        <div class="container">
+          <p class="mb-0">Prajnapuri City Design — Key Problems</p>
+        </div>
+      </footer>
 
-    <!-- Footer -->
-    <footer class="footer text-center py-4">
-      <div class="container">
-        <p class="mb-0">Prajnapuri City Design — Key Problems</p>
-      </div>
-    </footer>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+      <script src="js/scripts.js"></script>
+      <script>
+        // Load and display CSV data
+        function loadCSVData() {
+          fetch('assets/img/portfolio/Prajnapuri_population.csv')
+            .then(response => response.text())
+            .then(data => {
+              const lines = data.trim().split('\n');
+              let tableHTML = '<table style="width: 100%; border-collapse: collapse; margin-top: 10px;">';
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="js/scripts.js"></script>
-    <script>
-      // Load and display CSV data
-      function loadCSVData() {
-        fetch('assets/img/portfolio/Prajnapuri_population.csv')
-          .then(response => response.text())
-          .then(data => {
-            const lines = data.trim().split('\n');
-            let tableHTML = '<table style="width: 100%; border-collapse: collapse; margin-top: 10px;">';
+              lines.forEach((line, index) => {
+                const cells = line.split(',');
+                const isHeader = index === 0;
+                const rowStyle = isHeader ? 'background-color: #28a745; color: white; font-weight: bold;' : (index % 2 === 0 ? 'background-color: #f9f9f9;' : '');
 
-            lines.forEach((line, index) => {
-              const cells = line.split(',');
-              const isHeader = index === 0;
-              const rowStyle = isHeader ? 'background-color: #28a745; color: white; font-weight: bold;' : (index % 2 === 0 ? 'background-color: #f9f9f9;' : '');
-
-              tableHTML += `<tr style="${rowStyle}">`;
-              cells.forEach(cell => {
-                const tag = isHeader ? 'th' : 'td';
-                tableHTML += `<${tag} style="padding: 10px; border: 1px solid #ddd; text-align: left;">${cell.trim()}</${tag}>`;
+                tableHTML += `<tr style="${rowStyle}">`;
+                cells.forEach(cell => {
+                  const tag = isHeader ? 'th' : 'td';
+                  tableHTML += `<${tag} style="padding: 10px; border: 1px solid #ddd; text-align: left;">${cell.trim()}</${tag}>`;
+                });
+                tableHTML += '</tr>';
               });
-              tableHTML += '</tr>';
+
+              tableHTML += '</table>';
+              document.getElementById('csvTableContainer').innerHTML = tableHTML;
+            })
+            .catch(error => {
+              document.getElementById('csvTableContainer').innerHTML = '<p style="color: red; text-align: center;">Error loading CSV data</p>';
+              console.error('Error:', error);
             });
-
-            tableHTML += '</table>';
-            document.getElementById('csvTableContainer').innerHTML = tableHTML;
-          })
-          .catch(error => {
-            document.getElementById('csvTableContainer').innerHTML = '<p style="color: red; text-align: center;">Error loading CSV data</p>';
-            console.error('Error:', error);
-          });
-      }
-
-      // Load CSV when modal is shown
-      document.getElementById('csvModal3').addEventListener('show.bs.modal', loadCSVData);
-      // Ensure Problem 7 button opens modal7 even if data attributes fail
-      (function () {
-        const btn = document.querySelector('[data-bs-target="#modal7"]');
-        if (btn) {
-          btn.addEventListener('click', function (e) {
-            var modalEl = document.getElementById('modal7');
-            if (modalEl) {
-              var bsModal = bootstrap.Modal.getOrCreateInstance(modalEl);
-              bsModal.show();
-            }
-          });
         }
-      })();
-    </script>
+
+        // Load CSV when modal is shown
+        document.getElementById('csvModal3').addEventListener('show.bs.modal', loadCSVData);
+        // Ensure Problem 7 button opens modal7 even if data attributes fail
+        (function () {
+          const btn = document.querySelector('[data-bs-target="#modal7"]');
+          if (btn) {
+            btn.addEventListener('click', function (e) {
+              var modalEl = document.getElementById('modal7');
+              if (modalEl) {
+                var bsModal = bootstrap.Modal.getOrCreateInstance(modalEl);
+                bsModal.show();
+              }
+            });
+          }
+        })();
+      </script>
 </body>
 
 </html>
