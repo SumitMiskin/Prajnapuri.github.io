@@ -125,11 +125,11 @@
 
         <h4>View Algorithm Code</h4>
         <div class="mb-3">
-          <a class="btn btn-outline-primary me-2 mb-2" href="code-viewer.html?file=linear_regression.cpp">Linear Regression</a>
-          <a class="btn btn-outline-primary me-2 mb-2" href="code-viewer.html?file=genetic_algo.cpp">Genetic Algorithm</a>
-          <a class="btn btn-outline-primary me-2 mb-2" href="code-viewer.html?file=pid_controller.cpp">PID Controller</a>
-          <a class="btn btn-outline-primary me-2 mb-2" href="code-viewer.html?file=anomaly_detection.cpp">Anomaly Detection</a>
-          <a class="btn btn-outline-primary me-2 mb-2" href="code-viewer.html?file=greedy_irrigation.cpp">Greedy Irrigation</a>
+          <button class="btn btn-outline-primary me-2 mb-2" data-bs-toggle="collapse" data-bs-target="#code-linear_regression">Linear Regression</button>
+          <button class="btn btn-outline-primary me-2 mb-2" data-bs-toggle="collapse" data-bs-target="#code-genetic_algo">Genetic Algorithm</button>
+          <button class="btn btn-outline-primary me-2 mb-2" data-bs-toggle="collapse" data-bs-target="#code-pid_controller">PID Controller</button>
+          <button class="btn btn-outline-primary me-2 mb-2" data-bs-toggle="collapse" data-bs-target="#code-anomaly_detection">Anomaly Detection</button>
+          <button class="btn btn-outline-primary me-2 mb-2" data-bs-toggle="collapse" data-bs-target="#code-greedy_irrigation">Greedy Irrigation</button>
         </div>
 
         <h3>Data Structures Used</h3>
@@ -146,11 +146,308 @@
 
         <h4>View Data Structure Code</h4>
         <div class="mb-3">
-          <a class="btn btn-outline-secondary me-2 mb-2" href="code-viewer.html?file=arrays_example.cpp">Arrays / Lists</a>
-          <a class="btn btn-outline-secondary me-2 mb-2" href="code-viewer.html?file=hashmap_sensor.cpp">Hash Map</a>
-          <a class="btn btn-outline-secondary me-2 mb-2" href="code-viewer.html?file=graph_model.cpp">Graph</a>
-          <a class="btn btn-outline-secondary me-2 mb-2" href="code-viewer.html?file=priority_queue_alerts.cpp">Priority Queue</a>
-          <a class="btn btn-outline-secondary me-2 mb-2" href="code-viewer.html?file=tree_growth.cpp">Tree (Growth Stages)</a>
+          <button class="btn btn-outline-secondary me-2 mb-2" data-bs-toggle="collapse" data-bs-target="#code-arrays_example">Arrays / Lists</button>
+          <button class="btn btn-outline-secondary me-2 mb-2" data-bs-toggle="collapse" data-bs-target="#code-hashmap_sensor">Hash Map</button>
+          <button class="btn btn-outline-secondary me-2 mb-2" data-bs-toggle="collapse" data-bs-target="#code-graph_model">Graph</button>
+          <button class="btn btn-outline-secondary me-2 mb-2" data-bs-toggle="collapse" data-bs-target="#code-priority_queue_alerts">Priority Queue</button>
+          <button class="btn btn-outline-secondary me-2 mb-2" data-bs-toggle="collapse" data-bs-target="#code-tree_growth">Tree (Growth Stages)</button>
+        </div>
+
+        <!-- Embedded code accordion -->
+        <div class="accordion" id="codeAccordion">
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="algLinearHeading">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#code-linear_regression" aria-expanded="false" aria-controls="code-linear_regression">Linear Regression (linear_regression.cpp)</button>
+            </h2>
+            <div id="code-linear_regression" class="accordion-collapse collapse" aria-labelledby="algLinearHeading" data-bs-parent="#codeAccordion">
+              <div class="accordion-body">
+                <div class="d-flex justify-content-end mb-2"><button class="btn btn-sm btn-outline-secondary" onclick="copyCode('linear_regression_pre', this)">Copy</button></div>
+                <pre id="linear_regression_pre" class="code-block"><code><?xml version="1.0"?>
+#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    // Example data (temperature vs yield)
+    int n = 5;
+    double x[] = {20, 22, 25, 27, 30}; // temperature
+    double y[] = {10, 12, 15, 17, 20}; // yield
+
+    double sumX = 0, sumY = 0, sumXY = 0, sumXX = 0;
+
+    for(int i = 0; i < n; i++) {
+        sumX += x[i];
+        sumY += y[i];
+        sumXY += x[i] * y[i];
+        sumXX += x[i] * x[i];
+    }
+
+    double m = (n * sumXY - sumX * sumY) / (n * sumXX - sumX * sumX);
+    double c = (sumY - m * sumX) / n;
+
+    double futureTemp = 28;
+    double predictedYield = m * futureTemp + c;
+
+    cout << "Predicted Yield: " << predictedYield << endl;
+    return 0;
+}
+</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="algGeneticHeading">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#code-genetic_algo" aria-expanded="false" aria-controls="code-genetic_algo">Genetic Algorithm (genetic_algo.cpp)</button>
+            </h2>
+            <div id="code-genetic_algo" class="accordion-collapse collapse" aria-labelledby="algGeneticHeading" data-bs-parent="#codeAccordion">
+              <div class="accordion-body">
+                <div class="d-flex justify-content-end mb-2"><button class="btn btn-sm btn-outline-secondary" onclick="copyCode('genetic_algo_pre', this)">Copy</button></div>
+                <pre id="genetic_algo_pre" class="code-block"><code>#include &lt;iostream&gt;
+#include &lt;cstdlib&gt;
+using namespace std;
+
+int fitness(int nutrient) {
+    return nutrient * nutrient; // example fitness function
+}
+
+int main() {
+    int population[5] = {2, 5, 8, 3, 6};
+
+    int best = population[0];
+    for(int i = 1; i < 5; i++) {
+        if(fitness(population[i]) > fitness(best))
+            best = population[i];
+    }
+
+    cout << "Best Nutrient Value: " << best << endl;
+    return 0;
+}
+</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="algPIDHeading">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#code-pid_controller" aria-expanded="false" aria-controls="code-pid_controller">PID Controller (pid_controller.cpp)</button>
+            </h2>
+            <div id="code-pid_controller" class="accordion-collapse collapse" aria-labelledby="algPIDHeading" data-bs-parent="#codeAccordion">
+              <div class="accordion-body">
+                <div class="d-flex justify-content-end mb-2"><button class="btn btn-sm btn-outline-secondary" onclick="copyCode('pid_controller_pre', this)">Copy</button></div>
+                <pre id="pid_controller_pre" class="code-block"><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    double setPoint = 25;
+    double currentTemp = 30;
+    double Kp = 1.2;
+
+    double error = setPoint - currentTemp;
+    double controlSignal = Kp * error;
+
+    cout << "Control Signal: " << controlSignal << endl;
+    return 0;
+}
+</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="algAnomHeading">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#code-anomaly_detection" aria-expanded="false" aria-controls="code-anomaly_detection">Anomaly Detection (anomaly_detection.cpp)</button>
+            </h2>
+            <div id="code-anomaly_detection" class="accordion-collapse collapse" aria-labelledby="algAnomHeading" data-bs-parent="#codeAccordion">
+              <div class="accordion-body">
+                <div class="d-flex justify-content-end mb-2"><button class="btn btn-sm btn-outline-secondary" onclick="copyCode('anomaly_detection_pre', this)">Copy</button></div>
+                <pre id="anomaly_detection_pre" class="code-block"><code>#include &lt;iostream&gt;
+#include &lt;cmath&gt;
+using namespace std;
+
+int main() {
+    double values[] = {20, 21, 22, 100, 23};
+    int n = 5;
+
+    double mean = 0;
+    for(int i = 0; i < n; i++) mean += values[i];
+    mean /= n;
+
+    double stdDev = 0;
+    for(int i = 0; i < n; i++)
+        stdDev += pow(values[i] - mean, 2);
+    stdDev = sqrt(stdDev / n);
+
+    for(int i = 0; i < n; i++) {
+        double z = (values[i] - mean) / stdDev;
+        if(fabs(z) > 2)
+            cout << "Anomaly detected: " << values[i] << endl;
+    }
+    return 0;
+}
+</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="algGreedyHeading">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#code-greedy_irrigation" aria-expanded="false" aria-controls="code-greedy_irrigation">Greedy Irrigation (greedy_irrigation.cpp)</button>
+            </h2>
+            <div id="code-greedy_irrigation" class="accordion-collapse collapse" aria-labelledby="algGreedyHeading" data-bs-parent="#codeAccordion">
+              <div class="accordion-body">
+                <div class="d-flex justify-content-end mb-2"><button class="btn btn-sm btn-outline-secondary" onclick="copyCode('greedy_irrigation_pre', this)">Copy</button></div>
+                <pre id="greedy_irrigation_pre" class="code-block"><code>#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+using namespace std;
+
+int main() {
+    int waterLevel[] = {40, 10, 30, 20};
+    int n = 4;
+
+    sort(waterLevel, waterLevel + n);
+
+    cout << "Irrigation Order: ";
+    for(int i = 0; i < n; i++)
+        cout << waterLevel[i] << " ";
+
+    cout << endl;
+    return 0;
+}
+</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <!-- Data structure code blocks -->
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="dsArraysHeading">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#code-arrays_example" aria-expanded="false" aria-controls="code-arrays_example">Arrays / Lists (arrays_example.cpp)</button>
+            </h2>
+            <div id="code-arrays_example" class="accordion-collapse collapse" aria-labelledby="dsArraysHeading" data-bs-parent="#codeAccordion">
+              <div class="accordion-body">
+                <div class="d-flex justify-content-end mb-2"><button class="btn btn-sm btn-outline-secondary" onclick="copyCode('arrays_example_pre', this)">Copy</button></div>
+                <pre id="arrays_example_pre" class="code-block"><code>#include &lt;iostream&gt;
+using namespace std;
+
+int main() {
+    int temperature[5] = {24, 25, 26, 27, 28};
+
+    for(int i = 0; i < 5; i++)
+        cout << "Temp: " << temperature[i] << endl;
+
+    return 0;
+}
+</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="dsHashmapHeading">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#code-hashmap_sensor" aria-expanded="false" aria-controls="code-hashmap_sensor">Hash Map (hashmap_sensor.cpp)</button>
+            </h2>
+            <div id="code-hashmap_sensor" class="accordion-collapse collapse" aria-labelledby="dsHashmapHeading" data-bs-parent="#codeAccordion">
+              <div class="accordion-body">
+                <div class="d-flex justify-content-end mb-2"><button class="btn btn-sm btn-outline-secondary" onclick="copyCode('hashmap_sensor_pre', this)">Copy</button></div>
+                <pre id="hashmap_sensor_pre" class="code-block"><code>#include &lt;iostream&gt;
+#include &lt;unordered_map&gt;
+#include &lt;string&gt;
+using namespace std;
+
+int main() {
+    unordered_map<string, float> sensorData;
+    sensorData["pH"] = 6.5;
+    sensorData["EC"] = 1.8;
+
+    cout << "pH Level: " << sensorData["pH"] << endl;
+    return 0;
+}
+</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="dsGraphHeading">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#code-graph_model" aria-expanded="false" aria-controls="code-graph_model">Graph (graph_model.cpp)</button>
+            </h2>
+            <div id="code-graph_model" class="accordion-collapse collapse" aria-labelledby="dsGraphHeading" data-bs-parent="#codeAccordion">
+              <div class="accordion-body">
+                <div class="d-flex justify-content-end mb-2"><button class="btn btn-sm btn-outline-secondary" onclick="copyCode('graph_model_pre', this)">Copy</button></div>
+                <pre id="graph_model_pre" class="code-block"><code>#include &lt;iostream&gt;
+#include &lt;vector&gt;
+using namespace std;
+
+int main() {
+    vector<int> graph[3];
+
+    graph[0].push_back(1); // Pump → Water Flow
+    graph[1].push_back(2); // Water Flow → Plant Growth
+
+    cout << "System Dependencies Created" << endl;
+    return 0;
+}
+</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="dsPQHeading">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#code-priority_queue_alerts" aria-expanded="false" aria-controls="code-priority_queue_alerts">Priority Queue (priority_queue_alerts.cpp)</button>
+            </h2>
+            <div id="code-priority_queue_alerts" class="accordion-collapse collapse" aria-labelledby="dsPQHeading" data-bs-parent="#codeAccordion">
+              <div class="accordion-body">
+                <div class="d-flex justify-content-end mb-2"><button class="btn btn-sm btn-outline-secondary" onclick="copyCode('priority_queue_alerts_pre', this)">Copy</button></div>
+                <pre id="priority_queue_alerts_pre" class="code-block"><code>#include &lt;iostream&gt;
+#include &lt;queue&gt;
+using namespace std;
+
+int main() {
+    priority_queue<int> alerts;
+
+    alerts.push(2); // medium
+    alerts.push(5); // critical
+    alerts.push(1); // low
+
+    cout << "Highest Priority Alert: " << alerts.top() << endl;
+    return 0;
+}
+</code></pre>
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="dsTreeHeading">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#code-tree_growth" aria-expanded="false" aria-controls="code-tree_growth">Tree (tree_growth.cpp)</button>
+            </h2>
+            <div id="code-tree_growth" class="accordion-collapse collapse" aria-labelledby="dsTreeHeading" data-bs-parent="#codeAccordion">
+              <div class="accordion-body">
+                <div class="d-flex justify-content-end mb-2"><button class="btn btn-sm btn-outline-secondary" onclick="copyCode('tree_growth_pre', this)">Copy</button></div>
+                <pre id="tree_growth_pre" class="code-block"><code>#include &lt;iostream&gt;
+using namespace std;
+
+struct Node {
+    string stage;
+    Node* left;
+    Node* right;
+};
+
+int main() {
+    Node* root = new Node{"Seedling", NULL, NULL};
+    root->left = new Node{"Vegetative", NULL, NULL};
+    root->right = new Node{"Harvest", NULL, NULL};
+
+    cout << "Current Stage: " << root->stage << endl;
+    return 0;
+}
+</code></pre>
+              </div>
+            </div>
+          </div>
+
         </div>
 
         <h3>Benefits and Improvements</h3>
@@ -184,5 +481,20 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/scripts.js"></script>
+    <script>
+      function copyCode(id, btn){
+        const el = document.getElementById(id);
+        if(!el) return;
+        const text = el.innerText || el.textContent;
+        if(navigator.clipboard){
+          navigator.clipboard.writeText(text).then(()=>{
+            if(btn){ const original = btn.innerText; btn.innerText = 'Copied'; setTimeout(()=> btn.innerText = original, 1100); }
+          });
+        } else {
+          const ta = document.createElement('textarea'); ta.value = text; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+          if(btn){ const original = btn.innerText; btn.innerText = 'Copied'; setTimeout(()=> btn.innerText = original, 1100); }
+        }
+      }
+    </script>
   </body>
 </html>
