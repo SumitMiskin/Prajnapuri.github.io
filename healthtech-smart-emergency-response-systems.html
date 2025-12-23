@@ -11,6 +11,11 @@
     <link href="css/styles.css" rel="stylesheet" />
     <style>
       .content-card{ background:#fff; max-width:900px; margin:100px auto 40px; padding:28px; border-radius:12px; box-shadow:0 12px 36px rgba(0,0,0,0.12); font-family: "Times New Roman", Times, serif }
+      /* Problem-style cards for code index */
+      .problem-card { background: #fff; border-radius: 10px; padding: 18px; box-shadow: 0 10px 30px rgba(0,0,0,0.06); }
+      .problem-title { font-weight: 700; color: #186fa4; }
+      .view-btn { background: transparent; border: none; color: #186fa4; font-weight: 700; cursor: pointer; }
+      pre.code-block { background: #0f1720; color: #dfeffb; padding: 16px; border-radius: 8px; overflow: auto; }
     </style>
   </head>
   <body id="page-top">
@@ -138,8 +143,147 @@
         </ul>
 
         <p><a class="btn btn-primary" href="shrinivas.html">Back to ideas</a></p>
-        <!-- Code examples with separate buttons -->
+        <!-- Code index (cards) -->
         <h3 class="mt-4">Code Examples (C++)</h3>
+        <div class="container mb-3">
+          <div class="row g-4">
+            <div class="col-md-6">
+              <div class="problem-card">
+                <div class="d-flex justify-content-between align-items-start">
+                  <div>
+                    <div class="badge bg-light text-dark mb-2">Data Structures</div>
+                    <h4 class="problem-title">Graph – City Road Network (Dijkstra)</h4>
+                    <p class="mb-2">Graph representation used for shortest-path routing.</p>
+                  </div>
+                  <div>
+                    <button class="view-btn" data-bs-toggle="collapse" data-bs-target="#code1" aria-expanded="false" aria-controls="code1">View code →</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="problem-card">
+                <div class="d-flex justify-content-between align-items-start">
+                  <div>
+                    <div class="badge bg-light text-dark mb-2">Data Structures</div>
+                    <h4 class="problem-title">Priority Queue – Emergency Handling</h4>
+                    <p class="mb-2">Priority queue to order emergencies by severity.</p>
+                  </div>
+                  <div>
+                    <button class="view-btn" data-bs-toggle="collapse" data-bs-target="#code2" aria-expanded="false" aria-controls="code2">View code →</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="problem-card">
+                <div class="d-flex justify-content-between align-items-start">
+                  <div>
+                    <div class="badge bg-light text-dark mb-2">Data Structures</div>
+                    <h4 class="problem-title">Hash Map – Ambulance & Hospital Data</h4>
+                    <p class="mb-2">Fast lookup for ambulance and hospital records.</p>
+                  </div>
+                  <div>
+                    <button class="view-btn" data-bs-toggle="collapse" data-bs-target="#code3" aria-expanded="false" aria-controls="code3">View code →</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="problem-card">
+                <div class="d-flex justify-content-between align-items-start">
+                  <div>
+                    <div class="badge bg-light text-dark mb-2">Data Structures</div>
+                    <h4 class="problem-title">Arrays / Vectors – Sensor Data</h4>
+                    <p class="mb-2">Example of sensor readings stored in vectors.</p>
+                  </div>
+                  <div>
+                    <button class="view-btn" data-bs-toggle="collapse" data-bs-target="#code4" aria-expanded="false" aria-controls="#code4">View code →</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="problem-card">
+                <div class="d-flex justify-content-between align-items-start">
+                  <div>
+                    <div class="badge bg-light text-dark mb-2">Algorithms</div>
+                    <h4 class="problem-title">Dijkstra – Fastest Route</h4>
+                    <p class="mb-2">Shortest-path implementation using a min-priority queue.</p>
+                  </div>
+                  <div>
+                    <button class="view-btn" data-bs-toggle="collapse" data-bs-target="#code5" aria-expanded="false" aria-controls="code5">View code →</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="problem-card">
+                <div class="d-flex justify-content-between align-items-start">
+                  <div>
+                    <div class="badge bg-light text-dark mb-2">Algorithms</div>
+                    <h4 class="problem-title">Greedy – Nearest Ambulance</h4>
+                    <p class="mb-2">A simple greedy search to pick nearest ambulance.</p>
+                  </div>
+                  <div>
+                    <button class="view-btn" data-bs-toggle="collapse" data-bs-target="#code6" aria-expanded="false" aria-controls="code6">View code →</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="problem-card">
+                <div class="d-flex justify-content-between align-items-start">
+                  <div>
+                    <div class="badge bg-light text-dark mb-2">Algorithms</div>
+                    <h4 class="problem-title">Priority Scheduling – Emergency Order</h4>
+                    <p class="mb-2">Custom struct with priority queue for emergencies.</p>
+                  </div>
+                  <div>
+                    <button class="view-btn" data-bs-toggle="collapse" data-bs-target="#code7" aria-expanded="false" aria-controls="code7">View code →</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="problem-card">
+                <div class="d-flex justify-content-between align-items-start">
+                  <div>
+                    <div class="badge bg-light text-dark mb-2">Algorithms</div>
+                    <h4 class="problem-title">Anomaly Detection – Z-Score</h4>
+                    <p class="mb-2">Detect sensor faults using z-score outlier detection.</p>
+                  </div>
+                  <div>
+                    <button class="view-btn" data-bs-toggle="collapse" data-bs-target="#code8" aria-expanded="false" aria-controls="code8">View code →</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="problem-card">
+                <div class="d-flex justify-content-between align-items-start">
+                  <div>
+                    <div class="badge bg-light text-dark mb-2">ML</div>
+                    <h4 class="problem-title">ML (Simulated) – Severity Prediction</h4>
+                    <p class="mb-2">Simple rule-based severity prediction to illustrate logistic regression output.</p>
+                  </div>
+                  <div>
+                    <button class="view-btn" data-bs-toggle="collapse" data-bs-target="#code9" aria-expanded="false" aria-controls="code9">View code →</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div id="code-examples" class="mb-4">
           <div class="accordion" id="codesAccordion">
 
@@ -147,7 +291,7 @@
             <div class="accordion-item">
               <h2 class="accordion-header" id="headingOne">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#code1" aria-expanded="false" aria-controls="code1">
-                  1️⃣ Graph – City Road Network (Dijkstra)
+                  1️ Graph – City Road Network (Dijkstra)
                 </button>
               </h2>
               <div id="code1" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#codesAccordion">
@@ -182,7 +326,7 @@ int main() {
             <div class="accordion-item">
               <h2 class="accordion-header" id="headingTwo">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#code2" aria-expanded="false" aria-controls="code2">
-                  2️⃣ Priority Queue – Emergency Handling
+                  2️ Priority Queue – Emergency Handling
                 </button>
               </h2>
               <div id="code2" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#codesAccordion">
@@ -214,7 +358,7 @@ int main() {
             <div class="accordion-item">
               <h2 class="accordion-header" id="headingThree">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#code3" aria-expanded="false" aria-controls="code3">
-                  3️⃣ Hash Map (unordered_map) – Ambulance & Hospital Data
+                  3️ Hash Map (unordered_map) – Ambulance & Hospital Data
                 </button>
               </h2>
               <div id="code3" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#codesAccordion">
@@ -244,7 +388,7 @@ int main() {
             <div class="accordion-item">
               <h2 class="accordion-header" id="headingFour">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#code4" aria-expanded="false" aria-controls="code4">
-                  4️⃣ Arrays / Vectors – Sensor & Location Data
+                  4️ Arrays / Vectors – Sensor & Location Data
                 </button>
               </h2>
               <div id="code4" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#codesAccordion">
@@ -271,7 +415,7 @@ int main() {
             <div class="accordion-item">
               <h2 class="accordion-header" id="headingFive">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#code5" aria-expanded="false" aria-controls="code5">
-                  5️⃣ Dijkstra Algorithm – Fastest Route
+                  5️ Dijkstra Algorithm – Fastest Route
                 </button>
               </h2>
               <div id="code5" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#codesAccordion">
@@ -326,7 +470,7 @@ int main() {
             <div class="accordion-item">
               <h2 class="accordion-header" id="headingSix">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#code6" aria-expanded="false" aria-controls="code6">
-                  6️⃣ Greedy Algorithm – Nearest Ambulance
+                  6️ Greedy Algorithm – Nearest Ambulance
                 </button>
               </h2>
               <div id="code6" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#codesAccordion">
@@ -361,7 +505,7 @@ int main() {
             <div class="accordion-item">
               <h2 class="accordion-header" id="headingSeven">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#code7" aria-expanded="false" aria-controls="code7">
-                  7️⃣ Priority Scheduling – Emergency Order
+                  7️ Priority Scheduling – Emergency Order
                 </button>
               </h2>
               <div id="code7" class="accordion-collapse collapse" aria-labelledby="headingSeven" data-bs-parent="#codesAccordion">
@@ -403,7 +547,7 @@ int main() {
             <div class="accordion-item">
               <h2 class="accordion-header" id="headingEight">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#code8" aria-expanded="false" aria-controls="code8">
-                  8️⃣ Anomaly Detection – Z-Score (Sensor Fault)
+                  8️ Anomaly Detection – Z-Score (Sensor Fault)
                 </button>
               </h2>
               <div id="code8" class="accordion-collapse collapse" aria-labelledby="headingEight" data-bs-parent="#codesAccordion">
@@ -443,7 +587,7 @@ int main() {
             <div class="accordion-item">
               <h2 class="accordion-header" id="headingNine">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#code9" aria-expanded="false" aria-controls="code9">
-                  9️⃣ ML (Logistic Regression – Simulated) – Severity Prediction
+                  9️ ML (Logistic Regression – Simulated) – Severity Prediction
                 </button>
               </h2>
               <div id="code9" class="accordion-collapse collapse" aria-labelledby="headingNine" data-bs-parent="#codesAccordion">
