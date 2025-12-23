@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <title>Waste Record Management Code Preview — Prajnapuri</title>
+    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic" rel="stylesheet" />
+    <link href="css/styles.css" rel="stylesheet" />
+    <style>
+        body {
+            background: #f3f6f9;
+            color: #333;
+            font-family: 'Lato', sans-serif;
+            padding: 60px 20px;
+        }
+
+        .container-modal {
+            max-width: 1000px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        .modal-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid #e1e8ed;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .modal-title {
+            font-weight: 700;
+            font-size: 18px;
+            color: #222;
+        }
+
+        .modal-subtitle {
+            color: #777;
+            font-size: 13px;
+        }
+
+        .top-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .btn-action {
+            background: #1f6feb;
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+        }
+
+        .btn-action:hover {
+            background: #0d47a1;
+        }
+
+        .btn-action.btn-close-modal {
+            background: #2b87c9;
+        }
+
+        .modal-body {
+            padding: 24px;
+        }
+
+        .row-content {
+            display: grid;
+            grid-template-columns: 40% 60%;
+            gap: 24px;
+        }
+
+        @media (max-width: 768px) {
+            .row-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .col-left h6 {
+            color: #2a6a9e;
+            font-weight: 700;
+            font-size: 14px;
+            margin-top: 16px;
+            margin-bottom: 8px;
+        }
+
+        .col-left h6:first-child {
+            margin-top: 0;
+        }
+
+        .col-left p {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .col-right h6 {
+            color: #2a6a9e;
+            font-weight: 700;
+            font-size: 14px;
+            margin-bottom: 12px;
+        }
+
+        pre.code-block {
+            background: #0b1220;
+            color: #cfe5ff;
+            padding: 16px;
+            border-radius: 6px;
+            overflow: auto;
+            max-height: 500px;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        .code-line {
+            display: flex;
+        }
+
+        .ln {
+            width: 35px;
+            text-align: right;
+            padding-right: 12px;
+            color: #6b7a89;
+            user-select: none;
+            flex-shrink: 0;
+        }
+
+        .code {
+            white-space: pre;
+            font-family: Consolas, 'Courier New', monospace;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-modal">
+        <div class="modal-header">
+            <div>
+                <div class="modal-title">Waste Collection Records</div>
+                <div class="modal-subtitle">WasteRecords.cpp — C++ (read-only)</div>
+            </div>
+            <div class="top-actions">
+                <button class="btn-action" id="copyBtn"><i class="fas fa-copy"></i> Copy</button>
+                <a href="waste-management.html" class="btn-action btn-close-modal"><i class="fas fa-times"></i>
+                    Close</a>
+            </div>
+        </div>
+
+        <div class="modal-body">
+            <div class="row-content">
+                <div class="col-left">
+                    <h6>Problem Statement</h6>
+                    <p>Efficiently tracking waste collection data from various locations is essential for municipal
+                        waste management. We need a structured way to store and retrieve details like location, waste
+                        type, and weight for analysis.</p>
+
+                    <h6>Solution Approach</h6>
+                    <p>We use a **Structure (struct)** to define a complex data type `WasteRecord` that groups related
+                        information (location, type, weight). An **Array** of these structures enables us to manage
+                        multiple records systematically, allowing for easy data entry and reporting.</p>
+                </div>
+
+                <div class="col-right">
+                    <h6>C++ Implementation</h6>
+                    <pre class="code-block" id="codeBlock"><code><div class="code-line"><span class="ln">1</span><span class="code">#include &lt;iostream&gt;</span></div>
+<div class="code-line"><span class="ln">2</span><span class="code">using namespace std;</span></div>
+<div class="code-line"><span class="ln">3</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">4</span><span class="code">// Define a structure to store waste collection information</span></div>
+<div class="code-line"><span class="ln">5</span><span class="code">struct WasteRecord {</span></div>
+<div class="code-line"><span class="ln">6</span><span class="code">    string location;</span></div>
+<div class="code-line"><span class="ln">7</span><span class="code">    string wasteType;</span></div>
+<div class="code-line"><span class="ln">8</span><span class="code">    float weight; // in kilograms</span></div>
+<div class="code-line"><span class="ln">9</span><span class="code">};</span></div>
+<div class="code-line"><span class="ln">10</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">11</span><span class="code">int main() {</span></div>
+<div class="code-line"><span class="ln">12</span><span class="code">    int n;</span></div>
+<div class="code-line"><span class="ln">13</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">14</span><span class="code">    // Ask the user for the number of waste records</span></div>
+<div class="code-line"><span class="ln">15</span><span class="code">    cout &lt;&lt; "Enter the number of waste collection records: ";</span></div>
+<div class="code-line"><span class="ln">16</span><span class="code">    cin &gt;&gt; n;</span></div>
+<div class="code-line"><span class="ln">17</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">18</span><span class="code">    // Declare an array of structures</span></div>
+<div class="code-line"><span class="ln">19</span><span class="code">    WasteRecord records[n];</span></div>
+<div class="code-line"><span class="ln">20</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">21</span><span class="code">    // Input waste collection details</span></div>
+<div class="code-line"><span class="ln">22</span><span class="code">    for (int i = 0; i &lt; n; ++i) {</span></div>
+<div class="code-line"><span class="ln">23</span><span class="code">        cout &lt;&lt; "Enter details for record " &lt;&lt; i + 1 &lt;&lt; endl;</span></div>
+<div class="code-line"><span class="ln">24</span><span class="code">        cout &lt;&lt; "Location: ";</span></div>
+<div class="code-line"><span class="ln">25</span><span class="code">        cin &gt;&gt; records[i].location;</span></div>
+<div class="code-line"><span class="ln">26</span><span class="code">        cout &lt;&lt; "Type of Waste (e.g., Plastic, Organic, E-Waste): ";</span></div>
+<div class="code-line"><span class="ln">27</span><span class="code">        cin &gt;&gt; records[i].wasteType;</span></div>
+<div class="code-line"><span class="ln">28</span><span class="code">        cout &lt;&lt; "Weight (kg): ";</span></div>
+<div class="code-line"><span class="ln">29</span><span class="code">        cin &gt;&gt; records[i].weight;</span></div>
+<div class="code-line"><span class="ln">30</span><span class="code">        cout &lt;&lt; endl;</span></div>
+<div class="code-line"><span class="ln">31</span><span class="code">    }</span></div>
+<div class="code-line"><span class="ln">32</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">33</span><span class="code">    // Output the details of the waste collection records</span></div>
+<div class="code-line"><span class="ln">34</span><span class="code">    cout &lt;&lt; "Waste Collection Records:" &lt;&lt; endl;</span></div>
+<div class="code-line"><span class="ln">35</span><span class="code">    for (int i = 0; i &lt; n; ++i) {</span></div>
+<div class="code-line"><span class="ln">36</span><span class="code">        cout &lt;&lt; "Record " &lt;&lt; i + 1 &lt;&lt; ":" &lt;&lt; endl;</span></div>
+<div class="code-line"><span class="ln">37</span><span class="code">        cout &lt;&lt; "Location: " &lt;&lt; records[i].location &lt;&lt; endl;</span></div>
+<div class="code-line"><span class="ln">38</span><span class="code">        cout &lt;&lt; "Waste Type: " &lt;&lt; records[i].wasteType &lt;&lt; endl;</span></div>
+<div class="code-line"><span class="ln">39</span><span class="code">        cout &lt;&lt; "Weight: " &lt;&lt; records[i].weight &lt;&lt; " kg" &lt;&lt; endl;</span></div>
+<div class="code-line"><span class="ln">40</span><span class="code">        cout &lt;&lt; endl;</span></div>
+<div class="code-line"><span class="ln">41</span><span class="code">    }</span></div>
+<div class="code-line"><span class="ln">42</span><span class="code"></span></div>
+<div class="code-line"><span class="ln">43</span><span class="code">    return 0;</span></div>
+<div class="code-line"><span class="ln">44</span><span class="code">}</span></div></code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('copyBtn').addEventListener('click', function () {
+            const text = Array.from(document.querySelectorAll('#codeBlock .code')).map(n => n.textContent).join('\n');
+            navigator.clipboard.writeText(text).then(() => {
+                this.textContent = 'Copied!';
+                setTimeout(() => this.innerHTML = '<i class="fas fa-copy"></i> Copy', 1500);
+            });
+        });
+    </script>
+</body>
+
+</html>
