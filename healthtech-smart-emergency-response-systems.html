@@ -138,6 +138,361 @@
         </ul>
 
         <p><a class="btn btn-primary" href="shrinivas.html">Back to ideas</a></p>
+        <!-- Code examples with separate buttons -->
+        <h3 class="mt-4">Code Examples (C++)</h3>
+        <div id="code-examples" class="mb-4">
+          <div class="accordion" id="codesAccordion">
+
+            <!-- 1 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#code1" aria-expanded="false" aria-controls="code1">
+                  1️⃣ Graph – City Road Network (Dijkstra)
+                </button>
+              </h2>
+              <div id="code1" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#codesAccordion">
+                <div class="accordion-body">
+                  <div class="d-flex justify-content-end mb-2"><button class="btn btn-sm btn-outline-secondary" onclick="copyCode('code1pre')">Copy</button></div>
+                  <pre id="code1pre"><code>// Graph – City Road Network
+#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+#define INF 1e9
+
+int main() {
+    int V = 5;
+    vector<pair<int,int>> graph[5];
+
+    // Edges: (from, to, distance)
+    graph[0].push_back({1,4});
+    graph[0].push_back({2,1});
+    graph[2].push_back({1,2});
+    graph[1].push_back({3,1});
+    graph[3].push_back({4,3});
+
+    cout << "Graph (City Road Network) created successfully\n";
+    return 0;
+}
+</code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#code2" aria-expanded="false" aria-controls="code2">
+                  2️⃣ Priority Queue – Emergency Handling
+                </button>
+              </h2>
+              <div id="code2" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#codesAccordion">
+                <div class="accordion-body">
+                  <div class="d-flex justify-content-end mb-2"><button class="btn btn-sm btn-outline-secondary" onclick="copyCode('code2pre')">Copy</button></div>
+                  <pre id="code2pre"><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+int main() {
+    priority_queue<int> emergencyPQ;
+
+    emergencyPQ.push(3); // High severity
+    emergencyPQ.push(1);
+    emergencyPQ.push(2);
+
+    cout << "Emergency Handling Order:\n";
+    while(!emergencyPQ.empty()) {
+        cout << "Severity: " << emergencyPQ.top() << endl;
+        emergencyPQ.pop();
+    }
+    return 0;
+}
+</code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#code3" aria-expanded="false" aria-controls="code3">
+                  3️⃣ Hash Map (unordered_map) – Ambulance & Hospital Data
+                </button>
+              </h2>
+              <div id="code3" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#codesAccordion">
+                <div class="accordion-body">
+                  <div class="d-flex justify-content-end mb-2"><button class="btn btn-sm btn-outline-secondary" onclick="copyCode('code3pre')">Copy</button></div>
+                  <pre id="code3pre"><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+int main() {
+    unordered_map<int, string> ambulance;
+
+    ambulance[101] = "Ambulance A";
+    ambulance[102] = "Ambulance B";
+
+    cout << "Ambulance Details:\n";
+    for(auto x : ambulance)
+        cout << x.first << " -> " << x.second << endl;
+
+    return 0;
+}
+</code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- 4 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingFour">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#code4" aria-expanded="false" aria-controls="code4">
+                  4️⃣ Arrays / Vectors – Sensor & Location Data
+                </button>
+              </h2>
+              <div id="code4" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#codesAccordion">
+                <div class="accordion-body">
+                  <div class="d-flex justify-content-end mb-2"><button class="btn btn-sm btn-outline-secondary" onclick="copyCode('code4pre')">Copy</button></div>
+                  <pre id="code4pre"><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+int main() {
+    vector<int> heartRate = {80, 85, 78, 140};
+
+    cout << "Sensor Data:\n";
+    for(int x : heartRate)
+        cout << x << " ";
+
+    return 0;
+}
+</code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- 5 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingFive">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#code5" aria-expanded="false" aria-controls="code5">
+                  5️⃣ Dijkstra Algorithm – Fastest Route
+                </button>
+              </h2>
+              <div id="code5" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#codesAccordion">
+                <div class="accordion-body">
+                  <div class="d-flex justify-content-end mb-2"><button class="btn btn-sm btn-outline-secondary" onclick="copyCode('code5pre')">Copy</button></div>
+                  <pre id="code5pre"><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+#define INF 1e9
+
+int main() {
+    int V = 5;
+    vector<pair<int,int>> graph[5];
+
+    graph[0].push_back({1,4});
+    graph[0].push_back({2,1});
+    graph[2].push_back({1,2});
+    graph[1].push_back({3,1});
+    graph[3].push_back({4,3});
+
+    vector<int> dist(V, INF);
+    priority_queue<pair<int,int>, vector<pair<int,int>>, greater<>> pq;
+
+    dist[0] = 0;
+    pq.push({0,0});
+
+    while(!pq.empty()) {
+        int u = pq.top().second;
+        pq.pop();
+
+        for(auto e : graph[u]) {
+            int v = e.first, w = e.second;
+            if(dist[v] > dist[u] + w) {
+                dist[v] = dist[u] + w;
+                pq.push({dist[v], v});
+            }
+        }
+    }
+
+    cout << "Fastest distances from source:\n";
+    for(int i=0;i<V;i++)
+        cout << "Node " << i << " : " << dist[i] << endl;
+
+    return 0;
+}
+</code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- 6 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingSix">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#code6" aria-expanded="false" aria-controls="code6">
+                  6️⃣ Greedy Algorithm – Nearest Ambulance
+                </button>
+              </h2>
+              <div id="code6" class="accordion-collapse collapse" aria-labelledby="headingSix" data-bs-parent="#codesAccordion">
+                <div class="accordion-body">
+                  <div class="d-flex justify-content-end mb-2"><button class="btn btn-sm btn-outline-secondary" onclick="copyCode('code6pre')">Copy</button></div>
+                  <pre id="code6pre"><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+int main() {
+    vector<int> ambulanceLoc = {2, 8, 15};
+    int patientLoc = 6;
+
+    int nearest = ambulanceLoc[0];
+    int minDist = abs(ambulanceLoc[0] - patientLoc);
+
+    for(int x : ambulanceLoc) {
+        if(abs(x - patientLoc) < minDist) {
+            minDist = abs(x - patientLoc);
+            nearest = x;
+        }
+    }
+
+    cout << "Nearest Ambulance Location: " << nearest;
+    return 0;
+}
+</code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- 7 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingSeven">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#code7" aria-expanded="false" aria-controls="code7">
+                  7️⃣ Priority Scheduling – Emergency Order
+                </button>
+              </h2>
+              <div id="code7" class="accordion-collapse collapse" aria-labelledby="headingSeven" data-bs-parent="#codesAccordion">
+                <div class="accordion-body">
+                  <div class="d-flex justify-content-end mb-2"><button class="btn btn-sm btn-outline-secondary" onclick="copyCode('code7pre')">Copy</button></div>
+                  <pre id="code7pre"><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+struct Emergency {
+    int id;
+    int severity;
+};
+
+bool operator<(Emergency a, Emergency b) {
+    return a.severity < b.severity;
+}
+
+int main() {
+    priority_queue<Emergency> pq;
+
+    pq.push({1,3});
+    pq.push({2,1});
+    pq.push({3,2});
+
+    cout << "Emergency Handling Order:\n";
+    while(!pq.empty()) {
+        cout << "ID: " << pq.top().id
+             << " Severity: " << pq.top().severity << endl;
+        pq.pop();
+    }
+    return 0;
+}
+</code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- 8 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingEight">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#code8" aria-expanded="false" aria-controls="code8">
+                  8️⃣ Anomaly Detection – Z-Score (Sensor Fault)
+                </button>
+              </h2>
+              <div id="code8" class="accordion-collapse collapse" aria-labelledby="headingEight" data-bs-parent="#codesAccordion">
+                <div class="accordion-body">
+                  <div class="d-flex justify-content-end mb-2"><button class="btn btn-sm btn-outline-secondary" onclick="copyCode('code8pre')">Copy</button></div>
+                  <pre id="code8pre"><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+int main() {
+    vector<int> data = {80, 82, 79, 300};
+
+    double mean = accumulate(data.begin(), data.end(), 0.0) / data.size();
+    double sum = 0;
+
+    for(int x : data)
+        sum += (x - mean) * (x - mean);
+
+    double stddev = sqrt(sum / data.size());
+
+    for(int x : data) {
+        double z = (x - mean) / stddev;
+        if(abs(z) > 2.5) {
+            cout << "Anomaly Detected!\n";
+            return 0;
+        }
+    }
+
+    cout << "Sensor Data Normal\n";
+    return 0;
+}
+</code></pre>
+                </div>
+              </div>
+            </div>
+
+            <!-- 9 -->
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingNine">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#code9" aria-expanded="false" aria-controls="code9">
+                  9️⃣ ML (Logistic Regression – Simulated) – Severity Prediction
+                </button>
+              </h2>
+              <div id="code9" class="accordion-collapse collapse" aria-labelledby="headingNine" data-bs-parent="#codesAccordion">
+                <div class="accordion-body">
+                  <div class="d-flex justify-content-end mb-2"><button class="btn btn-sm btn-outline-secondary" onclick="copyCode('code9pre')">Copy</button></div>
+                  <pre id="code9pre"><code>#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+int main() {
+    int heartRate = 130;
+    int oxygen = 85;
+
+    int severity;
+    if(heartRate > 120 || oxygen < 90)
+        severity = 3;
+    else if(heartRate > 100)
+        severity = 2;
+    else
+        severity = 1;
+
+    cout << "Predicted Emergency Severity: " << severity;
+    return 0;
+}
+</code></pre>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <script>
+          function copyCode(id){
+            const el = document.getElementById(id);
+            if(!el) return;
+            const text = el.innerText;
+            if(navigator.clipboard){
+              navigator.clipboard.writeText(text).then(()=>{
+                const original = event.target.innerText;
+                event.target.innerText = 'Copied';
+                setTimeout(()=> event.target.innerText = original, 1200);
+              });
+            } else {
+              const ta = document.createElement('textarea');
+              ta.value = text; document.body.appendChild(ta); ta.select(); document.execCommand('copy'); document.body.removeChild(ta);
+              alert('Copied');
+            }
+          }
+        </script>
       </div>
     </section>
 
